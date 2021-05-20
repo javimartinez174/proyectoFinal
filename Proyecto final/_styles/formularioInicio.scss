@@ -1,0 +1,60 @@
+@import "_vars.scss";
+
+
+body{
+    background-color: #34484C;
+}
+h1{
+    color: #0CC7ED;
+}
+h2{
+    color: #0CC7ED;
+}
+
+nav{
+    background-color: #1b2b2f;
+}
+.titulo{
+    display: flex;
+    padding-left:60px;
+}
+.modal-body{
+    background-color: #34484C;
+    border: 1px solid #1D2728;
+    padding: 10px;
+    align-content: center;
+}
+.modal-header{
+    background-color:#1D2728;
+    border: none;
+    align-items:center;
+    border-radius: 0;
+}
+
+.modal-content{
+ padding: 0;
+}
+a{
+    text-decoration: none;
+    color: #14839A;
+}
+a:hover{
+    color: #85C9D6;
+}
+
+p{
+    color: #0CC7ED;
+    display: inline;
+}
+
+button{
+    background-color: #14839A;
+    border: 1px solid #0093AF;
+    border-radius: 5px;
+}
+button:hover{
+    background-color: #85C9D6;
+}
+
+
+
