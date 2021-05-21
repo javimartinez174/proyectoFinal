@@ -9,7 +9,7 @@ $contrasenna = $rs[0]->getContrasenna();
 
 $usuario = DAO::usuarioObtener($identificador, $contrasenna);
 
-if (!DAO::haySesionRamIniciada() && !DAO::intentarCanjearSesionCookie()) redireccionar("SesionInicioFormulario.php");
+if (!DAO::haySesionRamIniciada() && !DAO::intentarCanjearSesionCookie()) redireccionar("html/SesionInicioFormulario.html");
 
 if (!DAO::haySesionRamIniciada() && DAO::intentarCanjearSesionCookie()) DAO::marcarSesionComoIniciada(DAO::obtenerUsuarioPorCookie($_COOKIE["codigoCookie"]));
 
