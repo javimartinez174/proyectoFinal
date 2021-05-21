@@ -23,3 +23,28 @@ function mostrarInputsBusqueda(){
         document.getElementById("plataforma").style.display = "inline-block";
     }
 }
+
+
+function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
+    //TODO PARA DEPURACIÓN: alert("Haciendo ajax a " + url + "\nCon parámetros " + parametros);
+
+    var request = new XMLHttpRequest();
+
+    request.open("POST", url);
+    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    request.onreadystatechange = function() {
+        if (this.readyState == 4 && request.status == 200) {
+            manejadorOK(request.responseText);
+        }
+        if (manejadorError != null && request.readyState == 4 && this.status != 200) {
+            manejadorError(request.responseText);
+        }
+    };
+
+    request.send(parametros);
+}
+
+
+
+

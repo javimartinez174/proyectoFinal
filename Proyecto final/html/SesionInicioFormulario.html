@@ -1,0 +1,63 @@
+
+<html lang=''>
+
+<head>
+    <meta charset='UTF-8'>
+    <title></title>
+    
+    <script src="../_js/SesionInicioFormulario.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../_styles/formularioInicio.scss">
+
+</head>
+
+<body>
+<div>
+    <nav class="navbar navbar-expand-sm">
+    <!-- Brand/logo -->
+        <a class="navbar-brand" href="#">
+            <img src="../_img/logo.png" width="100" height="70"/>
+        </a>
+    
+    <!-- Links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link 2</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link 3</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item">
+                <button type="button" class="ml-auto" data-toggle="modal" data-target="#myModal">
+                    Iniciar Sesión/ Registrarse
+                </button>        
+            </li>
+        </ul>
+    </nav>
+
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-scrollable modal-sm">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <h1> Iniciar Sesion / Registrarse</h1>
+                </div>
+                <div id="formulario" class= "modal-body align-items-center justify-content-center" >
+                    <button id="iniciarSesion">Iniciar Sesion</button>
+                    <button id="Registrarse">Registrarse</button>
+                </div>
+                <div id="prueba" class="d-flex"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
