@@ -1,18 +1,6 @@
 
 window.onload = function() {
-    document.getElementById("abreModal").addEventListener("click", formularioInicioAJAX);
-}
-
-function formularioInicioAJAX() {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "");
-    xhr.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-          crearBotonesInicio();  
-        }
-    }
-   
-    xhr.send();
+    document.getElementById("abreModal").addEventListener("click", crearBotonesInicio);
 }
 
 function crearBotonesInicio() {
@@ -78,8 +66,10 @@ function crearBotonesInicio() {
 
         document.getElementById("formulario").appendChild(form);
 
+        form.setAttribute("id", "form");
         form.setAttribute("method", "post");
         form.setAttribute("action", "../SesionInicioComprobar.php");
+
     }
 
 
@@ -173,8 +163,51 @@ function crearBotonesInicio() {
 
         document.getElementById("formulario").appendChild(formRegistro);
 
+        formRegistro.setAttribute("id", "formRegistro");
         formRegistro.setAttribute("method", "post");
         formRegistro.setAttribute("action", "../UsuarioNuevoCrear.php");
     }
 }
 
+//PENSADO PARA VALIDAR FORMULARIO PARA REGISTRARSE EN PHP
+
+$(document).ready(function(){
+	$('#formRegistro').submit(function(event){
+
+		event.preventDefault();
+
+		$.ajax({
+			type: 'POST',
+			url: $(this).attr('action'),
+			data: $(this).serialize(),
+			success: function(data){
+				//Cuando la interacción sea exitosa, se ejecutará esto.
+			},
+			error: function(data){
+				//Cuando la interacción retorne un error, se ejecutará esto.
+			}
+		})
+	})
+});
+
+
+//PENSADO PARA VALIDAR FORMULARIO PARA LOGIN EN PHP
+
+$(document).ready(function(){
+	$('#form').submit(function(event){
+
+		event.preventDefault();
+
+		$.ajax({
+			type: 'POST',
+			url: $(this).attr('action'),
+			data: $(this).serialize(),
+			success: function(data){
+                alert("bien");
+            },
+			error: function(data){
+				alert("error");
+			}
+		})
+	})
+});
