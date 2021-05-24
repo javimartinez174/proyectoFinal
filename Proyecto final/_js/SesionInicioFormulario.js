@@ -1,6 +1,19 @@
 
 window.onload = function() {
     document.getElementById("abreModal").addEventListener("click", crearBotonesInicio);
+    ajaxComprobarSesionIniciada();
+}
+
+function ajaxComprobarSesionIniciada(){
+    llamadaAjax("../SesionIniciada.php", "", 
+    function(texto){
+        var sesionIniciada = JSON.parse(texto);
+        if(sesionIniciada){
+            window.location ="../PaginaPrincipal.php"
+        }
+    },  function(texto) {
+        }
+    );
 }
 
 function crearBotonesInicio() {
@@ -56,6 +69,16 @@ function crearBotonesInicio() {
         contrasenna.setAttribute("placeholder", "Contraseña");
         contrasenna.setAttribute("required", true);
         form.appendChild(contrasenna);
+
+        var pRecuerdame = document.createElement("p");
+        pRecuerdame.innerHTML = "Mantener Sesion Iniciada: ";
+        form.appendChild(pRecuerdame);
+
+        var recuerdame = document.createElement("input");
+        recuerdame.setAttribute("type", "checkbox");
+        recuerdame.setAttribute("name", "recordar");
+        recuerdame.setAttribute("id", "recordar");
+        form.append(recuerdame);
 
         var inicioSesion = document.createElement("button");
         inicioSesion.setAttribute("type", "submit");
@@ -169,45 +192,22 @@ function crearBotonesInicio() {
     }
 }
 
-//PENSADO PARA VALIDAR FORMULARIO PARA REGISTRARSE EN PHP
+function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
+    //TODO PARA DEPURACIÓN: alert("Haciendo ajax a " + url + "\nCon parámetros " + parametros);
 
-$(document).ready(function(){
-	$('#formRegistro').submit(function(event){
+    var request = new XMLHttpRequest();
 
-		event.preventDefault();
+    request.open("POST", url);
+    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-		$.ajax({
-			type: 'POST',
-			url: $(this).attr('action'),
-			data: $(this).serialize(),
-			success: function(data){
-				//Cuando la interacción sea exitosa, se ejecutará esto.
-			},
-			error: function(data){
-				//Cuando la interacción retorne un error, se ejecutará esto.
-			}
-		})
-	})
-});
+    request.onreadystatechange = function() {
+        if (this.readyState == 4 && request.status == 200) {
+            manejadorOK(request.responseText);
+        }
+        if (manejadorError != null && request.readyState == 4 && this.status != 200) {
+            manejadorError(request.responseText);
+        }
+    };
 
-
-//PENSADO PARA VALIDAR FORMULARIO PARA LOGIN EN PHP
-
-$(document).ready(function(){
-	$('#form').submit(function(event){
-
-		event.preventDefault();
-
-		$.ajax({
-			type: 'POST',
-			url: $(this).attr('action'),
-			data: $(this).serialize(),
-			success: function(data){
-                alert("bien");
-            },
-			error: function(data){
-				alert("error");
-			}
-		})
-	})
-});
+    request.send(parametros);
+}
