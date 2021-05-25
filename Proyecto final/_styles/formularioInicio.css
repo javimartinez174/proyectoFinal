@@ -2,7 +2,7 @@
 
 
 body{
-    background-color: #14c4e7;
+  background: rgb(23, 63, 90);
 }
 h1{
     color: #0CC7ED;
@@ -16,11 +16,11 @@ h4{
 }
 
 nav {
-    background-color: #1b2b2f;
+    background-color: #071c22f5;
 }
 
 nav button {
-    background-color: #14839A;
+    background-color: rgba(4, 155, 255, 0.651);
 }
 
 .modal-body {
@@ -85,7 +85,7 @@ nav button {
 
 a {
     text-decoration: none;
-    color: #14839A;
+    color: rgba(33, 163, 250, 0.651);
 }
 a:hover {
     color: #85C9D6;
@@ -100,9 +100,90 @@ button {
     border: 1px solid #0093AF;
     border-radius: 5px;
 }
+
+.btn{
+  background-color:rgba(33, 163, 250, 0.863);
+  color: white;
+}
+.btn:hover{
+  background-color: #85C9D6;
+}
 button:hover {
     background-color: #85C9D6;
 }
 
+.novedades-section {
+    padding: 10rem 0;
+  }
+  .novedades-section .featured-text {
+    padding: 2rem;
+  }
+  @media (min-width: 992px) {
+    .novedades-section .featured-text {
+      padding: 0 0 0 2rem;
+      border-left: 0.5rem solid #64a19d;
+    }
+  }
+  .novedades-section .project-text {
+    padding: 3rem;
+    font-size: 90%;
+  }
+  @media (min-width: 992px) {
+    .novedades-section .project-text {
+      padding: 5rem;
+    }
+    .novedades-section .project-text hr {
+      border-color: #64a19d;
+      border-width: 0.25rem;
+      width: 30%;
+    }
+  }
 
+  .masthead {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 35rem;
+    padding: 15rem 0;
+    background: linear-gradient(to bottom, rgba(4, 155, 255, 0.651) 0%, rgba(0, 0, 0, 0.7) 80%, rgb(23, 63, 90) 100%), url("../_img/utiles/fondoInicio.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+  }
+  .masthead h1, .masthead .h1 {
+    font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+    letter-spacing: 0.8rem;
+    background: linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.637));
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+            background-clip: text;
+  }
+  .masthead h2, .masthead .h2 {
+    max-width: 20rem;
+    font-size: 1rem;
+  }
+  @media (min-width: 768px) {
+    .masthead h1, .masthead .h1 {
+      font-size: 4rem;
+      line-height: 4rem;
+    }
+  }
+  @media (min-width: 992px) {
+    .masthead {
+      height: 100vh;
+      padding: 0;
+    }
+    .masthead h1, .masthead .h1 {
+      font-size: 6.5rem;
+      line-height: 6.5rem;
+      letter-spacing: 0.8rem;
+    }
+    .masthead h2, .masthead .h2 {
+      max-width: 30rem;
+      font-size: 1.25rem;
+    }
+  }
 

@@ -13,4 +13,3 @@ $nuevoUsuario = isset($_REQUEST["nuevo"]);
 $sesionCerrada = isset($_REQUEST["cerrarSesion"]);
 
 echo json_encode($sesionIniciada);
-?>

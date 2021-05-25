@@ -2,6 +2,7 @@ window.onpaint = ajaxComprobarSesionIniciada(); //se ejecuta antes de cargar la 
 
 window.onload = function() {
     document.getElementById("abreModal").addEventListener("click", crearBotonesInicio);
+    document.getElementById("descubrenos").addEventListener("click", crearBotonesInicio);
 }
 
 function ajaxComprobarSesionIniciada(){
