@@ -241,7 +241,7 @@ class DAO
 
     private static function peliculaCrearDesdeRS(array $pelicula): Pelicula
     {
-        return new Pelicula($pelicula["id"], $pelicula["nombre"], $pelicula["anio"], $pelicula["puntuacion"]);
+        return new Pelicula($pelicula["id"], $pelicula["nombre"], $pelicula["anio"], $pelicula["puntuacion"], $pelicula["fechaEntrada"]);
     }
 
     public static function peliculasObtenerDesdeLista(int $listaId): ?array //permite obtener todas las peliculas de una lista
@@ -466,6 +466,27 @@ class DAO
             array_push($peliculas, $pelicula);
         }
 
+
+        if ($rs) {
+            return $peliculas;
+        } else {
+            return null;
+        }
+    }
+
+    public static function obtenerUltimasPeliculas(): ?array
+    {
+        $peliculas = [];
+        $rs = self::ejecutarConsulta(
+            "SELECT * FROM pelicula WHERE fechaEntrada BETWEEN 
+            (CURRENT_DATE-10) AND CURRENT_DATE",
+            []
+        );
+
+        foreach ($rs as $fila) {
+            $pelicula = self::peliculaCrearDesdeRS($fila);
+            array_push($peliculas, $pelicula);
+        }
 
         if ($rs) {
             return $peliculas;

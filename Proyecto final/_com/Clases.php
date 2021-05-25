@@ -121,12 +121,15 @@ class Pelicula extends Dato
 
     private int $puntuacion;
 
-    public function __construct(int $id, string $nombre, int $anio, int $puntuacion)
+    private string $fechaEntrada;
+
+    public function __construct(int $id, string $nombre, int $anio, int $puntuacion, string $fechaEntrada)
     {
         $this->setId($id);
         $this->setNombre($nombre);
         $this->setAnio($anio);
         $this->setPuntuacion($puntuacion);
+        $this->setFechaEntrada($fechaEntrada);
     }
 
     public function getNombre(): string
@@ -157,6 +160,16 @@ class Pelicula extends Dato
     public function setPuntuacion(int $puntuacion)
     {
         $this->puntuacion = $puntuacion;
+    }
+
+    public function getFechaEntrada(): string
+    {
+        return $this->fechaEntrada;
+    }
+
+    public function setFechaEntrada(string $fechaEntrada)
+    {
+        $this->fechaEntrada = $fechaEntrada;
     }
 
 }

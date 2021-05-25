@@ -3,6 +3,7 @@ window.onpaint = ajaxComprobarSesionIniciada(); //se ejecuta antes de cargar la 
 window.onload = function() {
     document.getElementById("abreModal").addEventListener("click", crearBotonesInicio);
     document.getElementById("descubrenos").addEventListener("click", crearBotonesInicio);
+    crearCarruselNovedades();
 }
 
 function ajaxComprobarSesionIniciada(){
@@ -50,10 +51,6 @@ function crearBotonesInicio() {
             var btnAtras = document.createElement("i");
             btnAtras.setAttribute("class", "fas fa-angle-left fa-2x"); //fa-2x para size
             divAtras.appendChild(btnAtras);
-
-            var pAtras = document.createElement("p");
-            pAtras.innerHTML = "atrás";
-            divAtras.appendChild(pAtras);
         divAtras.addEventListener("click", crearBotonesInicio);
         document.getElementById("formulario").appendChild(divAtras);
 
@@ -86,12 +83,15 @@ function crearBotonesInicio() {
 
         var pRecuerdame = document.createElement("p");
         pRecuerdame.innerHTML = "Mantener Sesion Iniciada: ";
+        pRecuerdame.style.display= "inline-block";
+        pRecuerdame.style.marginRight = "1em";
         form.appendChild(pRecuerdame);
 
         var recuerdame = document.createElement("input");
         recuerdame.setAttribute("type", "checkbox");
         recuerdame.setAttribute("name", "recordar");
         recuerdame.setAttribute("id", "recordar");
+        recuerdame.style.display = "inline-block";
         form.append(recuerdame);
 
         var inicioSesion = document.createElement("button");
@@ -121,10 +121,6 @@ function crearBotonesInicio() {
             var btnAtras = document.createElement("i");
             btnAtras.setAttribute("class", "fas fa-angle-left fa-2x"); //fa-2x para size
             divAtras.appendChild(btnAtras);
-
-            var pAtras = document.createElement("p");
-            pAtras.innerHTML = "atrás";
-            divAtras.appendChild(pAtras);
         divAtras.addEventListener("click", crearBotonesInicio);
         document.getElementById("formulario").appendChild(divAtras);
 
@@ -221,6 +217,32 @@ function crearBotonesInicio() {
         formRegistro.setAttribute("method", "post");
         formRegistro.setAttribute("action", "../UsuarioNuevoCrear.php");
     }
+}
+
+function crearCarruselNovedades(){
+
+    llamadaAjax("../PeliculasNovedades.php", "",
+        function(texto) {
+            var peliculas = JSON.parse(texto);
+
+            for (var i=0; i<peliculas.length; i++) {
+                // No se fuerza la ordenación, ya que PHP nos habrá dado los elementos en orden correcto y sería una pérdida de tiempo.
+                domCrearCarruselNovedades(peliculas[i]);
+            }
+        }, function (texto){}
+    );
+}
+
+function domCrearCarruselNovedades(pelicula){
+    novedades = document.getElementById("novedades");
+
+    divImagen = document.createElement("div");
+
+    imgCaratula = document.createElement("img");
+    imgCaratula.setAttribute("src", pelicula.id);    
+
+    divImagen.appendChild(imgCaratula);
+    novedades.appendChild(divImagen);
 }
 
 function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
