@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-05-2021 a las 18:24:37
+-- Tiempo de generación: 25-05-2021 a las 18:37:55
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -61,6 +61,13 @@ CREATE TABLE `director` (
   `apellidos` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `director`
+--
+
+INSERT INTO `director` (`id`, `nombre`, `apellidos`) VALUES
+(1, 'James', 'Cameron');
+
 -- --------------------------------------------------------
 
 --
@@ -72,6 +79,13 @@ CREATE TABLE `directorespeliculas` (
   `peliculaId` int(11) NOT NULL,
   `directorId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `directorespeliculas`
+--
+
+INSERT INTO `directorespeliculas` (`peliculaId`, `directorId`) VALUES
+(4, 1);
 
 -- --------------------------------------------------------
 
@@ -85,6 +99,14 @@ CREATE TABLE `genero` (
   `nombre` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `genero`
+--
+
+INSERT INTO `genero` (`id`, `nombre`) VALUES
+(1, 'Comedia'),
+(2, 'Terror');
+
 -- --------------------------------------------------------
 
 --
@@ -96,6 +118,15 @@ CREATE TABLE `generospeliculas` (
   `peliculaId` int(11) NOT NULL,
   `generoId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `generospeliculas`
+--
+
+INSERT INTO `generospeliculas` (`peliculaId`, `generoId`) VALUES
+(1, 1),
+(2, 2),
+(5, 1);
 
 -- --------------------------------------------------------
 
@@ -140,6 +171,13 @@ CREATE TABLE `listaamigos` (
   `amigoId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `listaamigos`
+--
+
+INSERT INTO `listaamigos` (`usuarioId`, `amigoId`) VALUES
+(1, 9);
+
 -- --------------------------------------------------------
 
 --
@@ -163,7 +201,8 @@ INSERT INTO `listausuariopeliculas` (`peliculaId`, `listaId`) VALUES
 (12, 1),
 (11, 1),
 (11, 16),
-(11, 17);
+(11, 17),
+(5, 1);
 
 -- --------------------------------------------------------
 
@@ -236,6 +275,14 @@ CREATE TABLE `plataformaspeliculas` (
   `plataformaId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `plataformaspeliculas`
+--
+
+INSERT INTO `plataformaspeliculas` (`peliculaId`, `plataformaId`) VALUES
+(5, 1),
+(11, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -259,7 +306,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `identificador`, `nombre`, `apellidos`, `email`, `contrasenna`, `fotoPerfil`, `codigoCookie`) VALUES
-(1, 'jlopez', 'Josép', 'Lópep', 'j@cp', 'j', 'estrellaRellena.png', NULL),
+(1, 'jlopez', 'Josép', 'Lópep', 'j@cp', 'j', 'estrellaRellena.png', 'yzOZ460v4FnmHM2dKMSjHoLZv0CdU7rM'),
 (2, 'mgarcia', 'María', 'García', 'm@c', 'm', 'usuario.png', NULL),
 (3, 'fpi', 'Felipe', 'Pi', 'f@c', 'f', 'usuario.png', NULL),
 (9, 'alainF', 'Alain', 'Fernandez', 'a@fernan', 'a', '60423426.jpg', 'UsadCI6uefGzR3ozNzPiD1ESqW6HUH5L');
@@ -291,9 +338,8 @@ ALTER TABLE `director`
 -- Indices de la tabla `directorespeliculas`
 --
 ALTER TABLE `directorespeliculas`
-  ADD KEY `directorId` (`peliculaId`),
-  ADD KEY `peliculaId` (`peliculaId`,`directorId`),
-  ADD KEY `directorId_2` (`directorId`);
+  ADD KEY `peliculaId` (`peliculaId`) USING BTREE,
+  ADD KEY `directorId` (`directorId`) USING BTREE;
 
 --
 -- Indices de la tabla `genero`
@@ -369,13 +415,13 @@ ALTER TABLE `actor`
 -- AUTO_INCREMENT de la tabla `director`
 --
 ALTER TABLE `director`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `genero`
 --
 ALTER TABLE `genero`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `lista`
