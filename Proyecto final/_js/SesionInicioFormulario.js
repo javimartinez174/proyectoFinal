@@ -1,7 +1,7 @@
+window.onpaint = ajaxComprobarSesionIniciada(); //se ejecuta antes de cargar la página
 
 window.onload = function() {
     document.getElementById("abreModal").addEventListener("click", crearBotonesInicio);
-    ajaxComprobarSesionIniciada();
 }
 
 function ajaxComprobarSesionIniciada(){
@@ -177,6 +177,10 @@ function crearBotonesInicio() {
         contrasenna2.setAttribute("required", true);
         formRegistro.appendChild(contrasenna2);
 
+        var saltoLinea = document.createElement("br");
+        formRegistro.appendChild(saltoLinea);
+        var saltoLinea = document.createElement("br");
+        formRegistro.appendChild(saltoLinea);
         var registrarme = document.createElement("button");
         registrarme.setAttribute("type", "submit");
         registrarme.setAttribute("name", "registrarme");
