@@ -1,0 +1,108 @@
+/*@import "_vars.scss";*/
+
+
+body{
+    background-color: #14c4e7;
+}
+h1{
+    color: #0CC7ED;
+}
+h2{
+    color: #0CC7ED;
+}
+
+h4{
+    color: #0CC7ED;
+}
+
+nav {
+    background-color: #1b2b2f;
+}
+
+nav button {
+    background-color: #14839A;
+}
+
+.modal-body {
+    background-color: #34484C;
+    border: 1px solid #1D2728;
+    padding: 10px;
+    align-content: center;
+}
+.modal-header {
+    background-color:#1D2728;
+    border: none;
+    align-items:center;
+    border-radius: 0;
+}
+.modal-content:hover {
+    border: 1px solid #14839A;
+    box-shadow: #14839A;
+}
+
+/*btn Atras*/
+.divAtras {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    width: 64px;
+    background-color: #0CC7ED;
+    border: 1px solid #0093AF;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.divAtras:hover {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    width: 64px;
+    background-color: #85C9D6;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.divAtras:active {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    width: 64px;
+    background-color: #85C9D6;
+    border: 1px solid #0093AF;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.divAtras p {
+    margin-top: 10;
+    color: black;
+}
+
+
+.fas {
+    color: #ff6060;
+}
+#registrarse{
+    margin-left: 20%;
+}
+
+a {
+    text-decoration: none;
+    color: #14839A;
+}
+a:hover {
+    color: #85C9D6;
+}
+
+p {
+    color: #0CC7ED;
+}
+
+button {
+    background-color: #0CC7ED;
+    border: 1px solid #0093AF;
+    border-radius: 5px;
+}
+button:hover {
+    background-color: #85C9D6;
+}
+
+
+

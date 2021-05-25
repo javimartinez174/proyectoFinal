@@ -43,8 +43,21 @@ function crearBotonesInicio() {
         document.getElementById("formulario").removeChild(btnIniciarSesion);
         document.getElementById("formulario").removeChild(btnRegistrarse);
 
-        var form = document.createElement("form");
+        //boton para volver atras
+        var divAtras = document.createElement("div");
+        divAtras.setAttribute("class", "divAtras");
+            var btnAtras = document.createElement("i");
+            btnAtras.setAttribute("class", "fas fa-angle-left fa-2x"); //fa-2x para size
+            divAtras.appendChild(btnAtras);
 
+            var pAtras = document.createElement("p");
+            pAtras.innerHTML = "atrás";
+            divAtras.appendChild(pAtras);
+        divAtras.addEventListener("click", crearBotonesInicio);
+        document.getElementById("formulario").appendChild(divAtras);
+
+        //formulario de inicio
+        var form = document.createElement("form");
 
         var pUsuario = document.createElement("p");
         pUsuario.innerHTML = "Usuario: ";
@@ -101,7 +114,20 @@ function crearBotonesInicio() {
         document.getElementById("formulario").removeChild(btnIniciarSesion);
         document.getElementById("formulario").removeChild(btnRegistrarse);
 
+        //boton para volver atras
+        var divAtras = document.createElement("div");
+        divAtras.setAttribute("class", "divAtras");
+            var btnAtras = document.createElement("i");
+            btnAtras.setAttribute("class", "fas fa-angle-left fa-2x"); //fa-2x para size
+            divAtras.appendChild(btnAtras);
 
+            var pAtras = document.createElement("p");
+            pAtras.innerHTML = "atrás";
+            divAtras.appendChild(pAtras);
+        divAtras.addEventListener("click", crearBotonesInicio);
+        document.getElementById("formulario").appendChild(divAtras);
+
+        //formulario registro
         var formRegistro = document.createElement("form");
 
         var pNombre = document.createElement("p");
