@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-05-2021 a las 17:11:39
+-- Tiempo de generación: 25-05-2021 a las 18:24:37
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -30,11 +30,10 @@ USE `watchfilm`;
 --
 
 DROP TABLE IF EXISTS `actor`;
-CREATE TABLE IF NOT EXISTS `actor` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `actor` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(20) NOT NULL,
-  `apellidos` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
+  `apellidos` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -44,11 +43,9 @@ CREATE TABLE IF NOT EXISTS `actor` (
 --
 
 DROP TABLE IF EXISTS `actorespeliculas`;
-CREATE TABLE IF NOT EXISTS `actorespeliculas` (
+CREATE TABLE `actorespeliculas` (
   `peliculaId` int(11) NOT NULL,
-  `actorId` int(11) NOT NULL,
-  KEY `peliculaId` (`peliculaId`,`actorId`),
-  KEY `actorId` (`actorId`)
+  `actorId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -58,19 +55,11 @@ CREATE TABLE IF NOT EXISTS `actorespeliculas` (
 --
 
 DROP TABLE IF EXISTS `director`;
-CREATE TABLE IF NOT EXISTS `director` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `director` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
-  `apellidos` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `director`
---
-
-INSERT INTO `director` (`id`, `nombre`, `apellidos`) VALUES
-(1, 'James', 'Cameron');
+  `apellidos` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -79,19 +68,10 @@ INSERT INTO `director` (`id`, `nombre`, `apellidos`) VALUES
 --
 
 DROP TABLE IF EXISTS `directorespeliculas`;
-CREATE TABLE IF NOT EXISTS `directorespeliculas` (
+CREATE TABLE `directorespeliculas` (
   `peliculaId` int(11) NOT NULL,
-  `directorId` int(11) NOT NULL,
-  KEY `peliculaId` (`peliculaId`) USING BTREE,
-  KEY `directorId` (`directorId`) USING BTREE
+  `directorId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `directorespeliculas`
---
-
-INSERT INTO `directorespeliculas` (`peliculaId`, `directorId`) VALUES
-(4, 1);
 
 -- --------------------------------------------------------
 
@@ -100,19 +80,10 @@ INSERT INTO `directorespeliculas` (`peliculaId`, `directorId`) VALUES
 --
 
 DROP TABLE IF EXISTS `genero`;
-CREATE TABLE IF NOT EXISTS `genero` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `genero`
---
-
-INSERT INTO `genero` (`id`, `nombre`) VALUES
-(1, 'Comedia'),
-(2, 'Terror');
+CREATE TABLE `genero` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -121,21 +92,10 @@ INSERT INTO `genero` (`id`, `nombre`) VALUES
 --
 
 DROP TABLE IF EXISTS `generospeliculas`;
-CREATE TABLE IF NOT EXISTS `generospeliculas` (
+CREATE TABLE `generospeliculas` (
   `peliculaId` int(11) NOT NULL,
-  `generoId` int(11) NOT NULL,
-  KEY `peliculaId` (`peliculaId`,`generoId`),
-  KEY `generoId` (`generoId`)
+  `generoId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `generospeliculas`
---
-
-INSERT INTO `generospeliculas` (`peliculaId`, `generoId`) VALUES
-(1, 1),
-(2, 2),
-(5, 1);
 
 -- --------------------------------------------------------
 
@@ -144,13 +104,11 @@ INSERT INTO `generospeliculas` (`peliculaId`, `generoId`) VALUES
 --
 
 DROP TABLE IF EXISTS `lista`;
-CREATE TABLE IF NOT EXISTS `lista` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `lista` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
-  `usuarioId` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `usuarioId` (`usuarioId`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `usuarioId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `lista`
@@ -177,20 +135,10 @@ INSERT INTO `lista` (`id`, `nombre`, `usuarioId`) VALUES
 --
 
 DROP TABLE IF EXISTS `listaamigos`;
-CREATE TABLE IF NOT EXISTS `listaamigos` (
+CREATE TABLE `listaamigos` (
   `usuarioId` int(11) NOT NULL,
-  `amigoId` int(11) NOT NULL,
-  PRIMARY KEY (`usuarioId`,`amigoId`),
-  KEY `usuarioId` (`usuarioId`,`amigoId`),
-  KEY `amigoId` (`amigoId`)
+  `amigoId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `listaamigos`
---
-
-INSERT INTO `listaamigos` (`usuarioId`, `amigoId`) VALUES
-(1, 9);
 
 -- --------------------------------------------------------
 
@@ -199,11 +147,9 @@ INSERT INTO `listaamigos` (`usuarioId`, `amigoId`) VALUES
 --
 
 DROP TABLE IF EXISTS `listausuariopeliculas`;
-CREATE TABLE IF NOT EXISTS `listausuariopeliculas` (
+CREATE TABLE `listausuariopeliculas` (
   `peliculaId` int(11) NOT NULL,
-  `listaId` int(11) NOT NULL,
-  KEY `listaId` (`listaId`),
-  KEY `peliculaId` (`peliculaId`)
+  `listaId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -217,8 +163,7 @@ INSERT INTO `listausuariopeliculas` (`peliculaId`, `listaId`) VALUES
 (12, 1),
 (11, 1),
 (11, 16),
-(11, 17),
-(5, 1);
+(11, 17);
 
 -- --------------------------------------------------------
 
@@ -227,36 +172,36 @@ INSERT INTO `listausuariopeliculas` (`peliculaId`, `listaId`) VALUES
 --
 
 DROP TABLE IF EXISTS `pelicula`;
-CREATE TABLE IF NOT EXISTS `pelicula` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `pelicula` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `anio` int(4) NOT NULL,
   `puntuacion` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+  `fechaEntrada` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pelicula`
 --
 
-INSERT INTO `pelicula` (`id`, `nombre`, `anio`, `puntuacion`) VALUES
-(1, 'Colega dónde está mi coche', 2000, 2),
-(2, 'No respires', 2016, 3),
-(3, 'It', 2017, 3),
-(4, 'Titanic', 1997, 4),
-(5, 'El Show de Truman', 1998, 4),
-(6, 'Gladiator', 2000, 5),
-(7, 'Malditos Bastardos', 2009, 5),
-(8, 'Tiburón', 1975, 3),
-(9, 'El señor de los anillos La comunidad del anillo', 2001, 4),
-(10, 'El señor de los anillos Las dos torres', 2002, 5),
-(11, 'El señor de los anillos el retorno del rey', 2003, 5),
-(12, 'Iron Man', 2008, 3),
-(13, 'Iron Man 2', 2010, 2),
-(14, 'Terminator', 1984, 4),
-(15, 'Terminator 2 El juicio final', 1991, 4),
-(16, 'Terminator 3 La rebelión de las máquinas', 2003, 2),
-(17, 'Interstellar', 2014, 5);
+INSERT INTO `pelicula` (`id`, `nombre`, `anio`, `puntuacion`, `fechaEntrada`) VALUES
+(1, 'Colega dónde está mi coche', 2000, 2, '2021-05-25'),
+(2, 'No respires', 2016, 3, '2021-05-25'),
+(3, 'It', 2017, 3, '2021-05-25'),
+(4, 'Titanic', 1997, 4, '2021-05-25'),
+(5, 'El Show de Truman', 1998, 4, '2021-05-25'),
+(6, 'Gladiator', 2000, 5, '2021-05-25'),
+(7, 'Malditos Bastardos', 2009, 5, '2021-05-25'),
+(8, 'Tiburón', 1975, 3, '2021-05-25'),
+(9, 'El señor de los anillos La comunidad del anillo', 2001, 4, '2021-05-25'),
+(10, 'El señor de los anillos Las dos torres', 2002, 5, '2021-05-25'),
+(11, 'El señor de los anillos el retorno del rey', 2003, 5, '2021-05-25'),
+(12, 'Iron Man', 2008, 3, '2021-05-25'),
+(13, 'Iron Man 2', 2010, 2, '2021-05-25'),
+(14, 'Terminator', 1984, 4, '2021-05-25'),
+(15, 'Terminator 2 El juicio final', 1991, 4, '2021-05-25'),
+(16, 'Terminator 3 La rebelión de las máquinas', 2003, 2, '2021-05-26'),
+(17, 'Interstellar', 2014, 5, '2021-05-26');
 
 -- --------------------------------------------------------
 
@@ -265,11 +210,10 @@ INSERT INTO `pelicula` (`id`, `nombre`, `anio`, `puntuacion`) VALUES
 --
 
 DROP TABLE IF EXISTS `plataforma`;
-CREATE TABLE IF NOT EXISTS `plataforma` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+CREATE TABLE `plataforma` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `plataforma`
@@ -287,20 +231,10 @@ INSERT INTO `plataforma` (`id`, `nombre`) VALUES
 --
 
 DROP TABLE IF EXISTS `plataformaspeliculas`;
-CREATE TABLE IF NOT EXISTS `plataformaspeliculas` (
+CREATE TABLE `plataformaspeliculas` (
   `peliculaId` int(11) NOT NULL,
-  `plataformaId` int(11) NOT NULL,
-  KEY `peliculaId` (`peliculaId`,`plataformaId`),
-  KEY `plataformaId` (`plataformaId`)
+  `plataformaId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `plataformaspeliculas`
---
-
-INSERT INTO `plataformaspeliculas` (`peliculaId`, `plataformaId`) VALUES
-(5, 1),
-(11, 2);
 
 -- --------------------------------------------------------
 
@@ -309,27 +243,163 @@ INSERT INTO `plataformaspeliculas` (`peliculaId`, `plataformaId`) VALUES
 --
 
 DROP TABLE IF EXISTS `usuario`;
-CREATE TABLE IF NOT EXISTS `usuario` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL,
   `identificador` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
   `nombre` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
   `apellidos` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
   `email` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
   `contrasenna` varchar(80) COLLATE utf8_spanish_ci NOT NULL,
   `fotoPerfil` varchar(50) COLLATE utf8_spanish_ci DEFAULT 'usuario.png',
-  `codigoCookie` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `codigoCookie` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`id`, `identificador`, `nombre`, `apellidos`, `email`, `contrasenna`, `fotoPerfil`, `codigoCookie`) VALUES
-(1, 'jlopez', 'Josép', 'Lópep', 'j@cp', 'j', 'estrellaRellena.png', 'yzOZ460v4FnmHM2dKMSjHoLZv0CdU7rM'),
+(1, 'jlopez', 'Josép', 'Lópep', 'j@cp', 'j', 'estrellaRellena.png', NULL),
 (2, 'mgarcia', 'María', 'García', 'm@c', 'm', 'usuario.png', NULL),
 (3, 'fpi', 'Felipe', 'Pi', 'f@c', 'f', 'usuario.png', NULL),
 (9, 'alainF', 'Alain', 'Fernandez', 'a@fernan', 'a', '60423426.jpg', 'UsadCI6uefGzR3ozNzPiD1ESqW6HUH5L');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `actor`
+--
+ALTER TABLE `actor`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `actorespeliculas`
+--
+ALTER TABLE `actorespeliculas`
+  ADD KEY `peliculaId` (`peliculaId`,`actorId`),
+  ADD KEY `actorId` (`actorId`);
+
+--
+-- Indices de la tabla `director`
+--
+ALTER TABLE `director`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `directorespeliculas`
+--
+ALTER TABLE `directorespeliculas`
+  ADD KEY `directorId` (`peliculaId`),
+  ADD KEY `peliculaId` (`peliculaId`,`directorId`),
+  ADD KEY `directorId_2` (`directorId`);
+
+--
+-- Indices de la tabla `genero`
+--
+ALTER TABLE `genero`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `generospeliculas`
+--
+ALTER TABLE `generospeliculas`
+  ADD KEY `peliculaId` (`peliculaId`,`generoId`),
+  ADD KEY `generoId` (`generoId`);
+
+--
+-- Indices de la tabla `lista`
+--
+ALTER TABLE `lista`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuarioId` (`usuarioId`);
+
+--
+-- Indices de la tabla `listaamigos`
+--
+ALTER TABLE `listaamigos`
+  ADD PRIMARY KEY (`usuarioId`,`amigoId`),
+  ADD KEY `usuarioId` (`usuarioId`,`amigoId`),
+  ADD KEY `amigoId` (`amigoId`);
+
+--
+-- Indices de la tabla `listausuariopeliculas`
+--
+ALTER TABLE `listausuariopeliculas`
+  ADD KEY `listaId` (`listaId`),
+  ADD KEY `peliculaId` (`peliculaId`);
+
+--
+-- Indices de la tabla `pelicula`
+--
+ALTER TABLE `pelicula`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `plataforma`
+--
+ALTER TABLE `plataforma`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `plataformaspeliculas`
+--
+ALTER TABLE `plataformaspeliculas`
+  ADD KEY `peliculaId` (`peliculaId`,`plataformaId`),
+  ADD KEY `plataformaId` (`plataformaId`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `actor`
+--
+ALTER TABLE `actor`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `director`
+--
+ALTER TABLE `director`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `genero`
+--
+ALTER TABLE `genero`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `lista`
+--
+ALTER TABLE `lista`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT de la tabla `pelicula`
+--
+ALTER TABLE `pelicula`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT de la tabla `plataforma`
+--
+ALTER TABLE `plataforma`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas
