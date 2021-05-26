@@ -6,6 +6,26 @@ window.onload = function() {
     crearCarruselNovedades();
 }
 
+function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
+    //TODO PARA DEPURACIÓN: alert("Haciendo ajax a " + url + "\nCon parámetros " + parametros);
+
+    var request = new XMLHttpRequest();
+
+    request.open("POST", url);
+    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    request.onreadystatechange = function() {
+        if (this.readyState == 4 && request.status == 200) {
+            manejadorOK(request.responseText);
+        }
+        if (manejadorError != null && request.readyState == 4 && this.status != 200) {
+            manejadorError(request.responseText);
+        }
+    };
+    
+    request.send();
+}
+
 function ajaxComprobarSesionIniciada(){
     llamadaAjax("../SesionIniciada.php", "", 
     function(texto){
@@ -235,32 +255,9 @@ function crearCarruselNovedades(){
 
 function domCrearCarruselNovedades(pelicula){
     novedades = document.getElementById("novedades");
-
-    divImagen = document.createElement("div");
-
     imgCaratula = document.createElement("img");
-    imgCaratula.setAttribute("src", pelicula.id);    
-
-    divImagen.appendChild(imgCaratula);
-    novedades.appendChild(divImagen);
+    imgCaratula.setAttribute("id", "imgNovedades");
+    imgCaratula.setAttribute("src", "../_img/"+pelicula.id+".jpg");    
+    novedades.appendChild(imgCaratula);
 }
 
-function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
-    //TODO PARA DEPURACIÓN: alert("Haciendo ajax a " + url + "\nCon parámetros " + parametros);
-
-    var request = new XMLHttpRequest();
-
-    request.open("POST", url);
-    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-    request.onreadystatechange = function() {
-        if (this.readyState == 4 && request.status == 200) {
-            manejadorOK(request.responseText);
-        }
-        if (manejadorError != null && request.readyState == 4 && this.status != 200) {
-            manejadorError(request.responseText);
-        }
-    };
-
-    request.send(parametros);
-}

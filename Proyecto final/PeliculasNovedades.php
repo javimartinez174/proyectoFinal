@@ -2,4 +2,6 @@
 
 require_once "_com/DAO.php";
 
-echo json_encode(DAO::peliculaObtenerTodas());
+
+echo json_encode(DAO::obtenerUltimasPeliculas());
+

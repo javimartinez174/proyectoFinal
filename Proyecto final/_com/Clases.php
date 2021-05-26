@@ -111,7 +111,7 @@ class Usuario extends Dato
 
 /* ------------------------PELÍCULA----------------------------*/
 
-class Pelicula extends Dato
+class Pelicula extends Dato implements JsonSerializable
 {
     use Identificable;
 
@@ -130,6 +130,22 @@ class Pelicula extends Dato
         $this->setAnio($anio);
         $this->setPuntuacion($puntuacion);
         $this->setFechaEntrada($fechaEntrada);
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "id" => $this->id,
+            "nombre" => $this->nombre,
+            "anio" => $this->anio,
+            "puntuacion" => $this->puntuacion,
+            "fechaEntrada" => $this->fechaEntrada,
+        ];
+
+        // Esto sería lo mismo:
+        //$array["nombre"] = $this->nombre;
+        //$array["id"] = $this->id;
+        //return $array;
     }
 
     public function getNombre(): string

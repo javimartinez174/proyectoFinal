@@ -476,7 +476,7 @@ class DAO
 
     public static function obtenerUltimasPeliculas(): ?array
     {
-        $peliculas = [];
+        $peliculas = array();
         $rs = self::ejecutarConsulta(
             "SELECT * FROM pelicula WHERE fechaEntrada BETWEEN 
             (CURRENT_DATE-10) AND CURRENT_DATE",
@@ -484,6 +484,7 @@ class DAO
         );
 
         foreach ($rs as $fila) {
+        
             $pelicula = self::peliculaCrearDesdeRS($fila);
             array_push($peliculas, $pelicula);
         }
