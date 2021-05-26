@@ -1,9 +1,16 @@
-window.onpaint = ajaxComprobarSesionIniciada(); //se ejecuta antes de cargar la página
+window.onpaint =  ajaxComprobarSesionIniciada(); //se ejecuta antes de cargar la página
+window.onpaint =  crearCarruselNovedades();
+
 
 window.onload = function() {
     document.getElementById("abreModal").addEventListener("click", crearBotonesInicio);
     document.getElementById("descubrenos").addEventListener("click", crearBotonesInicio);
-    crearCarruselNovedades();
+}
+
+function importarScript(nombre) {
+    var s = document.createElement("script");
+    s.src = nombre;
+    document.querySelector("head").appendChild(s);
 }
 
 function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
@@ -49,12 +56,14 @@ function crearBotonesInicio() {
     //Crear botones para iniciar sesión o registrarse
     var btnIniciarSesion = document.createElement("button");
     btnIniciarSesion.setAttribute("id", "iniciarSesion");
+    btnIniciarSesion.setAttribute("class", "iniciarSesion");
     btnIniciarSesion.innerHTML = "Iniciar Sesion";
     document.getElementById("formulario").appendChild(btnIniciarSesion);
     btnIniciarSesion.addEventListener("click", crearFormularioInicio);
 
     var btnRegistrarse = document.createElement("button");
     btnRegistrarse.setAttribute("id", "registrarse");
+    btnRegistrarse.setAttribute("class", "registrarse");
     btnRegistrarse.innerHTML = "Registrarse";
     document.getElementById("formulario").appendChild(btnRegistrarse);
     btnRegistrarse.addEventListener("click", crearFormularioRegistrarse)
@@ -68,10 +77,11 @@ function crearBotonesInicio() {
         //boton para volver atras
         var divAtras = document.createElement("div");
         divAtras.setAttribute("class", "divAtras");
-            var btnAtras = document.createElement("i");
-            btnAtras.setAttribute("class", "fas fa-angle-left fa-2x"); //fa-2x para size
-            divAtras.appendChild(btnAtras);
+        var btnAtras = document.createElement("i");
+        btnAtras.setAttribute("class", "fas fa-angle-left fa-2x"); //fa-2x para size
+        divAtras.appendChild(btnAtras);
         divAtras.addEventListener("click", crearBotonesInicio);
+
         document.getElementById("formulario").appendChild(divAtras);
 
         //formulario de inicio
@@ -117,6 +127,7 @@ function crearBotonesInicio() {
         var inicioSesion = document.createElement("button");
         inicioSesion.setAttribute("type", "submit");
         inicioSesion.setAttribute("name", "iniciar");
+        inicioSesion.setAttribute("class", "botonIniciar");
         inicioSesion.innerHTML = "Iniciar sesión";
         inicioSesion.setAttribute("value", "Iniciar sesión");
         form.appendChild(inicioSesion);
@@ -255,9 +266,18 @@ function crearCarruselNovedades(){
 
 function domCrearCarruselNovedades(pelicula){
     novedades = document.getElementById("novedades");
+
+    divPelicula = document.createElement("div");
+
     imgCaratula = document.createElement("img");
     imgCaratula.setAttribute("id", "imgNovedades");
+    imgCaratula.setAttribute("class", "imgNovedades");
     imgCaratula.setAttribute("src", "../_img/"+pelicula.id+".jpg");    
-    novedades.appendChild(imgCaratula);
+    imgCaratula.setAttribute("width", "270px");
+    imgCaratula.setAttribute("height", "400px");
+
+    divPelicula.appendChild(imgCaratula);
+    novedades.appendChild(divPelicula);
+    
 }
 
