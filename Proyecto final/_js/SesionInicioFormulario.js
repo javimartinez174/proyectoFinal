@@ -5,6 +5,7 @@ window.onpaint =  crearCarruselNovedades();
 window.onload = function() {
     document.getElementById("abreModal").addEventListener("click", crearBotonesInicio);
     document.getElementById("descubrenos").addEventListener("click", crearBotonesInicio);
+    crearAlertaCredencialesErroneas(); //hay que ejecutarla cuando las credenciales sean erróneas al iniciar sesión
 }
 
 function importarScript(nombre) {
@@ -74,15 +75,7 @@ function crearBotonesInicio() {
         document.getElementById("formulario").removeChild(btnIniciarSesion);
         document.getElementById("formulario").removeChild(btnRegistrarse);
 
-        //boton para volver atras
-        var divAtras = document.createElement("div");
-        divAtras.setAttribute("class", "divAtras");
-        var btnAtras = document.createElement("i");
-        btnAtras.setAttribute("class", "fas fa-angle-left fa-2x"); //fa-2x para size
-        divAtras.appendChild(btnAtras);
-        divAtras.addEventListener("click", crearBotonesInicio);
-
-        document.getElementById("formulario").appendChild(divAtras);
+        crearBtnAtras();
 
         //formulario de inicio
         var form = document.createElement("form");
@@ -146,14 +139,7 @@ function crearBotonesInicio() {
         document.getElementById("formulario").removeChild(btnIniciarSesion);
         document.getElementById("formulario").removeChild(btnRegistrarse);
 
-        //boton para volver atras
-        var divAtras = document.createElement("div");
-        divAtras.setAttribute("class", "divAtras");
-            var btnAtras = document.createElement("i");
-            btnAtras.setAttribute("class", "fas fa-angle-left fa-2x"); //fa-2x para size
-            divAtras.appendChild(btnAtras);
-        divAtras.addEventListener("click", crearBotonesInicio);
-        document.getElementById("formulario").appendChild(divAtras);
+        crearBtnAtras();
 
         //formulario registro
         var formRegistro = document.createElement("form");
@@ -249,6 +235,35 @@ function crearBotonesInicio() {
         formRegistro.setAttribute("action", "../UsuarioNuevoCrear.php");
     }
 }
+
+//boton para volver atras
+function crearBtnAtras() {
+    
+    var divAtras = document.createElement("div");
+    divAtras.setAttribute("class", "divAtras");
+    var btnAtras = document.createElement("i");
+    btnAtras.setAttribute("class", "fas fa-angle-left fa-2x"); //fa-2x para size
+    divAtras.appendChild(btnAtras);
+    divAtras.addEventListener("click", crearBotonesInicio);
+    document.getElementById("formulario").appendChild(divAtras);
+}
+
+//creación de mennsaje de alerta
+function crearAlertaCredencialesErroneas(){
+   
+    var alerta = document.createElement("div");
+    alerta.setAttribute("class", "alerta");
+    var msg = document.createElement("p");
+    msg.innerHTML = "Credenciales erroneas";
+    alerta.appendChild(msg);
+    var iCerrar = document.createElement("i");
+    iCerrar.setAttribute("class", "fas fa-times fa-2x");
+    alerta.appendChild(iCerrar);
+    document.getElementById("navAlerta").appendChild(alerta);
+    iCerrar.addEventListener("click", function() {navAlerta.removeChild(navAlerta.lastChild);});
+}
+
+//Sección de Novedades (Carrusel)
 
 function crearCarruselNovedades(){
 

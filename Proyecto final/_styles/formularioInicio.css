@@ -51,35 +51,48 @@ nav button {
   float: left;
 }
 /*btn Atras*/
-.divAtras {
-    display: flex;
-    align-items: center;
-    height: 2em;
-    width: 2em;
-    background-color: #0CC7ED;
-    border: 1px solid #0093AF;
-    border-radius: 5px;
-    cursor: pointer;
+/*.divAtras {
+    width: 20px;
+}*/
+
+/*botones*/
+
+button .close {
+  background-color: #071c22d3 !important;
+  border: none !important;
 }
-.divAtras:hover {
-    display: flex;
-    align-items: center;
-    background-color: #85C9D6;
-    border-radius: 5px;
-    cursor: pointer;
+#btnClose:hover {
+  background-color: transparent;
+  border: none;
 }
-.divAtras:active {
-    display: flex;
-    align-items: center;
-    background-color: #85C9D6;
-    border: 1px solid #0093AF;
-    border-radius: 5px;
-    cursor: pointer;
+#abreModal {
+  font-size: 32px;
+  background-color: transparent;
+  border: none;
+}
+#abreModal:hover {
+  background-color: transparent;
+  border: none;
 }
 
-
-.fas{
+.fas {
+   size: 24px;
    color: #ff6060;
+   cursor: pointer;
+}
+.fas:hover {
+  size: 24px;
+  color: #a10000;
+  cursor: pointer;
+}
+
+.alerta {
+  display: flex;
+  margin-left: 50px;
+  color: #2b0000;
+  background-color: rgb(255, 187, 187);
+  border: 1px  solid rgb(240, 162, 162);
+  border-radius: 2px;
 }
 
 a {

@@ -5,7 +5,7 @@
     <meta charset='UTF-8'>
     <title>Inicio</title>
     
-<script src="../_js/SesionInicioFormulario.js"></script>
+    <script src="../_js/SesionInicioFormulario.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -37,10 +37,11 @@
                 <a class="nav-link" href="#">Noticias</a>
             </li>
         </ul>
+        <div id="navAlerta"></div>
         <ul class="nav navbar-nav ml-auto">
             <li class="nav-item">
                 <button type="button" id="abreModal" class="ml-auto" data-toggle="modal" data-target="#myModal">
-                    <img src="../_img/utiles/login.png" height="40em" width="40em">
+                    <i class="fas fa-door-open"></i>
                 </button>        
             </li>
         </ul>
@@ -52,7 +53,7 @@
             <div class="modal-content">
                 <div class="modal-header justify-content-center">
                     <h4 class="featured-text text-center text-uppercase"> Iniciar Sesion  Registrarse</h4>
-                    <button type="button" class="close" data-dismiss="modal"><i class= "fas fa-times"></i></button>
+                    <button id="btnClose" type="button" class="close" data-dismiss="modal"><i class= "fas fa-times"></i></button>
                 </div>
                 <div id="formulario" class= "modal-body align-items-center justify-content-center" >
                 </div>
@@ -71,7 +72,7 @@
         </div>
     </header>
     <section class="novedades-section">
-        <h4 class="featured-text text-center text-uppercase">Últimas Películas Incluidas</h4>
+        <h4 class="featured-text text-center text-uppercase">Últimas Películas Incluídas</h4>
         <div class="autoplay" id="novedades">
         </div>
     </section>

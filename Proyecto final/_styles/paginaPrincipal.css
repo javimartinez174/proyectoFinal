@@ -80,18 +80,18 @@ ul {
     justify-content: center;
     align-items: flex-end;
 }
-.fa-search {
-    color: #006391;
-}
 
-.fa-user-cog {
-    color: #006391;
+.fas {
+    size: 24px;
+    color: #72c47d;
+    cursor: pointer;
     line-height: 2;
-}
-.fa-door-closed {
-    color: #006391;
-    line-height: 2;
-}
+ }
+ .fas:hover {
+   size: 24px;
+   color: #a10000;
+   cursor: pointer;
+ }
 
 
 #registrarse{
@@ -103,11 +103,11 @@ a{
     color: #14839A;
 }
 a:hover{
-    color: #85C9D6;
+    color: #00cbf3;
 }
 
 p{
-    color: #0CC7ED;
+    color: #000000;
 }
 
 button{
@@ -119,5 +119,42 @@ button:hover{
     background-color: #85C9D6;
 }
 
-
+.cartelera {
+    margin: 20px;
+    display: flex;
+}
+.cube {
+    margin: 10px;
+    width: 270px;
+    height: 400px;
+    text-align: center;
+    margin: 0 auto;
+    -webkit-transition: -webkit-transform .33s;
+    transition: transform .33s;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+.cube .flip,
+.cube .flop {
+    border:1px solid #cdcdcd; 
+    text-align:center; 
+    background:#4873ce;
+    color:#fff; 
+    font-weight:bold;
+    border-radius: 5px;
+    height: 400px;
+}
+.cube .flip {
+    -webkit-transform: translateZ(50px);
+    transform: translateZ(50px);
+}
+.cube .flop {
+    -webkit-transform: rotateX(-90deg) translateZ(-50px);
+    transform: rotateX(-90deg) translateZ(-50px);
+}
+.cube:hover {
+    -webkit-transform: rotateX(89deg);
+    transform: rotateX(89deg);
+    cursor:pointer; 
+}
 
