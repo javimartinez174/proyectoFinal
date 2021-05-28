@@ -65,6 +65,10 @@ button .close {
   background-color: transparent;
   border: none;
 }
+#btnClose:active {
+  background-color: transparent;
+  border: none;
+}
 #abreModal {
   font-size: 32px;
   background-color: transparent;

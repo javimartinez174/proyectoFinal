@@ -1,6 +1,8 @@
 //window.onpaint =  
 
 window.onload = function() {
+    document.getElementById("btnCerrarSesion").addEventListener("click", cerrarSesion);
+    document.getElementById("btnBuscar").addEventListener("click", cargarBusqueda, false);
     cargarPelis();
     cartelera = document.getElementById("cartelera");
 }
@@ -24,10 +26,14 @@ function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
     request.send(parametros);
 }
 
-function cargarPelis(){
-    document.getElementById("btnBuscar").addEventListener("click", cargarBusqueda, false);
+function cerrarSesion() {
+    window.location = "../SesionCerrar.php";
+}
 
-    llamadaAjax("../PeliculasNovedades.php", "",
+function cargarPelis() {
+    
+
+    llamadaAjax("../CargarPeliculas.php", "",
         function(texto) {
             var peliculas = JSON.parse(texto);
 
@@ -38,7 +44,7 @@ function cargarPelis(){
     );
 }
 
-function cargarBusqueda(){
+function cargarBusqueda() {
 
     while(cartelera.firstChild){
         cartelera.removeChild(cartelera.lastChild);
@@ -47,18 +53,20 @@ function cargarBusqueda(){
 
     llamadaAjax("../BusquedaAJAX.php", "busqueda=" + busqueda.value,
     function(texto) {
-        var peliculas = JSON.parse(texto);
+        
+            var peliculas = JSON.parse(texto);
 
-        for(var i=0; i<peliculas.length; i++) {
-            domCrearPelis(peliculas[i]);
-        }
+            for(var i=0; i<peliculas.length; i++) {
+                domCrearPelis(peliculas[i]);
+            }
+        
     },
     function(texto) {
  
     }
     );
 }
-function domCrearPelis(pelicula){
+function domCrearPelis(pelicula) {
     
     divCube = document.createElement("div");
     divCube.setAttribute("class", "cube");
@@ -93,9 +101,16 @@ function domCrearPelis(pelicula){
     puntuacion.innerHTML = "Puntuación obtenida: "+pelicula.puntuacion;
     divFlop.appendChild(puntuacion);
 
+    sp = document.createElement("br");
+    divFlop.appendChild(sp);
+
+    //FALTA genero, director, reparto de actores
+
     divFlip.appendChild(imgCaratula);
     divCube.appendChild(divFlip);
     divCube.appendChild(divFlop);
     cartelera.appendChild(divCube);
     
+    
+
 }

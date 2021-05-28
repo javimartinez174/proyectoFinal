@@ -11,7 +11,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
-    <link rel="stylesheet" href="../_styles/paginaPrincipal.css">
+    <link rel="stylesheet" href="../_styles/PaginaPrincipal.css">
     <link rel="shortcut icon" href="../_img/logo.png">
 
 
@@ -24,7 +24,7 @@
     <nav class="navbar navbar-expand-sm">
     <!-- Brand/logo -->
         <a class="navbar-brand" href="#">
-            <img src="../_img/logo.png" width="100" height="70"/>
+            <img src="../_img/logo.png" width="70" height="70"/>
         </a>
     
     <!-- Links -->
@@ -49,17 +49,17 @@
               </div>
         </ul>
         <ul class="navRightPrincipal">
-            <i class="fas fa-stream"></i>
+            
             <div class="nav-item">
-                <a class="nav-link" href="#">Ver Mis Listas</a>
+                <a class="nav-link" href="#"><i class="fas fa-stream"></i>Ver Mis Listas</a>
             </div>
-            <i class="fas fa-user-cog"></i>
+            
             <div class="nav-item">
-                <a class="nav-link" href="#">Perfil</a>
+                <a class="nav-link" href="#"><i class="fas fa-user-cog"></i>Perfil</a>
             </div>
-            <i class="fas fa-door-closed"></i>
-            <div class="nav-item">
-                <a class="nav-link" href="#">Cerrar Sesión</a>
+            
+            <div class="nav-item" id="divCerrarSesion">
+                <a class="nav-link" id="btnCerrarSesion" href="#"><i class="fas fa-door-closed"></i>Cerrar Sesión</a>
             </div>
         </ul>
     </nav>
