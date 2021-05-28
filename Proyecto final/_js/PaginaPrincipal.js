@@ -35,11 +35,12 @@ function cargarPelis() {
 
     llamadaAjax("../CargarPeliculas.php", "",
         function(texto) {
+            
             var peliculas = JSON.parse(texto);
 
             for (var i=0; i<peliculas.length; i++) {
-                domCrearPelis(peliculas[i]);
-            }
+                domCrearPelis(peliculas[i]);}
+        
         }, function (texto){}
     );
 }
@@ -54,12 +55,15 @@ function cargarBusqueda() {
     llamadaAjax("../BusquedaAJAX.php", "busqueda=" + busqueda.value,
     function(texto) {
         
+        if ( texto == "" ) { //COMO SI CONTARAS LA LONGITUD DE CADENA
+            alert("SIN DATOS!")
+        }else{
             var peliculas = JSON.parse(texto);
 
             for(var i=0; i<peliculas.length; i++) {
                 domCrearPelis(peliculas[i]);
             }
-        
+        }
     },
     function(texto) {
  
