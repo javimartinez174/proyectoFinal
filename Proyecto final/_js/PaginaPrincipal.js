@@ -2,10 +2,10 @@
 
 window.onload = function() {
     cargarPelis();
+    cartelera = document.getElementById("cartelera");
 }
 
 function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
-    //TODO PARA DEPURACIÓN: alert("Haciendo ajax a " + url + "\nCon parámetros " + parametros);
 
     var request = new XMLHttpRequest();
 
@@ -21,10 +21,12 @@ function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
         }
     };
     
-    request.send();
+    request.send(parametros);
 }
 
 function cargarPelis(){
+    document.getElementById("btnBuscar").addEventListener("click", cargarBusqueda, false);
+
     llamadaAjax("../PeliculasNovedades.php", "",
         function(texto) {
             var peliculas = JSON.parse(texto);
@@ -36,9 +38,28 @@ function cargarPelis(){
     );
 }
 
-function domCrearPelis(pelicula){
-    cartelera = document.getElementById("cartelera");
+function cargarBusqueda(){
 
+    while(cartelera.firstChild){
+        cartelera.removeChild(cartelera.lastChild);
+    }
+    var busqueda = document.getElementById("busqueda");
+
+    llamadaAjax("../BusquedaAJAX.php", "busqueda=" + busqueda.value,
+    function(texto) {
+        var peliculas = JSON.parse(texto);
+
+        for(var i=0; i<peliculas.length; i++) {
+            domCrearPelis(peliculas[i]);
+        }
+    },
+    function(texto) {
+ 
+    }
+    );
+}
+function domCrearPelis(pelicula){
+    
     divCube = document.createElement("div");
     divCube.setAttribute("class", "cube");
 

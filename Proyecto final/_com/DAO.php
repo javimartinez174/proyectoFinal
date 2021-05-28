@@ -403,7 +403,7 @@ class DAO
             "SELECT pelicula.* FROM pelicula 
             INNER JOIN generospeliculas ON pelicula.id = generospeliculas.peliculaid 
             LEFT JOIN genero ON generospeliculas.generoId = genero.id 
-            WHERE genero.nombre = ?",
+            WHERE genero.nombre LIKE ?",
             [$generoNombre]
         );
 
@@ -456,7 +456,7 @@ class DAO
             "SELECT pelicula.* FROM pelicula 
             INNER JOIN plataformaspeliculas ON pelicula.id = plataformaspeliculas.peliculaid 
             LEFT JOIN plataforma ON plataformaspeliculas.plataformaId = plataforma.id 
-            WHERE plataforma.nombre = ?",
+            WHERE plataforma.nombre LIKE ?",
             [$plataformaNombre]
         );
 
