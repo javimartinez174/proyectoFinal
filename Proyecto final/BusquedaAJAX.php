@@ -16,4 +16,8 @@ if(isset($_REQUEST["busqueda"])){
     buscarPor($genero);
     $titulo = DAO::buscarPeliculaPorNombre($_REQUEST["busqueda"]);
     buscarPor($titulo);
+    $director = DAO::buscarPeliculaPorDirector($_REQUEST["busqueda"]);
+    buscarPor($director);
+    $actor = DAO::buscarPeliculaPorActor($_REQUEST["busqueda"]);
+    buscarPor($actor);
 }

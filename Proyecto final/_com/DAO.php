@@ -399,12 +399,14 @@ class DAO
     public static function buscarPeliculaPorGenero(string $generoNombre): ?array
     {
         $peliculas = [];
+        
+        $generoNombreDef = "%" . $generoNombre . "%";
         $rs = self::ejecutarConsulta(
             "SELECT pelicula.* FROM pelicula 
             INNER JOIN generospeliculas ON pelicula.id = generospeliculas.peliculaid 
             LEFT JOIN genero ON generospeliculas.generoId = genero.id 
             WHERE genero.nombre LIKE ?",
-            [$generoNombre]
+            [$generoNombreDef]
         );
 
 
@@ -452,12 +454,65 @@ class DAO
     public static function buscarPeliculaPorPlataforma(string $plataformaNombre): ?array
     {
         $peliculas = [];
+        $plataformaNombreDef = "%" . $plataformaNombre . "%";
         $rs = self::ejecutarConsulta(
             "SELECT pelicula.* FROM pelicula 
             INNER JOIN plataformaspeliculas ON pelicula.id = plataformaspeliculas.peliculaid 
             LEFT JOIN plataforma ON plataformaspeliculas.plataformaId = plataforma.id 
             WHERE plataforma.nombre LIKE ?",
-            [$plataformaNombre]
+            [$plataformaNombreDef]
+        );
+
+
+        foreach ($rs as $fila) {
+            $pelicula = self::peliculaCrearDesdeRS($fila);
+            array_push($peliculas, $pelicula);
+        }
+
+
+        if ($rs) {
+            return $peliculas;
+        } else {
+            return null;
+        }
+    }
+
+    public static function buscarPeliculaPorDirector(string $directorNombre): ?array
+    {
+        $peliculas = [];
+        $directorNombreDef = "%" . $directorNombre . "%";
+        $rs = self::ejecutarConsulta(
+            "SELECT pelicula.* FROM pelicula 
+            INNER JOIN directorespeliculas ON pelicula.id = directorespeliculas.peliculaid 
+            LEFT JOIN director ON directorespeliculas.directorId = director.id 
+            WHERE director.nombre LIKE ? ",
+            [$directorNombreDef]
+        );
+
+
+        foreach ($rs as $fila) {
+            $pelicula = self::peliculaCrearDesdeRS($fila);
+            array_push($peliculas, $pelicula);
+        }
+
+
+        if ($rs) {
+            return $peliculas;
+        } else {
+            return null;
+        }
+    }
+
+    public static function buscarPeliculaPorActor(string $actorNombre): ?array
+    {
+        $peliculas = [];
+        $actorNombreDef = "%" . $actorNombre . "%";
+        $rs = self::ejecutarConsulta(
+            "SELECT pelicula.* FROM pelicula 
+            INNER JOIN actorespeliculas ON pelicula.id = actorespeliculas.peliculaid 
+            LEFT JOIN actor ON actorespeliculas.actorId = actor.id 
+            WHERE actor.nombre LIKE ?",
+            [$actorNombreDef]
         );
 
 
