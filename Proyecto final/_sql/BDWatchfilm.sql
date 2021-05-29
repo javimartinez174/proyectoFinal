@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-05-2021 a las 18:37:55
+-- Tiempo de generación: 29-05-2021 a las 15:40:57
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -32,9 +32,59 @@ USE `watchfilm`;
 DROP TABLE IF EXISTS `actor`;
 CREATE TABLE `actor` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `apellidos` varchar(20) NOT NULL
+  `nombre` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `actor`
+--
+
+INSERT INTO `actor` (`id`, `nombre`) VALUES
+(1, 'Elijah Wood'),
+(2, 'Orlando Bloom'),
+(3, 'Ian McKellen'),
+(4, 'Viggo Mortensen'),
+(5, 'Liv Tyler'),
+(6, 'Sean Astin'),
+(7, 'Dominic Monaghan'),
+(8, 'Billy Boyd'),
+(9, 'Sean Bean'),
+(10, 'Miranda Otto'),
+(11, 'John Rhys-Davies'),
+(12, 'Andy Sёrkis'),
+(13, 'Cate Blanchett'),
+(14, 'Ian Holm'),
+(15, 'Bernard Hill'),
+(16, 'Hugo Weaving'),
+(17, 'Ashton Kutcher'),
+(18, 'Seann William Scott'),
+(19, 'Kristy Swanson'),
+(20, 'Jennifer Garner'),
+(21, 'Jim Carrey'),
+(22, 'Laura Linney'),
+(23, 'Ed Harris'),
+(24, 'Noah Emmerich'),
+(25, 'Natascha McElhone'),
+(26, 'Russell Crowe'),
+(27, 'Joaquin Phoenix'),
+(28, 'Connie Nielsen'),
+(29, 'Oliver Reed'),
+(30, 'Derek Jacobi'),
+(31, 'Djimon Hounsou'),
+(32, 'Matt Damon'),
+(33, 'Matthew McConaughey'),
+(34, 'Anne Hathaway'),
+(35, 'Jessica Chastain'),
+(36, 'Mackenzie Foy'),
+(37, 'Casey Affleck'),
+(38, 'Michael Caine'),
+(39, 'Daniel Brühl'),
+(40, 'Brad Pitt'),
+(41, 'Christoph Waltz'),
+(42, 'Mélanie Laurent'),
+(43, 'Michael Fassbender'),
+(44, 'Eli Roth'),
+(45, 'Diane Kruger');
 
 -- --------------------------------------------------------
 
@@ -48,6 +98,89 @@ CREATE TABLE `actorespeliculas` (
   `actorId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `actorespeliculas`
+--
+
+INSERT INTO `actorespeliculas` (`peliculaId`, `actorId`) VALUES
+(1, 17),
+(1, 18),
+(1, 19),
+(1, 20),
+(5, 21),
+(5, 22),
+(5, 23),
+(5, 24),
+(5, 25),
+(6, 26),
+(6, 27),
+(6, 28),
+(6, 29),
+(6, 30),
+(6, 31),
+(7, 39),
+(7, 40),
+(7, 41),
+(7, 42),
+(7, 43),
+(7, 44),
+(7, 45),
+(9, 1),
+(9, 2),
+(9, 3),
+(9, 4),
+(9, 5),
+(9, 6),
+(9, 7),
+(9, 8),
+(9, 9),
+(9, 10),
+(9, 11),
+(9, 12),
+(9, 13),
+(9, 14),
+(9, 15),
+(9, 16),
+(10, 1),
+(10, 2),
+(10, 3),
+(10, 4),
+(10, 5),
+(10, 6),
+(10, 7),
+(10, 8),
+(10, 9),
+(10, 10),
+(10, 11),
+(10, 12),
+(10, 13),
+(10, 14),
+(10, 15),
+(10, 16),
+(11, 1),
+(11, 2),
+(11, 3),
+(11, 4),
+(11, 5),
+(11, 6),
+(11, 7),
+(11, 8),
+(11, 9),
+(11, 10),
+(11, 11),
+(11, 12),
+(11, 13),
+(11, 14),
+(11, 15),
+(11, 16),
+(17, 32),
+(17, 33),
+(17, 34),
+(17, 35),
+(17, 36),
+(17, 37),
+(17, 38);
+
 -- --------------------------------------------------------
 
 --
@@ -57,16 +190,31 @@ CREATE TABLE `actorespeliculas` (
 DROP TABLE IF EXISTS `director`;
 CREATE TABLE `director` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  `apellidos` varchar(45) NOT NULL
+  `nombre` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `director`
 --
 
-INSERT INTO `director` (`id`, `nombre`, `apellidos`) VALUES
-(1, 'James', 'Cameron');
+INSERT INTO `director` (`id`, `nombre`) VALUES
+(1, 'James Cameron'),
+(2, 'Peter Jackson'),
+(3, 'Christopher Nolan'),
+(4, 'Jon Favreau'),
+(5, 'Ridley Scott'),
+(6, 'Andrés Muschietti'),
+(7, 'Peter Weir'),
+(8, 'Quentin Tarantino'),
+(9, 'Martin Scorsese'),
+(10, 'Danny Leiner'),
+(11, 'James Wan'),
+(12, 'Federico Álvarez'),
+(13, 'Steven Spielberg'),
+(14, 'Jonathan Mostow'),
+(15, 'Guy Ritchie'),
+(16, 'Tim Burton'),
+(17, 'David Fincher');
 
 -- --------------------------------------------------------
 
@@ -85,6 +233,23 @@ CREATE TABLE `directorespeliculas` (
 --
 
 INSERT INTO `directorespeliculas` (`peliculaId`, `directorId`) VALUES
+(4, 1),
+(1, 10),
+(9, 2),
+(10, 2),
+(11, 2),
+(8, 13),
+(17, 3),
+(6, 5),
+(5, 7),
+(12, 4),
+(13, 4),
+(3, 6),
+(7, 8),
+(2, 12),
+(14, 1),
+(15, 1),
+(16, 14),
 (4, 1);
 
 -- --------------------------------------------------------
@@ -105,7 +270,26 @@ CREATE TABLE `genero` (
 
 INSERT INTO `genero` (`id`, `nombre`) VALUES
 (1, 'Comedia'),
-(2, 'Terror');
+(2, 'Terror'),
+(3, 'Drama'),
+(4, 'Acción'),
+(5, 'Aventuras'),
+(6, 'Suspense'),
+(7, 'Ciencia Ficción'),
+(8, 'Fantasía'),
+(9, 'Romance'),
+(10, 'Musical'),
+(11, 'Animación'),
+(12, 'Bélico'),
+(13, 'Biográfico'),
+(14, 'Catástrofe'),
+(15, 'Histórico'),
+(16, 'Policíaco'),
+(17, 'Western'),
+(18, 'Erótico'),
+(19, 'Documental'),
+(20, 'Épico'),
+(21, 'Comedia Negra');
 
 -- --------------------------------------------------------
 
@@ -125,8 +309,38 @@ CREATE TABLE `generospeliculas` (
 
 INSERT INTO `generospeliculas` (`peliculaId`, `generoId`) VALUES
 (1, 1),
+(1, 7),
 (2, 2),
-(5, 1);
+(2, 6),
+(5, 1),
+(5, 3),
+(5, 7),
+(5, 8),
+(6, 3),
+(6, 4),
+(6, 5),
+(6, 20),
+(7, 1),
+(7, 3),
+(7, 4),
+(7, 5),
+(7, 12),
+(7, 21),
+(8, 1),
+(8, 2),
+(8, 3),
+(8, 5),
+(8, 6),
+(9, 5),
+(9, 8),
+(10, 5),
+(10, 8),
+(11, 5),
+(11, 8),
+(17, 3),
+(17, 5),
+(17, 7),
+(17, 20);
 
 -- --------------------------------------------------------
 
@@ -306,10 +520,10 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `identificador`, `nombre`, `apellidos`, `email`, `contrasenna`, `fotoPerfil`, `codigoCookie`) VALUES
-(1, 'jlopez', 'Josép', 'Lópep', 'j@cp', 'j', 'estrellaRellena.png', 'yzOZ460v4FnmHM2dKMSjHoLZv0CdU7rM'),
+(1, 'jlopez', 'Josép', 'Lópep', 'j@cp', 'j', 'estrellaRellena.png', NULL),
 (2, 'mgarcia', 'María', 'García', 'm@c', 'm', 'usuario.png', NULL),
 (3, 'fpi', 'Felipe', 'Pi', 'f@c', 'f', 'usuario.png', NULL),
-(9, 'alainF', 'Alain', 'Fernandez', 'a@fernan', 'a', '60423426.jpg', 'UsadCI6uefGzR3ozNzPiD1ESqW6HUH5L');
+(9, 'alainF', 'Alain', 'Fernandez', 'a@fernan', 'a', '60423426.jpg', 'JexlFxiYih2K6j9Kmfn0zzeApKywZarU');
 
 --
 -- Índices para tablas volcadas
@@ -409,19 +623,19 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `actor`
 --
 ALTER TABLE `actor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de la tabla `director`
 --
 ALTER TABLE `director`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `genero`
 --
 ALTER TABLE `genero`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `lista`
