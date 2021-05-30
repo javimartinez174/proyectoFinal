@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-05-2021 a las 15:40:57
+-- Tiempo de generación: 30-05-2021 a las 16:42:49
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -40,51 +40,51 @@ CREATE TABLE `actor` (
 --
 
 INSERT INTO `actor` (`id`, `nombre`) VALUES
-(1, 'Elijah Wood'),
-(2, 'Orlando Bloom'),
-(3, 'Ian McKellen'),
-(4, 'Viggo Mortensen'),
-(5, 'Liv Tyler'),
-(6, 'Sean Astin'),
-(7, 'Dominic Monaghan'),
-(8, 'Billy Boyd'),
-(9, 'Sean Bean'),
-(10, 'Miranda Otto'),
-(11, 'John Rhys-Davies'),
 (12, 'Andy Sёrkis'),
-(13, 'Cate Blanchett'),
-(14, 'Ian Holm'),
-(15, 'Bernard Hill'),
-(16, 'Hugo Weaving'),
+(34, 'Anne Hathaway'),
 (17, 'Ashton Kutcher'),
-(18, 'Seann William Scott'),
-(19, 'Kristy Swanson'),
-(20, 'Jennifer Garner'),
-(21, 'Jim Carrey'),
-(22, 'Laura Linney'),
-(23, 'Ed Harris'),
-(24, 'Noah Emmerich'),
-(25, 'Natascha McElhone'),
-(26, 'Russell Crowe'),
-(27, 'Joaquin Phoenix'),
+(15, 'Bernard Hill'),
+(8, 'Billy Boyd'),
+(40, 'Brad Pitt'),
+(37, 'Casey Affleck'),
+(13, 'Cate Blanchett'),
+(41, 'Christoph Waltz'),
 (28, 'Connie Nielsen'),
-(29, 'Oliver Reed'),
+(39, 'Daniel Brühl'),
 (30, 'Derek Jacobi'),
+(45, 'Diane Kruger'),
 (31, 'Djimon Hounsou'),
+(7, 'Dominic Monaghan'),
+(23, 'Ed Harris'),
+(44, 'Eli Roth'),
+(1, 'Elijah Wood'),
+(16, 'Hugo Weaving'),
+(14, 'Ian Holm'),
+(3, 'Ian McKellen'),
+(20, 'Jennifer Garner'),
+(35, 'Jessica Chastain'),
+(21, 'Jim Carrey'),
+(27, 'Joaquin Phoenix'),
+(11, 'John Rhys-Davies'),
+(19, 'Kristy Swanson'),
+(22, 'Laura Linney'),
+(5, 'Liv Tyler'),
+(36, 'Mackenzie Foy'),
 (32, 'Matt Damon'),
 (33, 'Matthew McConaughey'),
-(34, 'Anne Hathaway'),
-(35, 'Jessica Chastain'),
-(36, 'Mackenzie Foy'),
-(37, 'Casey Affleck'),
-(38, 'Michael Caine'),
-(39, 'Daniel Brühl'),
-(40, 'Brad Pitt'),
-(41, 'Christoph Waltz'),
 (42, 'Mélanie Laurent'),
+(38, 'Michael Caine'),
 (43, 'Michael Fassbender'),
-(44, 'Eli Roth'),
-(45, 'Diane Kruger');
+(10, 'Miranda Otto'),
+(25, 'Natascha McElhone'),
+(24, 'Noah Emmerich'),
+(29, 'Oliver Reed'),
+(2, 'Orlando Bloom'),
+(26, 'Russell Crowe'),
+(6, 'Sean Astin'),
+(9, 'Sean Bean'),
+(18, 'Seann William Scott'),
+(4, 'Viggo Mortensen');
 
 -- --------------------------------------------------------
 
@@ -198,23 +198,23 @@ CREATE TABLE `director` (
 --
 
 INSERT INTO `director` (`id`, `nombre`) VALUES
-(1, 'James Cameron'),
-(2, 'Peter Jackson'),
-(3, 'Christopher Nolan'),
-(4, 'Jon Favreau'),
-(5, 'Ridley Scott'),
 (6, 'Andrés Muschietti'),
+(3, 'Christopher Nolan'),
+(10, 'Danny Leiner'),
+(17, 'David Fincher'),
+(12, 'Federico Álvarez'),
+(15, 'Guy Ritchie'),
+(1, 'James Cameron'),
+(11, 'James Wan'),
+(4, 'Jon Favreau'),
+(14, 'Jonathan Mostow'),
+(9, 'Martin Scorsese'),
+(2, 'Peter Jackson'),
 (7, 'Peter Weir'),
 (8, 'Quentin Tarantino'),
-(9, 'Martin Scorsese'),
-(10, 'Danny Leiner'),
-(11, 'James Wan'),
-(12, 'Federico Álvarez'),
+(5, 'Ridley Scott'),
 (13, 'Steven Spielberg'),
-(14, 'Jonathan Mostow'),
-(15, 'Guy Ritchie'),
-(16, 'Tim Burton'),
-(17, 'David Fincher');
+(16, 'Tim Burton');
 
 -- --------------------------------------------------------
 
@@ -233,24 +233,23 @@ CREATE TABLE `directorespeliculas` (
 --
 
 INSERT INTO `directorespeliculas` (`peliculaId`, `directorId`) VALUES
-(4, 1),
 (1, 10),
+(2, 12),
+(3, 6),
+(4, 1),
+(5, 7),
+(6, 5),
+(7, 8),
+(8, 13),
 (9, 2),
 (10, 2),
 (11, 2),
-(8, 13),
-(17, 3),
-(6, 5),
-(5, 7),
 (12, 4),
 (13, 4),
-(3, 6),
-(7, 8),
-(2, 12),
 (14, 1),
 (15, 1),
 (16, 14),
-(4, 1);
+(17, 3);
 
 -- --------------------------------------------------------
 
@@ -269,27 +268,27 @@ CREATE TABLE `genero` (
 --
 
 INSERT INTO `genero` (`id`, `nombre`) VALUES
-(1, 'Comedia'),
-(2, 'Terror'),
-(3, 'Drama'),
 (4, 'Acción'),
-(5, 'Aventuras'),
-(6, 'Suspense'),
-(7, 'Ciencia Ficción'),
-(8, 'Fantasía'),
-(9, 'Romance'),
-(10, 'Musical'),
 (11, 'Animación'),
+(5, 'Aventuras'),
 (12, 'Bélico'),
 (13, 'Biográfico'),
 (14, 'Catástrofe'),
-(15, 'Histórico'),
-(16, 'Policíaco'),
-(17, 'Western'),
-(18, 'Erótico'),
+(7, 'Ciencia Ficción'),
+(1, 'Comedia'),
+(21, 'Comedia Negra'),
 (19, 'Documental'),
+(3, 'Drama'),
 (20, 'Épico'),
-(21, 'Comedia Negra');
+(18, 'Erótico'),
+(8, 'Fantasía'),
+(15, 'Histórico'),
+(10, 'Musical'),
+(16, 'Policíaco'),
+(9, 'Romance'),
+(6, 'Suspense'),
+(2, 'Terror'),
+(17, 'Western');
 
 -- --------------------------------------------------------
 
@@ -412,11 +411,11 @@ INSERT INTO `listausuariopeliculas` (`peliculaId`, `listaId`) VALUES
 (1, 1),
 (1, 2),
 (1, 3),
-(12, 1),
+(5, 1),
 (11, 1),
 (11, 16),
 (11, 17),
-(5, 1);
+(12, 1);
 
 -- --------------------------------------------------------
 
@@ -473,9 +472,9 @@ CREATE TABLE `plataforma` (
 --
 
 INSERT INTO `plataforma` (`id`, `nombre`) VALUES
-(1, 'Netflix'),
+(3, 'Amazon Prime'),
 (2, 'HBO'),
-(3, 'Amazon Prime');
+(1, 'Netflix');
 
 -- --------------------------------------------------------
 
@@ -533,12 +532,15 @@ INSERT INTO `usuario` (`id`, `identificador`, `nombre`, `apellidos`, `email`, `c
 -- Indices de la tabla `actor`
 --
 ALTER TABLE `actor`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `actorespeliculas`
 --
 ALTER TABLE `actorespeliculas`
+  ADD UNIQUE KEY `peliculaId_2` (`peliculaId`,`actorId`),
   ADD KEY `peliculaId` (`peliculaId`,`actorId`),
   ADD KEY `actorId` (`actorId`);
 
@@ -546,12 +548,14 @@ ALTER TABLE `actorespeliculas`
 -- Indices de la tabla `director`
 --
 ALTER TABLE `director`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `directorespeliculas`
 --
 ALTER TABLE `directorespeliculas`
+  ADD UNIQUE KEY `peliculaId_2` (`peliculaId`,`directorId`),
   ADD KEY `peliculaId` (`peliculaId`) USING BTREE,
   ADD KEY `directorId` (`directorId`) USING BTREE;
 
@@ -559,12 +563,14 @@ ALTER TABLE `directorespeliculas`
 -- Indices de la tabla `genero`
 --
 ALTER TABLE `genero`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `generospeliculas`
 --
 ALTER TABLE `generospeliculas`
+  ADD UNIQUE KEY `peliculaId_2` (`peliculaId`,`generoId`),
   ADD KEY `peliculaId` (`peliculaId`,`generoId`),
   ADD KEY `generoId` (`generoId`);
 
@@ -580,6 +586,7 @@ ALTER TABLE `lista`
 --
 ALTER TABLE `listaamigos`
   ADD PRIMARY KEY (`usuarioId`,`amigoId`),
+  ADD UNIQUE KEY `usuarioId_2` (`usuarioId`,`amigoId`),
   ADD KEY `usuarioId` (`usuarioId`,`amigoId`),
   ADD KEY `amigoId` (`amigoId`);
 
@@ -587,6 +594,7 @@ ALTER TABLE `listaamigos`
 -- Indices de la tabla `listausuariopeliculas`
 --
 ALTER TABLE `listausuariopeliculas`
+  ADD UNIQUE KEY `peliculaId_2` (`peliculaId`,`listaId`),
   ADD KEY `listaId` (`listaId`),
   ADD KEY `peliculaId` (`peliculaId`);
 
@@ -594,18 +602,23 @@ ALTER TABLE `listausuariopeliculas`
 -- Indices de la tabla `pelicula`
 --
 ALTER TABLE `pelicula`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `plataforma`
 --
 ALTER TABLE `plataforma`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `plataformaspeliculas`
 --
 ALTER TABLE `plataformaspeliculas`
+  ADD UNIQUE KEY `peliculaId_2` (`peliculaId`,`plataformaId`),
   ADD KEY `peliculaId` (`peliculaId`,`plataformaId`),
   ADD KEY `plataformaId` (`plataformaId`);
 
@@ -613,7 +626,8 @@ ALTER TABLE `plataformaspeliculas`
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`,`identificador`,`email`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
