@@ -74,11 +74,13 @@ function domCrearPelis(pelicula) {
     
     divCube = document.createElement("div");
     divCube.setAttribute("class", "cube");
+    divCube.setAttribute("id", ""+pelicula.id);
 
     divFlip = document.createElement("div");
     divFlip.setAttribute("class", "flip");
     divFlop = document.createElement("div");
     divFlop.setAttribute("class", "flop");
+    divCube.addEventListener("click", redireccionarPelicula);
 
     imgCaratula = document.createElement("img");
     imgCaratula.setAttribute("id", "imgNovedades");
@@ -114,7 +116,9 @@ function domCrearPelis(pelicula) {
     divCube.appendChild(divFlip);
     divCube.appendChild(divFlop);
     cartelera.appendChild(divCube);
-    
-    
 
+}
+
+function redireccionarPelicula(){
+    window.location = "Pelicula.html?verinfo="+this.id;
 }

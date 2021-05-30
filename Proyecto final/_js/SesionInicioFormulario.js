@@ -39,7 +39,7 @@ function ajaxComprobarSesionIniciada(){
     function(texto){
         var sesionIniciada = JSON.parse(texto);
         if(sesionIniciada){
-            window.location ="../PaginaPrincipal.php"
+            window.location ="PaginaPrincipal.html"
         }
     },  function(texto) {
         }

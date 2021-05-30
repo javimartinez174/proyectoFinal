@@ -16,7 +16,6 @@ if ($arrayUsuario) { // HAN venido datos: identificador existía y contraseña e
     } else {
         DAO::borrarCookieRecordar();
     }
-    //redireccionar("PaginaPrincipal.php");
     redireccionar("html/PaginaPrincipal.html");
 
 

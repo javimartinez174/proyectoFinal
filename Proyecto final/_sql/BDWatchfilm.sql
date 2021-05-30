@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-05-2021 a las 16:42:49
+-- Tiempo de generación: 30-05-2021 a las 19:25:14
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -429,31 +429,33 @@ CREATE TABLE `pelicula` (
   `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `anio` int(4) NOT NULL,
   `puntuacion` int(11) NOT NULL,
-  `fechaEntrada` date NOT NULL
+  `fechaEntrada` date NOT NULL,
+  `sinopsis` text NOT NULL,
+  `trailer` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pelicula`
 --
 
-INSERT INTO `pelicula` (`id`, `nombre`, `anio`, `puntuacion`, `fechaEntrada`) VALUES
-(1, 'Colega dónde está mi coche', 2000, 2, '2021-05-25'),
-(2, 'No respires', 2016, 3, '2021-05-25'),
-(3, 'It', 2017, 3, '2021-05-25'),
-(4, 'Titanic', 1997, 4, '2021-05-25'),
-(5, 'El Show de Truman', 1998, 4, '2021-05-25'),
-(6, 'Gladiator', 2000, 5, '2021-05-25'),
-(7, 'Malditos Bastardos', 2009, 5, '2021-05-25'),
-(8, 'Tiburón', 1975, 3, '2021-05-25'),
-(9, 'El señor de los anillos La comunidad del anillo', 2001, 4, '2021-05-25'),
-(10, 'El señor de los anillos Las dos torres', 2002, 5, '2021-05-25'),
-(11, 'El señor de los anillos el retorno del rey', 2003, 5, '2021-05-25'),
-(12, 'Iron Man', 2008, 3, '2021-05-25'),
-(13, 'Iron Man 2', 2010, 2, '2021-05-25'),
-(14, 'Terminator', 1984, 4, '2021-05-25'),
-(15, 'Terminator 2 El juicio final', 1991, 4, '2021-05-25'),
-(16, 'Terminator 3 La rebelión de las máquinas', 2003, 2, '2021-05-26'),
-(17, 'Interstellar', 2014, 5, '2021-05-26');
+INSERT INTO `pelicula` (`id`, `nombre`, `anio`, `puntuacion`, `fechaEntrada`, `sinopsis`, `trailer`) VALUES
+(1, 'Colega dónde está mi coche', 2000, 2, '2021-05-25', '', ''),
+(2, 'No respires', 2016, 3, '2021-05-25', '', ''),
+(3, 'It', 2017, 3, '2021-05-25', '', ''),
+(4, 'Titanic', 1997, 4, '2021-05-25', 'Durante las labores de recuperación de los restos del famoso Titanic, una anciana norteamericana se pone en contacto con la expedición para acudir a una plataforma flotante instalada en el Mar del Norte y asistir \'in situ\' a la recuperación de sus recuerdos. A través de su memoria reviviremos los acontecimientos que marcaron el siniestro más famoso del siglo XX: el hundimiento del trasatlántico más lujoso del mundo, la máquina más sofisticada de su tiempo, considerada «insumergible», que sucumbió a las heladas aguas del Atlántico en abril de 1912, llevándose consigo la vida de mil quinientas personas, más de la mitad del pasaje. En los recueros de la anciana hay cabida para algo más que la tragedia, la historia de amor que vivió con un joven pasajero de tercera clase, un pintor aficionado que había ganado su pasaje en una partida las cartas en una taberna de Southampton.', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/FiRVcExwBVA\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(5, 'El Show de Truman', 1998, 4, '2021-05-25', '', ''),
+(6, 'Gladiator', 2000, 5, '2021-05-25', 'En el año 180, el Imperio Romano domina todo el mundo conocido. Tras una gran victoria sobre los bárbaros del norte, el anciano emperador Marco Aurelio decide transferir el poder a Máximo, bravo general de sus ejércitos y hombre de inquebrantable lealtad al imperio. Pero su hijo Cómodo, que aspiraba al trono, no lo acepta y trata de asesinar a Máximo.', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/WHh06MLv6-I\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(7, 'Malditos Bastardos', 2009, 5, '2021-05-25', '', ''),
+(8, 'Tiburón', 1975, 3, '2021-05-25', '', ''),
+(9, 'El señor de los anillos La comunidad del anillo', 2001, 4, '2021-05-25', '', ''),
+(10, 'El señor de los anillos Las dos torres', 2002, 5, '2021-05-25', '', ''),
+(11, 'El señor de los anillos el retorno del rey', 2003, 5, '2021-05-25', '', ''),
+(12, 'Iron Man', 2008, 3, '2021-05-25', '', ''),
+(13, 'Iron Man 2', 2010, 2, '2021-05-25', '', ''),
+(14, 'Terminator', 1984, 4, '2021-05-25', '', ''),
+(15, 'Terminator 2 El juicio final', 1991, 4, '2021-05-25', '', ''),
+(16, 'Terminator 3 La rebelión de las máquinas', 2003, 2, '2021-05-26', '', ''),
+(17, 'Interstellar', 2014, 5, '2021-05-26', '', '');
 
 -- --------------------------------------------------------
 
@@ -519,7 +521,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `identificador`, `nombre`, `apellidos`, `email`, `contrasenna`, `fotoPerfil`, `codigoCookie`) VALUES
-(1, 'jlopez', 'Josép', 'Lópep', 'j@cp', 'j', 'estrellaRellena.png', NULL),
+(1, 'jlopez', 'Josép', 'Lópep', 'j@cp', 'j', 'estrellaRellena.png', '4MwZHqyrShcqEAJJKCaDfGMiNxfmFbYu'),
 (2, 'mgarcia', 'María', 'García', 'm@c', 'm', 'usuario.png', NULL),
 (3, 'fpi', 'Felipe', 'Pi', 'f@c', 'f', 'usuario.png', NULL),
 (9, 'alainF', 'Alain', 'Fernandez', 'a@fernan', 'a', '60423426.jpg', 'JexlFxiYih2K6j9Kmfn0zzeApKywZarU');
