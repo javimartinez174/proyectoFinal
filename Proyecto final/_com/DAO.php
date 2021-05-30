@@ -241,7 +241,7 @@ class DAO
 
     private static function peliculaCrearDesdeRS(array $pelicula): Pelicula
     {
-        return new Pelicula($pelicula["id"], $pelicula["nombre"], $pelicula["anio"], $pelicula["puntuacion"], $pelicula["fechaEntrada"]);
+        return new Pelicula($pelicula["id"], $pelicula["nombre"], $pelicula["anio"], $pelicula["puntuacion"], $pelicula["fechaEntrada"], $pelicula["sinopsis"], $pelicula["trailer"]);
     }
 
     public static function peliculasObtenerDesdeLista(int $listaId): ?array //permite obtener todas las peliculas de una lista
@@ -550,6 +550,92 @@ class DAO
             return null;
         }
     }
+
+
+/*-------------------------------DIRECTOR----------------------------*/
+
+    public static function directorObtenerPorId(int $id): ?Director
+    {
+        $rs = self::ejecutarConsulta(
+            "SELECT * FROM director WHERE id=?",
+            [$id]
+        );
+        if ($rs) return self::directorCrearDesdeRs($rs[0]);
+        else return null;
+    }
+
+    private static function directorCrearDesdeRS(array $director): Director
+    {
+        return new Director($director["id"], $director["nombre"]);
+    }
+
+    public static function directorObtenerPorPeliculaId(int $id): ?array
+    {
+        $directores = array();
+
+        $rs = self::ejecutarConsulta(
+            "SELECT director.* FROM director 
+            INNER JOIN directorespeliculas ON director.id = directorespeliculas.directorId 
+            LEFT JOIN pelicula ON directorespeliculas.peliculaId = pelicula.id 
+            WHERE pelicula.id = ?",
+            [$id]
+        );
+
+        foreach ($rs as $fila) {
+            $director = self::directorCrearDesdeRS($fila);
+            array_push($directores, $director);
+        }
+
+
+        if ($rs) {
+            return $directores;
+        } else {
+            return null;
+        }
+    }
+
+
+
+    /*-------------------------------ACTOR----------------------------*/
+
+public static function actorObtenerPorId(int $id): ?Actor
+{
+    $rs = self::ejecutarConsulta(
+        "SELECT * FROM actor WHERE id=?",
+        [$id]
+    );
+    if ($rs) return self::actorCrearDesdeRs($rs[0]);
+    else return null;
 }
 
+private static function actorCrearDesdeRS(array $actor): Actor
+{
+    return new Actor($actor["id"], $actor["nombre"]);
+}
 
+public static function actorObtenerPorPeliculaId(int $id): ?array
+{
+
+    $actores = [];
+
+    $rs = self::ejecutarConsulta(
+        "SELECT actor.* FROM actor 
+        INNER JOIN actorespeliculas ON actor.id = actorespeliculas.actorId 
+        LEFT JOIN pelicula ON actorespeliculas.peliculaId = pelicula.id 
+        WHERE pelicula.id = ?",
+        [$id]
+    );
+
+    foreach ($rs as $fila) {
+        $actor = self::actorCrearDesdeRS($fila);
+        array_push($actores, $actor);
+    }
+
+
+    if ($rs) {
+        return $actores;
+    } else {
+        return null;
+    }
+}
+}

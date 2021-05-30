@@ -122,14 +122,20 @@ class Pelicula extends Dato implements JsonSerializable
     private int $puntuacion;
 
     private string $fechaEntrada;
+     
+    private string $sinopsis;
 
-    public function __construct(int $id, string $nombre, int $anio, int $puntuacion, string $fechaEntrada)
+    private string $trailer;
+
+    public function __construct(int $id, string $nombre, int $anio, int $puntuacion, string $fechaEntrada, string $sinopsis, string $trailer)
     {
         $this->setId($id);
         $this->setNombre($nombre);
         $this->setAnio($anio);
         $this->setPuntuacion($puntuacion);
         $this->setFechaEntrada($fechaEntrada);
+        $this->setSinopsis($sinopsis);
+        $this->setTrailer($trailer);
     }
 
     public function jsonSerialize()
@@ -140,6 +146,8 @@ class Pelicula extends Dato implements JsonSerializable
             "anio" => $this->anio,
             "puntuacion" => $this->puntuacion,
             "fechaEntrada" => $this->fechaEntrada,
+            "sinopsis" => $this->sinopsis,
+            "trailer" => $this->trailer,
         ];
 
         // Esto sería lo mismo:
@@ -186,6 +194,26 @@ class Pelicula extends Dato implements JsonSerializable
     public function setFechaEntrada(string $fechaEntrada)
     {
         $this->fechaEntrada = $fechaEntrada;
+    }
+
+    public function getSinopsis(): string
+    {
+        return $this->sinopsis;
+    }
+
+    public function setSinopsis(string $sinopsis)
+    {
+        $this->sinopsis = $sinopsis;
+    }
+
+    public function getTrailer(): string
+    {
+        return $this->trailer;
+    }
+
+    public function setTrailer(string $trailer)
+    {
+        $this->trailer = $trailer;
     }
 
 }
@@ -267,18 +295,29 @@ class Genero extends Dato
 
 
 /*----------------------------------DIRECTOR--------------------------------*/
-class Director extends Dato
+class Director extends Dato implements JsonSerializable
 {
     use Identificable;
 
     private string $nombre;
-    private String $apellidos;
 
-    public function __construct(int $id, string $nombre, string $apellidos)
+    public function __construct(int $id, string $nombre)
     {
         $this->setId($id);
         $this->setNombre($nombre);
-        $this->setApellidos($apellidos);
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "id" => $this->id,
+            "nombre" => $this->nombre,
+        ];
+
+        // Esto sería lo mismo:
+        //$array["nombre"] = $this->nombre;
+        //$array["id"] = $this->id;
+        //return $array;
     }
 
     public function getNombre(): string
@@ -291,31 +330,28 @@ class Director extends Dato
         $this->nombre = $nombre;
     }
 
-    public function getApellidos(): string
-    {
-        return $this->apellidos;
-    }
-
-    public function setApellidos(string $apellidos)
-    {
-        $this->apellidos = $apellidos;
-    }
 }
 
 
-/*----------------------------------LISTA--------------------------------*/
-class Actor extends Dato
+/*----------------------------------ACTOR--------------------------------*/
+class Actor extends Dato implements JsonSerializable
 {
     use Identificable;
 
     private string $nombre;
-    private string $apellidos;
 
-    public function __construct(int $id, string $nombre, string $apellidos)
+    public function __construct(int $id, string $nombre)
     {
         $this->setId($id);
         $this->setNombre($nombre);
-        $this->setApellidos($apellidos);
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "id" => $this->id,
+            "nombre" => $this->nombre,
+        ];
     }
 
     public function getNombre(): string
@@ -328,13 +364,4 @@ class Actor extends Dato
         $this->nombre = $nombre;
     }
 
-    public function getApellidos(): string
-    {
-        return $this->apellidos;
-    }
-
-    public function setApellidos(string $apellidos)
-    {
-        $this->apellidos = $apellidos;
-    }
 }

@@ -1,5 +1,3 @@
-//window.onpaint =  
-
 window.onload = function() {
     document.getElementById("btnCerrarSesion").addEventListener("click", cerrarSesion);
     document.getElementById("btnBuscar").addEventListener("click", cargarBusqueda, false);
