@@ -28,7 +28,7 @@ function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
         }
     };
     
-    request.send();
+    request.send(parametros);
 }
 
 function ajaxComprobarSesionIniciada(){
@@ -52,7 +52,7 @@ function capturarIdURL() {
 
 function obtenerInfoPelicula(idPelicula) {
     alert(idPelicula);
-    llamadaAjax("../ObtenerInfoPelicula.php", "id=" + parseInt(idPelicula),
+    llamadaAjax("../ObtenerInfoPelicula.php", "id=" + idPelicula,
     function(texto) {
             var infoPelicula = JSON.parse(texto);
             crearPelicula(infoPelicula);        

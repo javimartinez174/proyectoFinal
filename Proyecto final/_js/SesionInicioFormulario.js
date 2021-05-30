@@ -31,7 +31,7 @@ function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
         }
     };
     
-    request.send();
+    request.send(parametros);
 }
 
 function ajaxComprobarSesionIniciada(){
