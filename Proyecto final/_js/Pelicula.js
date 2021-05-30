@@ -28,7 +28,7 @@ function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
         }
     };
     
-    request.send();
+    request.send(parametros);
 }
 
 function ajaxComprobarSesionIniciada(){
@@ -48,10 +48,12 @@ function capturarIdURL() {
     var pos1 = url.indexOf("=");
     var idPelicula = url.substring(pos1+1, url.length);
     obtenerInfoPelicula(idPelicula);
+    obtenerInfoDirector(idPelicula);
+    obtenerInfoActor(idPelicula);
 }
 
 function obtenerInfoPelicula(idPelicula) {
-    alert(idPelicula);
+    
     llamadaAjax("../ObtenerInfoPelicula.php", "id=" + parseInt(idPelicula),
     function(texto) {
             var infoPelicula = JSON.parse(texto);
@@ -61,12 +63,76 @@ function obtenerInfoPelicula(idPelicula) {
  
     }
     );
+
 }
+
+function obtenerInfoDirector(idPelicula) {
+    llamadaAjax("../ObtenerInfoDirector.php", "id=" + parseInt(idPelicula),
+    function(texto) {
+            var directores = JSON.parse(texto);
+
+            for(var i=0; i<directores.length; i++) {
+                crearDirector(directores[i]);
+            }
+                    
+    },
+    function(texto) {
+ 
+    }
+    );
+}
+
+function obtenerInfoActor(idPelicula) {
+    llamadaAjax("../ObtenerInfoActor.php", "id=" + parseInt(idPelicula),
+    function(texto) {
+            var actores = JSON.parse(texto);
+
+            for(var i=0; i<actores.length; i++) {
+                crearActor(actores[i]);
+            }     
+    },
+    function(texto) {
+ 
+    }
+    );
+}
+
 
 function crearPelicula(infoPelicula) {
     var titulo = document.createElement("h1");
-    titulo.innerHTML = ""+infoPelicula.nombre;
+    titulo.innerHTML = infoPelicula.nombre;
+
+    var sinopsis = document.createElement("p");
+    sinopsis.innerHTML = infoPelicula.sinopsis;
+
+    var trailer = document.createElement("p");
+    trailer.innerHTML = infoPelicula.trailer;
+
+    var puntuacion = document.createElement("p");
+    puntuacion.innerHTML = "Puntuación obtenida: "+infoPelicula.puntuacion;
+
+    var anio = document.createElement("p");
+    anio.innerHTML = "Año de estreno: "+infoPelicula.anio;
+    
     
     document.getElementById("infoPelicula").appendChild(titulo);
+    document.getElementById("infoPelicula").appendChild(sinopsis);
+    document.getElementById("infoPelicula").appendChild(trailer);
+    document.getElementById("infoPelicula").appendChild(puntuacion);
+    document.getElementById("infoPelicula").appendChild(anio);
 
+}
+
+function crearDirector(infoDirector) {
+    var nombre = document.createElement("h4");
+    nombre.innerHTML = "Director: "+infoDirector.nombre;
+    
+    document.getElementById("infoDirector").appendChild(nombre);
+}
+
+function crearActor(infoActor) {
+    var nombre = document.createElement("p");
+    nombre.innerHTML = ""+infoActor.nombre;
+    
+    document.getElementById("infoActor").appendChild(nombre);
 }

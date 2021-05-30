@@ -31,7 +31,7 @@ function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
         }
     };
     
-    request.send();
+    request.send(parametros);
 }
 
 function ajaxComprobarSesionIniciada(){
@@ -39,7 +39,7 @@ function ajaxComprobarSesionIniciada(){
     function(texto){
         var sesionIniciada = JSON.parse(texto);
         if(sesionIniciada){
-            window.location ="PaginaPrincipal.html"
+            window.location ="PaginaPrincipal.html";
         }
     },  function(texto) {
         }
