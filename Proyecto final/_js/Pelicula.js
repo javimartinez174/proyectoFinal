@@ -99,7 +99,7 @@ function obtenerInfoActor(idPelicula) {
 }
 
 function obtenerComentarios(idPelicula) {
-    llamadaAjax("../ObtenerComentarios.php", "id=" + parseInt(idPelicula),
+    llamadaAjax("../ObtenerComentarios.php", "peliculaId=" + parseInt(idPelicula),
     function(texto) {
             var comentarios = JSON.parse(texto);
 

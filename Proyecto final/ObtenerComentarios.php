@@ -2,6 +2,6 @@
 
 require_once "_com/DAO.php";
 
-$id = $_REQUEST["id"];
+$peliculaId = (int)$_REQUEST["peliculaId"];
 
-echo json_encode(DAO::comentariosObtener($id));
+echo json_encode(DAO::comentariosObtener($peliculaId));

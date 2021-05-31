@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 31-05-2021 a las 04:52:55
--- Versión del servidor: 10.4.17-MariaDB
--- Versión de PHP: 8.0.1
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 31-05-2021 a las 10:59:25
+-- Versión del servidor: 10.4.14-MariaDB
+-- Versión de PHP: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `watchfilm`
+-- Base de datos: `watchfilmbd`
 --
-CREATE DATABASE IF NOT EXISTS `watchfilm` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `watchfilm`;
+CREATE DATABASE IF NOT EXISTS `watchfilmbd` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `watchfilmbd`;
 
 -- --------------------------------------------------------
 
@@ -577,7 +577,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `identificador`, `nombre`, `apellidos`, `email`, `contrasenna`, `fotoPerfil`, `codigoCookie`) VALUES
-(1, 'jlopez', 'Josép', 'Lópep', 'j@cp', 'j', 'estrellaRellena.png', 'oYOcoUGqzNrRXHSjHYkgvJdFUEZriK3e'),
+(1, 'jlopez', 'Josép', 'Lópep', 'j@cp', 'j', 'estrellaRellena.png', 'P74e85c4Mw9qBtSqKYuZoRH33GTU04Ur'),
 (2, 'mgarcia', 'María', 'García', 'm@c', 'm', 'usuario.png', NULL),
 (3, 'fpi', 'Felipe', 'Pi', 'f@c', 'f', 'usuario.png', NULL),
 (9, 'alainF', 'Alain', 'Fernandez', 'a@fernan', 'a', '60423426.jpg', 'JexlFxiYih2K6j9Kmfn0zzeApKywZarU');
@@ -606,7 +606,9 @@ ALTER TABLE `actorespeliculas`
 -- Indices de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `peliculaId` (`peliculaId`,`usuarioId`),
+  ADD KEY `usuarioId` (`usuarioId`);
 
 --
 -- Indices de la tabla `director`
@@ -743,7 +745,7 @@ ALTER TABLE `plataforma`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas
@@ -755,6 +757,13 @@ ALTER TABLE `usuario`
 ALTER TABLE `actorespeliculas`
   ADD CONSTRAINT `actorespeliculas_ibfk_1` FOREIGN KEY (`peliculaId`) REFERENCES `pelicula` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `actorespeliculas_ibfk_2` FOREIGN KEY (`actorId`) REFERENCES `actor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `comentario`
+--
+ALTER TABLE `comentario`
+  ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`peliculaId`) REFERENCES `pelicula` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`usuarioId`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `directorespeliculas`

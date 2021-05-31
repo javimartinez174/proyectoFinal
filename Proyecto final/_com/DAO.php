@@ -53,7 +53,7 @@ class DAO
         $servidor = "localhost";
         $identificador = "root";
         $contrasenna = "";
-        $bd = "watchfilm";
+        $bd = "watchfilmbd";
         $opciones = [
             PDO::ATTR_EMULATE_PREPARES => false,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -651,9 +651,9 @@ public static function actorObtenerPorPeliculaId(int $id): ?array
 
 /*COMENTARIOS*/
 
-private static function comentarioCrearDesdeRS(array $comentario): ?array
+private static function comentarioCrearDesdeRS(array $comentario): Comentario
 {
-    return new Comentario($comentario["id"], $comentario["nombre"], $comentario["fechaPublicacion"]);
+    return new Comentario($comentario["id"], $comentario["mensaje"], $comentario["fechaPublicacion"]);
 }
 
 public static function comentariosObtener(int $id): ?array
@@ -667,10 +667,9 @@ public static function comentariosObtener(int $id): ?array
     );
 
     foreach ($rs as $fila) {
-        $comentario = self::actorCrearDesdeRS($fila);
+        $comentario = self::comentarioCrearDesdeRS($fila);
         array_push($comentarios, $comentario);
     }
-
 
     if ($rs) {
         return $comentarios;
