@@ -2,6 +2,6 @@
 
 require_once "_com/DAO.php";
 
-$id = $_REQUEST["id"];
+$id = (int)$_REQUEST["id"];
 
 echo json_encode(DAO::usuarioObtenerPorId($id));

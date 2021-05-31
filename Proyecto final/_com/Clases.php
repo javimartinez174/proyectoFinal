@@ -21,7 +21,7 @@ abstract class Dato
 
 /*--------------------------------USUARIO----------------------------------*/
 
-class Usuario extends Dato
+class Usuario extends Dato implements JsonSerializable
 {
     use Identificable;
 
@@ -46,6 +46,20 @@ class Usuario extends Dato
         $this->setEmail($email);
         $this->setContrasenna($contrasenna);
         $this->setFotoPerfil($fotoPerfil);
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "id" => $this->id,
+            "identificador" => $this->identificador,
+            "nombre" => $this->nombre,
+            "apellidos" => $this->apellidos,
+            "email" => $this->email,
+            "contrasenna" => $this->contrasenna,
+            "fotoPerfil" => $this->fotoPerfil,
+        ];
+
     }
 
     public function getNombre(): string
@@ -375,11 +389,17 @@ class Comentario extends Dato implements JsonSerializable
 
     private string $fechaPublicacion;
 
-    public function __construct(int $id, string $mensaje, string $fechaPublicacion)
+    private int $peliculaId;
+
+    private int $usuarioId;
+
+    public function __construct(int $id, string $mensaje, string $fechaPublicacion, int $peliculaId, int $usuarioId)
     {
         $this->setId($id);
         $this->setMensaje($mensaje);
         $this->setFechaPublicacion($fechaPublicacion);
+        $this->setPeliculaId($peliculaId);
+        $this->setUsuarioId($usuarioId);
     }
 
     public function jsonSerialize()
@@ -388,6 +408,8 @@ class Comentario extends Dato implements JsonSerializable
             "id" => $this->id,
             "mensaje" => $this->mensaje,
             "fechaPublicacion" => $this->fechaPublicacion,
+            "peliculaId" => $this->peliculaId,
+            "usuarioId" => $this->usuarioId,
         ];
     }
 
@@ -408,6 +430,26 @@ class Comentario extends Dato implements JsonSerializable
 
     public function setFechaPublicacion(string $fechaPublicacion)
     {
-        $this->getFechaPublicacion = $fechaPublicacion;
+        $this->fechaPublicacion = $fechaPublicacion;
+    }
+
+    public function getPeliculaId(): int
+    {
+        return $this->peliculaId;
+    }
+
+    public function setPeliculaId(int $peliculaId)
+    {
+        $this->peliculaId = $peliculaId;
+    }
+
+    public function getUsuarioId(): int
+    {
+        return $this->usuarioId;
+    }
+
+    public function setUsuarioId(int $usuarioId)
+    {
+        $this->usuarioId = $usuarioId;
     }
 }

@@ -172,7 +172,7 @@ class DAO
         );
     }
 
-    public static function usuarioObtenerPorId(int $id): ?Usuario
+    public static function usuarioObtenerPorId(int $id): Usuario
     {
         $rs = self::ejecutarConsulta(
             "SELECT * FROM usuario WHERE id=?",
@@ -653,7 +653,7 @@ public static function actorObtenerPorPeliculaId(int $id): ?array
 
 private static function comentarioCrearDesdeRS(array $comentario): Comentario
 {
-    return new Comentario($comentario["id"], $comentario["mensaje"], $comentario["fechaPublicacion"]);
+    return new Comentario($comentario["id"], $comentario["mensaje"], $comentario["fechaPublicacion"], $comentario["peliculaId"], $comentario["usuarioId"]);
 }
 
 public static function comentariosObtener(int $id): ?array

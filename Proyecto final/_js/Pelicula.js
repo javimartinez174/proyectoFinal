@@ -104,7 +104,7 @@ function obtenerComentarios(idPelicula) {
             var comentarios = JSON.parse(texto);
 
             for(var i=0; i<comentarios.length; i++) {
-                crearComentario(comentarios[i]);
+                obtenerUsuarioComentario(comentarios[i]);
             }
     },
     function(texto) {
@@ -179,15 +179,16 @@ function obtenerUsuarioComentario(comentario) {
     );
 }
 
-function crearComentario(comentario) {
-    var comentario = document.createElement("p")
-    comentario.innerHTML = comentario.mensaje;
+function crearComentario(comentario, usuario) {
+
+    var coment = document.createElement("p")
+    coment.innerHTML = ""+comentario.mensaje;
     var fechaComentario = document.createElement("p");
     fechaComentario.innerHTML = comentario.fechaPublicacion;
-    /*var usuarioComentario = document.createElement("h4");
-    usuarioComentario.innerHTML = usuario.nombre+" "+usuario.apellidos;*/
+    var usuarioComentario = document.createElement("h4");
+    usuarioComentario.innerHTML = usuario.nombre+" "+usuario.apellidos;
 
-    document.getElementById("comentarios").appendChild(comentario);
+    document.getElementById("comentarios").appendChild(coment);
     document.getElementById("comentarios").appendChild(fechaComentario);
-    //document.getElementById("comentarios").appendChild(usuarioComentario);
+    document.getElementById("comentarios").appendChild(usuarioComentario);
 }
