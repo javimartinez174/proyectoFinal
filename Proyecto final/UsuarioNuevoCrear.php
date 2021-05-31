@@ -19,7 +19,7 @@ if ($arrayUsuarioNuevo["contrasenna"] !== $arrayUsuarioNuevo["contrasenna2"]) {
 } else if (!DAO::comprobarIdentificadorDisponible($arrayUsuarioNuevo["identificador"])) {
 
     if (DAO::crearUsuario($arrayUsuarioNuevo)) {
-        redireccionar("PaginaPrincipal.php");
+        redireccionar("PaginaPrincipal.html");
     }
 
 } else {

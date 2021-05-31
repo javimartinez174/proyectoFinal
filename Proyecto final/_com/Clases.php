@@ -365,3 +365,49 @@ class Actor extends Dato implements JsonSerializable
     }
 
 }
+
+/*----------------------------------COMENTARIO/CRITICA--------------------------------*/
+class Comentario extends Dato implements JsonSerializable
+{
+    use Identificable;
+
+    private string $mensaje;
+
+    private string $fechaPublicacion;
+
+    public function __construct(int $id, string $mensaje, string $fechaPublicacion)
+    {
+        $this->setId($id);
+        $this->setMensaje($mensaje);
+        $this->setFechaPublicacion($fechaPublicacion);
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "id" => $this->id,
+            "mensaje" => $this->mensaje,
+            "fechaPublicacion" => $this->fechaPublicacion,
+        ];
+    }
+
+    public function getMensaje(): string
+    {
+        return $this->mensaje;
+    }
+
+    public function setMensaje(string $mensaje)
+    {
+        $this->mensaje = $mensaje;
+    }
+
+    public function getFechaPublicacion(): string
+    {
+        return $this->fechaPublicacion;
+    }
+
+    public function setFechaPublicacion(string $fechaPublicacion)
+    {
+        $this->getFechaPublicacion = $fechaPublicacion;
+    }
+}

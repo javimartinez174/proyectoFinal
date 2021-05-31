@@ -1,0 +1,122 @@
+
+body{
+    background: rgb(165, 173, 179);
+  }
+  h1{
+      color: #106a7c;
+  }
+  h2{
+      color: #106a7c;
+  }
+  
+  h4{
+      color: #106a7c;
+  }
+
+  a {
+      text-decoration: none;
+    color: #01447e;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
+
+    nav{
+        background-color: #071c22d3;
+    }
+
+    nav button{
+        background-color: #14839A;
+    }
+    .navRightPrincipal {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+  
+  .modal-dialog{
+    min-width: 350px;
+  }
+  .modal-body {
+      background-color: rgb(23, 63, 90);
+      border: 1px solid #1D2728;
+  }
+  
+  .modal-header {
+      background-color:#071c22d3;
+      border: none;
+      align-items:center;
+      border-radius: 0;
+  }
+  .modal-content:hover {
+      border: 1px solid #14839A;
+      box-shadow: #14839A;
+  }
+
+  .fas {
+    size: 24px;
+    color: #72c47d;
+    cursor: pointer;
+    line-height: 2;
+ }
+ .fas:hover {
+   size: 24px;
+   color: #a10000;
+   cursor: pointer;
+ }
+
+  /*Migas de Pan*/
+
+  ul.breadcrumb {
+    padding: 10px 16px;
+    list-style: none;
+    background-color: #eee;
+  }
+  ul.breadcrumb li {
+    display: inline;
+    font-size: 18px;
+  }
+  ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: "/\00a0";
+  }
+  ul.breadcrumb li a {
+    color: #0275d8;
+    text-decoration: none;
+  }
+  ul.breadcrumb li a:hover {
+    color: #01447e;
+    text-decoration: underline;
+  }
+
+  #infoPelicula {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 20px;
+  }
+  #infoPelicula #pSinopsis{
+    width: 400px;
+    margin: 20px;
+  }
+  #infoPelicula #pTrailer {
+      border: 1px solid darkblue;
+      box-shadow: 5px 5px darkblue;
+  }
+  #container1 {
+      display: flex;
+      flex-direction: row;
+  }
+  #infoDirector {
+      margin: 20px;
+  }
+  #infoActor {
+      margin: 20px;
+  }
+  

@@ -172,6 +172,16 @@ class DAO
         );
     }
 
+    public static function usuarioObtenerPorId(int $id): ?Usuario
+    {
+        $rs = self::ejecutarConsulta(
+            "SELECT * FROM usuario WHERE id=?",
+            [$id]
+        );
+        if ($rs) return self::usuarioCrearDesdeRs($rs[0]);
+        else return null;
+    }
+
     private static function ejecutarActualizacion(string $sql, array $parametros): bool
     {
         if (!isset(self::$pdo)) self::$pdo = self::obtenerPdoConexionBd();
@@ -638,4 +648,36 @@ public static function actorObtenerPorPeliculaId(int $id): ?array
         return null;
     }
 }
+
+/*COMENTARIOS*/
+
+private static function comentarioCrearDesdeRS(array $comentario): ?array
+{
+    return new Comentario($comentario["id"], $comentario["nombre"], $comentario["fechaPublicacion"]);
+}
+
+public static function comentariosObtener(int $id): ?array
+{
+
+    $comentarios = [];
+
+    $rs = self::ejecutarConsulta(
+        "SELECT * FROM comentario WHERE peliculaId = ?",
+        [$id]
+    );
+
+    foreach ($rs as $fila) {
+        $comentario = self::actorCrearDesdeRS($fila);
+        array_push($comentarios, $comentario);
+    }
+
+
+    if ($rs) {
+        return $comentarios;
+    } else {
+        return null;
+    }
+}
+
+
 }
