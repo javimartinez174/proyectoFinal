@@ -1,0 +1,62 @@
+<html lang=''>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Página Principal</title>
+    
+    <script src="../_js/PerfilUsuario.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <link rel="stylesheet" href="../_styles/perfilUsuario.css">
+    <link rel="shortcut icon" href="../_img/logo.png">
+</head>
+
+<body>
+<div>
+    <nav class="navbar navbar-expand-sm">
+    <!-- Brand/logo -->
+        <a class="navbar-brand" href="#">
+            <img src="../_img/logo.png" width="70" height="70"/>
+        </a>
+    
+    <!-- Links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Novedades</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Noticias</a>
+            </li>
+        </ul>
+
+        <ul class="navRightPrincipal">
+            
+            <div class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-stream"></i>Ver Mis Listas</a>
+            </div>
+            
+            <div class="nav-item" id="divCerrarSesion">
+                <a class="nav-link" id="btnCerrarSesion" href="#"><i class="fas fa-door-closed"></i>Cerrar Sesión</a>
+            </div>
+        </ul>
+    </nav>
+
+    <ul id="breadcrumb" class="breadcrumb">
+        <li><a href="PaginaPrincipal.html">Cartelera</a></li>
+    </ul>
+
+    <div id="infoUsuario">
+
+    </div>
+    <form action="../CambiarFoto.php" method="POST" enctype="multipart/form-data">
+        Añadir imagen: <input name="archivo" id="archivo" type="file"/>
+        <input type="submit" name="subir" value="Subir imagen"/>
+    </form>
+
+</div>

@@ -2,7 +2,7 @@
 
 require_once "_com/DAO.php";
 
-if (!DAO::haySesionRamIniciada() && !DAO::intentarCanjearSesionCookie()) redireccionar("SesionInicioFormulario.php");
+if (!DAO::haySesionRamIniciada() && !DAO::intentarCanjearSesionCookie()) redireccionar("html/SesionInicioFormulario.html");
 
 //Si se quiere subir una imagen
 if (isset($_POST['subir'])) {
@@ -29,7 +29,7 @@ if (isset($_POST['subir'])) {
                 echo '<div><b>Se ha subido correctamente la imagen.</b></div>';
                 //Mostramos la imagen subida
                 DAO::usuarioCambiarFoto($archivo, $_SESSION["identificador"]);
-                redireccionar("UsuarioFicha.php");
+                redireccionar("html/PerfilUsuario.html");
             }
             else {
                 //Si no se ha podido subir la imagen, mostramos un mensaje de error
@@ -38,26 +38,6 @@ if (isset($_POST['subir'])) {
         }
     }
 }
-$tema = comprobarTema();
 
-?>
 
-<html lang="">
-<head>
-    <meta charset='UTF-8'>
-    <title></title>
-    <?php if ($tema) { ?>
-        <link rel="stylesheet" href="_styles/styleBlack.css">
-    <?php } else { ?>
-        <link rel="stylesheet" href="_styles/style.css">
-    <?php } ?>
-</head>
-
-<body>
-<form action="CambiarFoto.php" method="POST" enctype="multipart/form-data">
-Añadir imagen: <input name="archivo" id="archivo" type="file"/>
-<input type="submit" name="subir" value="Subir imagen"/>
-</form>
-</body>
-</html>
 

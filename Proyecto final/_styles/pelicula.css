@@ -38,24 +38,6 @@ body{
         align-items: flex-end;
     }
   
-  .modal-dialog{
-    min-width: 350px;
-  }
-  .modal-body {
-      background-color: rgb(23, 63, 90);
-      border: 1px solid #1D2728;
-  }
-  
-  .modal-header {
-      background-color:#071c22d3;
-      border: none;
-      align-items:center;
-      border-radius: 0;
-  }
-  .modal-content:hover {
-      border: 1px solid #14839A;
-      box-shadow: #14839A;
-  }
 
   .fas {
     size: 24px;

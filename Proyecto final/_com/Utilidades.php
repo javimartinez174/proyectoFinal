@@ -48,33 +48,3 @@ function cerrarSesionRamYCookie()
         setcookie("identificador", "", time() - 3600);
     }
 }
-
-function comprobarTema(): bool
-{
-    if (isset($_REQUEST["oscuro"]) || (isset($_SESSION["oscuro"])) && (!isset($_REQUEST["claro"]))) {
-        unset($_SESSION["claro"]);
-        $_SESSION["oscuro"] = true;
-        unset($_SESSION["claro"]);
-        $tema = true;
-    } else if ((isset($_REQUEST["claro"])) || (!isset($_REQUEST["claro"])) || (isset($_SESSION["claro"]))) {
-        unset($_SESSION["oscuro"]);
-        $tema = false;
-    } else {
-        unset($_SESSION["oscuro"]);
-        $tema = false;
-    }
-
-    return $tema;
-}
-
-function cambiarTemaLinks()
-{
-
-    $archivoActual = $_SERVER['PHP_SELF'];
-
-    if (isset($_SESSION["oscuro"])) {
-        echo "<a class='enlace-volver' href='$archivoActual?claro'>TEMA CLARO</a>";
-    } else {
-        echo "<a class='enlace-volver' href='$archivoActual?oscuro'>TEMA OSCURO</a>";
-    }
-}

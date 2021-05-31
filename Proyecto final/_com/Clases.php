@@ -141,7 +141,9 @@ class Pelicula extends Dato implements JsonSerializable
 
     private string $trailer;
 
-    public function __construct(int $id, string $nombre, int $anio, int $puntuacion, string $fechaEntrada, string $sinopsis, string $trailer)
+    private string $caratula;
+
+    public function __construct(int $id, string $nombre, int $anio, int $puntuacion, string $fechaEntrada, string $sinopsis, string $trailer, string $caratula)
     {
         $this->setId($id);
         $this->setNombre($nombre);
@@ -150,6 +152,7 @@ class Pelicula extends Dato implements JsonSerializable
         $this->setFechaEntrada($fechaEntrada);
         $this->setSinopsis($sinopsis);
         $this->setTrailer($trailer);
+        $this->setCaratula($caratula);
     }
 
     public function jsonSerialize()
@@ -162,6 +165,7 @@ class Pelicula extends Dato implements JsonSerializable
             "fechaEntrada" => $this->fechaEntrada,
             "sinopsis" => $this->sinopsis,
             "trailer" => $this->trailer,
+            "caratula" => $this->caratula,
         ];
 
         // Esto sería lo mismo:
@@ -228,6 +232,16 @@ class Pelicula extends Dato implements JsonSerializable
     public function setTrailer(string $trailer)
     {
         $this->trailer = $trailer;
+    }
+
+    public function getCaratula(): string
+    {
+        return $this->caratula;
+    }
+
+    public function setCaratula(string $caratula)
+    {
+        $this->caratula = $caratula;
     }
 
 }

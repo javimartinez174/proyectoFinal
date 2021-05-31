@@ -1,5 +1,6 @@
 window.onload = function() {
     document.getElementById("btnCerrarSesion").addEventListener("click", cerrarSesion);
+    document.getElementById("btnPerfil").addEventListener("click", verPerfil);
     document.getElementById("btnBuscar").addEventListener("click", cargarBusqueda, false);
     cargarPelis();
     cartelera = document.getElementById("cartelera");
@@ -43,6 +44,10 @@ function cargarPelis() {
     );
 }
 
+function verPerfil(){
+    window.location = "PerfilUsuario.html"
+}
+
 function cargarBusqueda() {
 
     while(cartelera.firstChild){
@@ -83,7 +88,7 @@ function domCrearPelis(pelicula) {
     imgCaratula = document.createElement("img");
     imgCaratula.setAttribute("id", "imgNovedades");
     imgCaratula.setAttribute("class", "imgNovedades");
-    imgCaratula.setAttribute("src", "../_img/"+pelicula.id+".jpg");    
+    imgCaratula.setAttribute("src", "../_img/"+pelicula.caratula);    
     imgCaratula.setAttribute("width", "270px");
     imgCaratula.setAttribute("height", "400px");
 

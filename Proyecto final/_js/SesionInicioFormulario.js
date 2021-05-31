@@ -287,7 +287,7 @@ function domCrearCarruselNovedades(pelicula){
     imgCaratula = document.createElement("img");
     imgCaratula.setAttribute("id", "imgNovedades");
     imgCaratula.setAttribute("class", "imgNovedades");
-    imgCaratula.setAttribute("src", "../_img/"+pelicula.id+".jpg");    
+    imgCaratula.setAttribute("src", "../_img/"+pelicula.caratula);    
     imgCaratula.setAttribute("width", "270px");
     imgCaratula.setAttribute("height", "400px");
 

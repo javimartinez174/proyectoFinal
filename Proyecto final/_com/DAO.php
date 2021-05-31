@@ -251,7 +251,7 @@ class DAO
 
     private static function peliculaCrearDesdeRS(array $pelicula): Pelicula
     {
-        return new Pelicula($pelicula["id"], $pelicula["nombre"], $pelicula["anio"], $pelicula["puntuacion"], $pelicula["fechaEntrada"], $pelicula["sinopsis"], $pelicula["trailer"]);
+        return new Pelicula($pelicula["id"], $pelicula["nombre"], $pelicula["anio"], $pelicula["puntuacion"], $pelicula["fechaEntrada"], $pelicula["sinopsis"], $pelicula["trailer"], $pelicula["caratula"]);
     }
 
     public static function peliculasObtenerDesdeLista(int $listaId): ?array //permite obtener todas las peliculas de una lista
