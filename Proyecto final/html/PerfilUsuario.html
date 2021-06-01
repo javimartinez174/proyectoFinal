@@ -2,7 +2,7 @@
 
 <head>
     <meta charset='UTF-8'>
-    <title>Página Principal</title>
+    <title>Perfil Usuario</title>
     
     <script src="../_js/PerfilUsuario.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -47,16 +47,22 @@
         </ul>
     </nav>
 
-    <ul id="breadcrumb" class="breadcrumb">
+    <ul class="breadcrumb" id="breadcrumb">
         <li><a href="PaginaPrincipal.html">Cartelera</a></li>
     </ul>
 
-    <div id="infoUsuario">
+    <div class="divImg" id="divImg"></div>
+    <div class="formCambiarImg" id="formCambiarImg">
+        <i class="fas fa-file-image"></i>&nbsp;&nbsp;
+        <form action="../CambiarFoto.php" method="POST" enctype="multipart/form-data">
+            <input name="archivo" id="archivo" type="file"/>
+            <input type="submit" name="subir" value="Subir imagen"/>
+        </form>
+    </div>
+    
+
+    <div class="infoUsuario" id="infoUsuario">
 
     </div>
-    <form action="../CambiarFoto.php" method="POST" enctype="multipart/form-data">
-        Añadir imagen: <input name="archivo" id="archivo" type="file"/>
-        <input type="submit" name="subir" value="Subir imagen"/>
-    </form>
 
 </div>
