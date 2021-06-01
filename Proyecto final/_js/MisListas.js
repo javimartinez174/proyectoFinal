@@ -1,6 +1,6 @@
 window.onload = function(){
     cargarListas();
-    listasUsuario = document.getElementById("listasUsuario");
+    
 }
 
 function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
@@ -39,15 +39,16 @@ function cargarListas() {
     );
 }
 
-function cargarPelisLista(listaId){
-    llamadaAjax("../ObtenerInfoPeliculaPorListaId.php", parseInt(listaId),
+function cargarPelisLista(listaId, content){
+    llamadaAjax("../ObtenerInfoPeliculaPorListaId.php", "id="+parseInt(listaId),
     function(texto) {
         
             var peliculas = JSON.parse(texto);
-
+        if(peliculas !=null){
             for (var i=0; i<peliculas.length; i++) {
-                domCrearPeliculas(peliculas[i], i);
+                domCrearPeliculas(peliculas[i], content);
             }
+        }
     },
     function(texto) {
  
@@ -56,22 +57,26 @@ function cargarPelisLista(listaId){
 
 function domCrearListas(lista){
     nombreLista = document.createElement("button");
-    nombreLista.addEventListener("click", cargarPelisLista(lista.id));
+    nombreLista.setAttribute("type", "button");
+    nombreLista.setAttribute("class", "collapsible")
     nombreLista.innerHTML= lista.nombre;
-
     document.getElementById("listasUsuario").appendChild(nombreLista);
+
+    content = document.createElement("div");
+    content.setAttribute("class", "content");
+    content.setAttribute("id", lista.nombre);
+    document.getElementById("listasUsuario").appendChild(content);
+
+    cargarPelisLista(lista.id, content);
 }
 
-function domCrearPeliculas(pelicula, pos){
-    if(pos == 0){
-        limpiarDiv;
-    }
 
-    nombrePeli = document.createElement("img");
-    nombrePeli.setAttribute("src", "../_img/"+pelicula.caratula)
+function domCrearPeliculas(pelicula, content){
 
-    document.getElementById("listasUsuario").appendChild(nombrePeli);
+    imgPeli = document.createElement("img");
+    imgPeli.setAttribute("src", "../_img/"+pelicula.caratula);
 
+    content.appendChild(imgPeli);
 }
 
 function limpiarDiv(){
