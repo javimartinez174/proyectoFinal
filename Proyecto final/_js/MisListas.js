@@ -58,7 +58,16 @@ function cargarPelisLista(listaId, content){
 function domCrearListas(lista){
     nombreLista = document.createElement("button");
     nombreLista.setAttribute("type", "button");
-    nombreLista.setAttribute("class", "collapsible")
+    nombreLista.setAttribute("class", "collapsible active");
+    nombreLista.addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.maxHeight){
+        content.style.maxHeight = null;
+        } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+        } 
+    });
     nombreLista.innerHTML= lista.nombre;
     document.getElementById("listasUsuario").appendChild(nombreLista);
 
