@@ -273,7 +273,7 @@ class Plataforma extends Dato
 
 /*----------------------------------LISTA--------------------------------*/
 
-class Lista extends Dato
+class Lista extends Dato implements JsonSerializable
 {
     use Identificable;
 
@@ -283,6 +283,14 @@ class Lista extends Dato
     {
         $this->setId($id);
         $this->setNombre($nombre);
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "id" => $this->id,
+            "nombre" => $this->nombre,
+        ];
     }
 
     public function getNombre(): string

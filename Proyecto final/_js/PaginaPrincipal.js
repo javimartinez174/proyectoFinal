@@ -1,6 +1,7 @@
 window.onload = function() {
     document.getElementById("btnCerrarSesion").addEventListener("click", cerrarSesion);
     document.getElementById("btnPerfil").addEventListener("click", verPerfil);
+    document.getElementById("btnListas").addEventListener("click", verMisListas);
     document.getElementById("btnBuscar").addEventListener("click", cargarBusqueda, false);
     cargarPelis();
     cartelera = document.getElementById("cartelera");
@@ -46,6 +47,10 @@ function cargarPelis() {
 
 function verPerfil(){
     window.location = "PerfilUsuario.html"
+}
+
+function verMisListas(){
+    window.location = "MisListas.html"
 }
 
 function cargarBusqueda() {

@@ -1,22 +1,17 @@
-
 <html lang=''>
 
 <head>
     <meta charset='UTF-8'>
-    <title>Página Principal</title>
+    <title>Mis Listas</title>
     
-    <script src="../_js/PaginaPrincipal.js"></script>
+    <script src="../_js/MisListas.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
-    <link rel="stylesheet" href="../_styles/paginaPrincipal.css">
+    <link rel="stylesheet" href="../_styles/misListas.css">
     <link rel="shortcut icon" href="../_img/logo.png">
-
-
-    
-
 </head>
 
 <body>
@@ -39,20 +34,8 @@
                 <a class="nav-link" href="#">Noticias</a>
             </li>
         </ul>
-        <ul>  
-            <div class="input-group rounded">
-                <input type="search" class="form-control rounded" placeholder="Buscar por Título, Género, Director o Actor" aria-label="Search"
-                  aria-describedby="search-addon" id="busqueda"/>&nbsp;
-                <span class="input-group-text border-0" id="search-addon">
-                  <i class="fas fa-search" id="btnBuscar"></i>
-                </span>
-              </div>
-        </ul>
+
         <ul class="navRightPrincipal">
-            
-            <div class="nav-item">
-                <a class="nav-link" id="btnListas" href="#"><i class="fas fa-stream"></i>Ver Mis Listas</a>
-            </div>
             
             <div class="nav-item">
                 <a class="nav-link" id="btnPerfil" href="#"><i class="fas fa-user-cog"></i>Perfil</a>
@@ -63,11 +46,11 @@
             </div>
         </ul>
     </nav>
-</div>
 
-<div id="cartelera" class="cartelera">
-    <!--<div id="cube" class="cube"><div id="flip" class="flip"></div><div class="flop"></div</div>-->
-</div>
+    <ul class="breadcrumb" id="breadcrumb">
+        <li><a href="PaginaPrincipal.html">Cartelera</a></li>
+    </ul>    
 
-</body>
-</html>
+    <div class="listasUsuario" id="listasUsuario">
+
+    </div>

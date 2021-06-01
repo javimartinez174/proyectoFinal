@@ -254,22 +254,6 @@ class DAO
         return new Pelicula($pelicula["id"], $pelicula["nombre"], $pelicula["anio"], $pelicula["puntuacion"], $pelicula["fechaEntrada"], $pelicula["sinopsis"], $pelicula["trailer"], $pelicula["caratula"]);
     }
 
-    public static function peliculasObtenerDesdeLista(int $listaId): ?array //permite obtener todas las peliculas de una lista
-    {
-        $rs = self::ejecutarConsulta(
-            "SELECT * FROM listausuariopeliculas WHERE listaId=?",
-            [$listaId]
-        );
-        $arrayPeliculasLista = array();
-        if ($rs) {
-            for ($i = 0; $i < count($rs); $i++) {
-                $pelicula = self::peliculaObtenerPorId($rs[$i]["peliculaId"]);
-                array_push($arrayPeliculasLista, $pelicula);
-            }
-            return $arrayPeliculasLista;
-        } else return null;
-    }
-
     public static function peliculaObtenerPorId(int $peliculaId): ?Pelicula
     {
         $rs = self::ejecutarConsulta(
@@ -278,6 +262,27 @@ class DAO
         );
         if ($rs) return self::peliculaCrearDesdeRS($rs[0]);
         else return null;
+    }
+
+    public static function PeliculasObtenerPorIdLista(int $listaId): ?array
+    {
+        $peliculas = [];
+        $rs = self::ejecutarConsulta(
+            "SELECT pelicula.* FROM pelicula 
+            INNER JOIN listausuariopeliculas ON pelicula.id = listausuariopeliculas.peliculaid 
+            LEFT JOIN lista ON listausuariopeliculas.listaId = lista.id 
+            WHERE lista.id LIKE ?",
+            [$listaId]
+        );
+        foreach ($rs as $fila) {
+            $pelicula = self::peliculaCrearDesdeRS($fila);
+            array_push($peliculas, $pelicula);
+        }
+
+
+        if ($rs) {
+            return $peliculas;
+        }else return null;
     }
 
     public static function peliculaObtenerTodas(): array

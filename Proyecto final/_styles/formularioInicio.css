@@ -80,16 +80,16 @@ button .close {
 }
 
 .fas {
-   size: 24px;
-   color: #ff6060;
-   cursor: pointer;
+  size: 24px;
+  color: #72c47d;
+  cursor: pointer;
+  line-height: 2;
 }
 .fas:hover {
-  size: 24px;
-  color: #a10000;
-  cursor: pointer;
+ size: 24px;
+ color: #a10000;
+ cursor: pointer;
 }
-
 .alerta {
   display: flex;
   margin-left: 50px;
@@ -99,13 +99,14 @@ button .close {
   border-radius: 2px;
 }
 
-a {
-    text-decoration: none;
-    color: rgba(33, 163, 250, 0.651);
+a{
+  text-decoration: none;
+  color: #14839A;
 }
-a:hover {
-    color: #85C9D6;
+a:hover{
+  color: #00cbf3;
 }
+
 
 p {
     color: #0CC7ED;

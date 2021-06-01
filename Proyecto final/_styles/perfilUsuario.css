@@ -25,11 +25,11 @@ body{
   }
 
     nav{
-        background-color: #1b3b44d3;
+        background-color: #071c22d3;
     }
 
     nav button{
-        background-color: #14839A;
+        background-color: rgba(4, 155, 255, 0.651);
     }
     .navRightPrincipal {
         display: flex;
@@ -37,7 +37,15 @@ body{
         align-items: flex-end;
     }
   
-   
+    a{
+      text-decoration: none;
+      color: #14839A;
+    }
+
+    a:hover{
+      color: #00cbf3;
+    }
+  
 
   .fas {
     size: 72px;
@@ -51,7 +59,7 @@ body{
   ul.breadcrumb {
     padding: 10px 16px;
     list-style: none;
-    background-color: #eee;
+    background-color: rgb(238, 238, 238);
   }
   ul.breadcrumb li {
     display: inline;

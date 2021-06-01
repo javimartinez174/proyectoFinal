@@ -1,0 +1,93 @@
+body{
+    background: rgb(165, 173, 179);
+  }
+  h1{
+      color: #106a7c;
+  }
+  h2{
+      color: #106a7c;
+  }
+  
+  h4{
+      color: #106a7c;
+  }
+
+  a {
+      text-decoration: none;
+    color: #01447e;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
+
+    nav{
+        background-color: #071c22d3;
+    }
+
+    nav button{
+        background-color: rgba(4, 155, 255, 0.651);
+    }
+    .navRightPrincipal {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+  
+    a{
+        text-decoration: none;
+        color: #14839A;
+    }
+    a:hover{
+        color: #00cbf3;
+    }
+    
+
+    .fas {
+        size: 24px;
+        color: #72c47d;
+        cursor: pointer;
+        line-height: 2;
+     }
+     .fas:hover {
+       size: 24px;
+       color: #a10000;
+       cursor: pointer;
+     }
+ 
+  /*Migas de Pan*/
+
+  ul.breadcrumb {
+    padding: 10px 16px;
+    list-style: none;
+    background-color: #eee;
+  }
+  ul.breadcrumb li {
+    display: inline;
+    font-size: 18px;
+  }
+  ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: "/\00a0";
+  }
+  ul.breadcrumb li a {
+    color: #0275d8;
+    text-decoration: none;
+  }
+  ul.breadcrumb li a:hover {
+    color: #01447e;
+    text-decoration: underline;
+  }
+
+  .listasUsuario img{
+   height: 100px;
+   width: 70px
+  }
+  
+  button{
+   background-color: #14839A;;   
+  }
