@@ -128,5 +128,6 @@ function domCrearPelis(pelicula) {
 }
 
 function redireccionarPelicula(){
+    alert("hola");
     window.location = "Pelicula.html?verinfo="+this.id;
 }
