@@ -1,6 +1,6 @@
 window.onload = function(){
     cargarListas();
-    
+    cargarBreadcrumbs();
 }
 
 function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
@@ -82,14 +82,22 @@ function domCrearListas(lista){
 
 function domCrearPeliculas(pelicula, content){
 
+    aPeli = document.createElement("a");
+    aPeli.setAttribute("href", "Pelicula.html?verinfo="+pelicula.id);
     imgPeli = document.createElement("img");
     imgPeli.setAttribute("src", "../_img/"+pelicula.caratula);
-
-    content.appendChild(imgPeli);
+    aPeli.appendChild(imgPeli);
+    content.appendChild(aPeli);
 }
 
 function limpiarDiv(){
     while(listasUsuario.firstChild){
         listasUsuario.removeChild(listasUsuario.lastChild);
     }
+}
+
+function cargarBreadcrumbs() {
+    var breadcrumbs = document.createElement("li");
+    breadcrumbs.innerHTML = "Mis Listas";
+    document.getElementById("breadcrumb").appendChild(breadcrumbs);
 }

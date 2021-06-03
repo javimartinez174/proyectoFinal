@@ -84,6 +84,10 @@ body{
     text-decoration: underline;
   }
 
+  .contenedorPelicula {
+    display: flex;
+    flex-direction: row;
+  }
   #infoPelicula {
     display: flex;
     flex-direction: column;
@@ -105,8 +109,55 @@ body{
   }
   #infoDirector {
       margin: 20px;
+      align-self: center;
   }
   #infoActor {
       margin: 20px;
+      align-self: center;
   }
+
+  .comentarios {
+    margin: 20px;
+  }
+  .divComent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+    background-color: #b5dbf5;
+    width: 480px;
+    border-radius: 10px;
+    
+  }
+  .divComent p:first-child {
+    font-size: 8pt;
+    align-self: flex-end;
+    
+  }
+  .divComent p:last-child {
+    font-weight: bold;
+    
+  }
+  .divInsertComentario {
+    margin: 20px;
+  }
+  .divInsertComentario button{
+    margin: 20px;
+    background-color: #0CC7ED;
+    border: 1px solid #0093AF;
+    border-radius: 5px;
+  }
+  .insertComentario {
+    background-color: #b5dbf5;
+    border-radius: 10px;
+  }
+  .insertComentario:hover {
+    background-color: #76c2f5;
+    border-radius: 10px;
+    width: 20em;
+    height: 4em;
+  }
+  
+  
+  
   

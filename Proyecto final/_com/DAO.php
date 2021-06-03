@@ -683,5 +683,13 @@ public static function comentariosObtener(int $id): ?array
     }
 }
 
+public static function insertarComentario(string $mensaje, int $peliculaId, int $usuarioId): boolean
+{
+    if ($mensaje != "")
+        self::ejecutarActualizacion("INSERT INTO comentario (mensaje, fechaPublicacion, peliculaId, usuarioId) VALUES (?, ?, ?, ?);",
+            [$mensaje, date("y-m-d"), $peliculaId, $usuarioId]);
+      
+}
+
 
 }
