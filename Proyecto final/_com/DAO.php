@@ -683,6 +683,19 @@ public static function comentariosObtener(int $id): ?array
     }
 }
 
+public static function comentarioObtenerInsertado(): ?Comentario
+{
+    $rs = self::ejecutarConsulta(
+        "SELECT * FROM comentario WHERE id IN(SELECT MAX(id) AS maximo FROM comentario ) ",
+        []
+    );
+
+    if ($rs) return self::comentarioCrearDesdeRs($rs[0]);
+        else return null;
+}
+
+
+
 public static function insertarComentario(string $mensaje, int $peliculaId, int $usuarioId): boolean
 {
     if ($mensaje != "")

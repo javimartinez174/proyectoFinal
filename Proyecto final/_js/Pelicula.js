@@ -1,7 +1,7 @@
 window.onpaint =  ajaxComprobarSesionIniciada(); //se ejecuta antes de cargar la página
 
 window.onload = function() {
-    capturarIdURL();
+    crearPagina();
     document.getElementById("btnInsertComentario").addEventListener("click", insertarComentario);
 }
 
@@ -43,15 +43,21 @@ function ajaxComprobarSesionIniciada(){
     );
 }
 
+
+var idPelicula; //variable global
 function capturarIdURL() {
     var url = window.location.href;
     var pos1 = url.indexOf("=");
-    var idPelicula = url.substring(pos1+1, url.length);
+    idPelicula = url.substring(pos1+1, url.length);
+}
+
+function crearPagina() {
+    capturarIdURL();
     obtenerInfoPelicula(idPelicula);
     obtenerInfoDirector(idPelicula);
     obtenerInfoActor(idPelicula);
     obtenerComentarios(idPelicula);
-}
+} 
 
 function obtenerInfoPelicula(idPelicula) {
     
@@ -99,9 +105,9 @@ function obtenerInfoActor(idPelicula) {
 }
 
 function obtenerComentarios(idPelicula) {
-    while(document.getElementById("comentarios").firstChild){
+    /*while(document.getElementById("comentarios").firstChild){
         document.getElementById("comentarios").removeChild(document.getElementById("comentarios").lastChild); //provisional
-    }
+    }*/
     llamadaAjax("../ObtenerComentarios.php", "peliculaId=" + parseInt(idPelicula),
     function(texto) {
             var comentarios = JSON.parse(texto);
@@ -109,6 +115,18 @@ function obtenerComentarios(idPelicula) {
             for(var i=0; i<comentarios.length; i++) {
                 obtenerUsuarioComentario(comentarios[i]);
             }
+    },
+    function(texto) {
+ 
+    }
+    );
+}
+
+function obtenerComentarioInsertado() {
+    llamadaAjax("../ObtenerComentarioinsertado.php", "",
+    function(texto) {
+            var comentario = JSON.parse(texto);
+            obtenerUsuarioComentario(comentario);
     },
     function(texto) {
  
@@ -193,7 +211,7 @@ function crearComentario(comentario, usuario) {
     divComent.appendChild(infoComent);
     divComent.appendChild(coment);
 
-    document.getElementById("comentarios").appendChild(divComent);
+    document.getElementById("comentarios").insertBefore(divComent, document.getElementById("comentarios").firstChild);
 }
 
 function cargarBreadcrumbs(infoPelicula) {
@@ -203,13 +221,10 @@ function cargarBreadcrumbs(infoPelicula) {
 }
 
 function insertarComentario() {
-    var url = window.location.href;
-    var pos1 = url.indexOf("=");
-    var idPelicula = url.substring(pos1+1, url.length); //codigo repetido, agrupar!!!
     llamadaAjax("../InsertarComentario.php", "mensaje=" + document.getElementById("insertComentario").value+"&peliculaId="+parseInt(idPelicula),
     function(texto) {
-            obtenerComentarios(idPelicula); //cambiar por una funcion en la que se cargue solo el ultimo comentario, con ajax y un nuevo php, para no borrar todos los coments cada vez que se ahga insert
-    },  //ordenar comentarios por fecha
+            obtenerComentarioInsertado(); 
+    },
     function(texto) {
  
     }
