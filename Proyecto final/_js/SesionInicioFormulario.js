@@ -140,7 +140,7 @@ function crearBotonesInicio() {
                 }else{
                     window.location= "PaginaPrincipal.html";
                 }
-               
+                
             }, function (texto){}
         );
     }
@@ -152,11 +152,9 @@ function crearBotonesInicio() {
         crearBtnAtras();
 
         //formulario registro
-        var formRegistro = document.createElement("form");
 
         var pNombre = document.createElement("p");
         pNombre.innerHTML = "Nombre: ";
-        formRegistro.appendChild(pNombre);
 
         var nombre = document.createElement("input");
         nombre.setAttribute("type", "text");
@@ -164,11 +162,9 @@ function crearBotonesInicio() {
         nombre.setAttribute("id", "nombre");
         nombre.setAttribute("placeholder", "Nombre");
         nombre.setAttribute("required", true);
-        formRegistro.appendChild(nombre); 
 
         var pApellidos = document.createElement("p");
         pApellidos.innerHTML = "Apellidos: ";
-        formRegistro.appendChild(pApellidos);
 
         var apellidos = document.createElement("input");
         apellidos.setAttribute("type", "text");
@@ -176,23 +172,19 @@ function crearBotonesInicio() {
         apellidos.setAttribute("id", "apellidos");
         apellidos.setAttribute("placeholder", "Apellidos");
         apellidos.setAttribute("required", true);
-        formRegistro.appendChild(apellidos); 
 
-        var pUsuario = document.createElement("p");
-        pUsuario.innerHTML = "Usuario: ";
-        formRegistro.appendChild(pUsuario);
+        var pIdentificador = document.createElement("p");
+        pIdentificador.innerHTML = "Usuario: ";
 
-        var usuario = document.createElement("input");
-        usuario.setAttribute("type", "text");
-        usuario.setAttribute("name", "identificador");
-        usuario.setAttribute("id", "identificador");
-        usuario.setAttribute("placeholder", "Usuario");
-        usuario.setAttribute("required", true);
-        formRegistro.appendChild(usuario); 
+        var identificador = document.createElement("input");
+        identificador.setAttribute("type", "text");
+        identificador.setAttribute("name", "identificador");
+        identificador.setAttribute("id", "identificador");
+        identificador.setAttribute("placeholder", "Usuario");
+        identificador.setAttribute("required", true);
 
         var pEmail = document.createElement("p");
         pEmail.innerHTML = "Email: ";
-        formRegistro.appendChild(pEmail);
 
         var email = document.createElement("input");
         email.setAttribute("type", "text");
@@ -200,12 +192,10 @@ function crearBotonesInicio() {
         email.setAttribute("id", "email");
         email.setAttribute("placeholder", "Email");
         email.setAttribute("required", true);
-        formRegistro.appendChild(email); 
         
     
         var pContrasenna = document.createElement("p");
         pContrasenna.innerHTML = "Contraseña: ";
-        formRegistro.appendChild(pContrasenna);
 
         var contrasenna = document.createElement("input");
         contrasenna.setAttribute("type", "password");
@@ -213,11 +203,9 @@ function crearBotonesInicio() {
         contrasenna.setAttribute("id", "contrasenna");
         contrasenna.setAttribute("placeholder", "Contraseña");
         contrasenna.setAttribute("required", true);
-        formRegistro.appendChild(contrasenna);
 
         var pContrasenna2 = document.createElement("p");
         pContrasenna2.innerHTML = "Confirme su contraseña: ";
-        formRegistro.appendChild(pContrasenna2);
 
         var contrasenna2 = document.createElement("input");
         contrasenna2.setAttribute("type", "password");
@@ -225,30 +213,49 @@ function crearBotonesInicio() {
         contrasenna2.setAttribute("id", "contrasenna2");
         contrasenna2.setAttribute("placeholder", "Confirme su contraseña");
         contrasenna2.setAttribute("required", true);
-        formRegistro.appendChild(contrasenna2);
 
         var saltoLinea = document.createElement("br");
-        formRegistro.appendChild(saltoLinea);
         var saltoLinea = document.createElement("br");
-        formRegistro.appendChild(saltoLinea);
 
         var registrarme = document.createElement("button");
         registrarme.setAttribute("name", "registrarme");
         registrarme.setAttribute("value", "registrarme");
         registrarme.addEventListener("click", function(){
-
+            ajaxRegistrarNuevoUsuario(nombre, apellidos, identificador, email, contrasenna, contrasenna2);
         })        
         registrarme.innerHTML ="Registrarme";
-        formRegistro.appendChild(registrarme);
 
-        //document.getElementById("formulario").appendChild(formRegistro);
-
-        //formRegistro.setAttribute("id", "formRegistro");
-        //formRegistro.setAttribute("method", "post");
-        //formRegistro.setAttribute("action", "../UsuarioNuevoCrear.php");
+        document.getElementById("formulario").appendChild(pNombre);
+        document.getElementById("formulario").appendChild(nombre);
+        document.getElementById("formulario").appendChild(pApellidos);
+        document.getElementById("formulario").appendChild(apellidos);
+        document.getElementById("formulario").appendChild(pIdentificador);
+        document.getElementById("formulario").appendChild(identificador);
+        document.getElementById("formulario").appendChild(pEmail);
+        document.getElementById("formulario").appendChild(email);
+        document.getElementById("formulario").appendChild(pContrasenna);
+        document.getElementById("formulario").appendChild(contrasenna);
+        document.getElementById("formulario").appendChild(pContrasenna2);
+        document.getElementById("formulario").appendChild(contrasenna2);
+        document.getElementById("formulario").appendChild(registrarme);
     }
 }
+ function ajaxRegistrarNuevoUsuario(nombre, apellidos, identificador, email, contrasenna, contrasenna2){
+    llamadaAjax("../RegistrarUsuarioAjax.php", "nombre="+nombre.value+"&apellidos="+apellidos.value+
+                                                "&identificador="+identificador.value+"&email="+email.value
+                                                +"&contrasenna="+contrasenna.value+"&contrasenna2="+contrasenna2.value,
+    function(texto) {
+        var exito = JSON.parse(texto);
 
+        if(!exito){
+            crearAlertaContrasennas();
+        }else
+            window.location= "PaginaPrincipal.html";
+        
+        
+    }, function (texto){}
+);
+ }
 //boton para volver atras
 function crearBtnAtras() {
     
@@ -280,6 +287,22 @@ function crearAlertaCredencialesErroneas(){
     document.getElementById("formulario").appendChild(alerta);
 }
 
+function crearAlertaContrasennas(){
+    alerta = document.createElement("div");
+    alerta.setAttribute("class", "alert alert-danger alert-dismissible");
+    
+
+    cruz= document.createElement("i");
+    cruz.setAttribute("class", "fas fa-times close");
+    cruz.setAttribute("data-dismiss", "alert");
+
+    alerta.appendChild(cruz);
+
+    msg = document.createElement("p");
+    msg.innerHTML = "Las contrasennas no coinciden o el Usuario ya está registrado";
+    alerta.appendChild(msg);
+    document.getElementById("formulario").appendChild(alerta);
+}
 //Sección de Novedades (Carrusel)
 
 function crearCarruselNovedades(){
