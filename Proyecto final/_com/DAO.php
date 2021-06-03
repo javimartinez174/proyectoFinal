@@ -667,7 +667,7 @@ public static function comentariosObtener(int $id): ?array
     $comentarios = [];
 
     $rs = self::ejecutarConsulta(
-        "SELECT * FROM comentario WHERE peliculaId = ?",
+        "SELECT * FROM comentario WHERE peliculaId = ? ORDER BY fechaPublicacion DESC",
         [$id]
     );
 

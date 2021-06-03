@@ -127,7 +127,7 @@ body{
     background-color: #b5dbf5;
     width: 480px;
     border-radius: 10px;
-    
+    margin-bottom: 3%;
   }
   .divComent p:first-child {
     font-size: 8pt;

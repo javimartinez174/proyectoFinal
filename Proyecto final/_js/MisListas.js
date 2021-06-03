@@ -58,7 +58,7 @@ function cargarPelisLista(listaId, content){
 function domCrearListas(lista){
     nombreLista = document.createElement("button");
     nombreLista.setAttribute("type", "button");
-    nombreLista.setAttribute("class", "collapsible active");
+    nombreLista.setAttribute("class", "collapsible");
     nombreLista.addEventListener("click", function() {
         this.classList.toggle("active");
         var content = this.nextElementSibling;
