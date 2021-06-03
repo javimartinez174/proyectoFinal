@@ -14,7 +14,7 @@ $apellidos = $arrayUsuarioNuevo["apellidos"];
 $email = $arrayUsuarioNuevo["email"];
 
 if ($arrayUsuarioNuevo["contrasenna"] !== $arrayUsuarioNuevo["contrasenna2"]) {
-    redireccionar("UsuarioNuevoFormulario.php?contrasennaIncorrecta&identificador=$identificador&nombre=$nombre&apellidos=$apellidos&email=$email");
+    json_encode("Las contraseñas deben ser iguales");
 
 } else if (!DAO::comprobarIdentificadorDisponible($arrayUsuarioNuevo["identificador"])) {
 
@@ -23,6 +23,6 @@ if ($arrayUsuarioNuevo["contrasenna"] !== $arrayUsuarioNuevo["contrasenna2"]) {
     }
 
 } else {
-    redireccionar("UsuarioNuevoFormulario.php?usuarioNoValido&identificador=$identificador&nombre=$nombre&apellidos=$apellidos&email=$email");
+    json_encode("Identificador no disponible");
 }
 

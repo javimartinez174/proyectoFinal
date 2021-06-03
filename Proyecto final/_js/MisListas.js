@@ -24,6 +24,7 @@ function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
 
 
 function cargarListas() {
+    limpiarDiv();
     llamadaAjax("../ObtenerListasUsuario.php", "",
     function(texto) {
         
@@ -39,14 +40,14 @@ function cargarListas() {
     );
 }
 
-function cargarPelisLista(listaId, content){
+function cargarPelisLista(listaId, divPelis){
     llamadaAjax("../ObtenerInfoPeliculaPorListaId.php", "id="+parseInt(listaId),
     function(texto) {
         
             var peliculas = JSON.parse(texto);
         if(peliculas !=null){
             for (var i=0; i<peliculas.length; i++) {
-                domCrearPeliculas(peliculas[i], content);
+                domCrearPeliculas(peliculas[i], divPelis, listaId);
             }
         }
     },
@@ -56,9 +57,8 @@ function cargarPelisLista(listaId, content){
 }
 
 function domCrearListas(lista){
-    nombreLista = document.createElement("button");
-    nombreLista.setAttribute("type", "button");
-    nombreLista.setAttribute("class", "collapsible");
+    nombreLista = document.createElement("div");
+    nombreLista.setAttribute("class", "collapsible container");
     nombreLista.addEventListener("click", function() {
         this.classList.toggle("active");
         var content = this.nextElementSibling;
@@ -71,25 +71,51 @@ function domCrearListas(lista){
     nombreLista.innerHTML= lista.nombre;
     document.getElementById("listasUsuario").appendChild(nombreLista);
 
-    content = document.createElement("div");
-    content.setAttribute("class", "content");
-    content.setAttribute("id", lista.nombre);
-    document.getElementById("listasUsuario").appendChild(content);
+    divPelis = document.createElement("div");
+    divPelis.setAttribute("class", "content");
+    divPelis.setAttribute("id", lista.nombre);
+    document.getElementById("listasUsuario").appendChild(divPelis);
 
-    cargarPelisLista(lista.id, content);
+    cargarPelisLista(lista.id, divPelis);
 }
 
+function eliminarPelicula(listaId, peliculaId){
+    llamadaAjax("../BorrarPeliculaLista.php", "listaId="+parseInt(listaId)+"&peliculaId="+parseInt(peliculaId),
+    function(texto) {
+        cargarListas();
+    },
+    function(texto) {
+        alert("algo ha ido mal")
+    });
+}
 
-function domCrearPeliculas(pelicula, content){
-
+function domCrearPeliculas(pelicula, divPelis, listaId){
+    
     aPeli = document.createElement("a");
     aPeli.setAttribute("href", "Pelicula.html?verinfo="+pelicula.id);
     imgPeli = document.createElement("img");
     imgPeli.setAttribute("src", "../_img/"+pelicula.caratula);
+    imgPeli.setAttribute("data-toggle", "tooltip");
+    imgPeli.setAttribute("title", pelicula.nombre);
+    imgPeli.setAttribute("data-placement", "top");
+    mostrarTooltip();
+
+
+    eliminarPeli = document.createElement("button");
+    eliminarPeli.innerHTML = "-";
+    eliminarPeli.addEventListener("click", function(){
+        eliminarPelicula(listaId, pelicula.id);
+    });
     aPeli.appendChild(imgPeli);
-    content.appendChild(aPeli);
+    divPelis.appendChild(aPeli);
+    divPelis.appendChild(eliminarPeli);
 }
 
+function mostrarTooltip(){
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();   
+    });
+}
 function limpiarDiv(){
     while(listasUsuario.firstChild){
         listasUsuario.removeChild(listasUsuario.lastChild);

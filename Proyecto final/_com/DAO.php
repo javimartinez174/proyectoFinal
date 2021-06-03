@@ -376,9 +376,12 @@ class DAO
         self::ejecutarActualizacion("INSERT INTO listausuariopeliculas (peliculaId, listaId) SELECT ?, ? WHERE NOT EXISTS(SELECT peliculaId, listaId FROM listausuariopeliculas WHERE peliculaId=? && listaId=?)", [$idPelicula, $idLista, $idPelicula, $idLista]);
     }
 
-    public static function borrarPeliculaLista(int $idPelicula, int $idLista)
+    public static function borrarPeliculaLista(int $idPelicula, int $idLista): bool
     {
-        self::ejecutarActualizacion("DELETE FROM listausuariopeliculas WHERE peliculaId=? && listaId=?", [$idPelicula, $idLista]);
+        $filasAfectadas = self::ejecutarActualizacion("DELETE FROM listausuariopeliculas WHERE peliculaId=? && listaId=?", [$idPelicula, $idLista]);
+
+        
+        return $filasAfectadas;
     }
 
     /*--------------------------------BÚSQUEDA---------------------------------*/
