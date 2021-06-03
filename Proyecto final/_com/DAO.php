@@ -111,8 +111,17 @@ class DAO
         $arrayCookies["codigoCookie"] = setcookie("codigoCookie", $codigoCookie, time() + 60 * 60);
     }
 
-    public static function usuarioObtener(string $identificador, string $contrasenna): ?Usuario
+    public static function usuarioObtener(string $identificador, string $contrasennaSimple): ?Usuario
     {
+        $contrasenna_hash = self::ejecutarConsulta(
+          "SELECT * FROM usuario WHERE identificador=?",
+           [$identificador]
+        );
+
+        if(password_verify($contrasennaSimple, $contrasenna_hash[0]["contrasenna"])){
+            $contrasenna = $contrasenna_hash[0]["contrasenna"];
+        }
+
         $rs = self::ejecutarConsulta(
             "SELECT * FROM usuario WHERE identificador=? AND contrasenna =?",
             [$identificador, $contrasenna]
@@ -168,7 +177,7 @@ class DAO
     {
         return self::ejecutarActualizacion(
             "INSERT INTO usuario (identificador, nombre, apellidos, email, contrasenna, fotoPerfil, codigoCookie) VALUES (?, ?, ?, ?, ?, 'usuario.png', NULL)",
-            [$arrayUsuarioNuevo["identificador"], $arrayUsuarioNuevo["nombre"], $arrayUsuarioNuevo["apellidos"], $arrayUsuarioNuevo["email"], $arrayUsuarioNuevo["contrasenna"]]
+            [$arrayUsuarioNuevo["identificador"], $arrayUsuarioNuevo["nombre"], $arrayUsuarioNuevo["apellidos"], $arrayUsuarioNuevo["email"], password_hash($arrayUsuarioNuevo["contrasenna"], PASSWORD_BCRYPT)]
         );
     }
 
