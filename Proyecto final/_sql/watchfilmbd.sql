@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2021 a las 04:47:30
+-- Tiempo de generación: 04-06-2021 a las 20:25:35
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -48,6 +48,7 @@ INSERT INTO `actor` (`id`, `nombre`) VALUES
 (8, 'Billy Boyd'),
 (40, 'Brad Pitt'),
 (49, 'Bryce Dallas Howard'),
+(79, 'Cameron Diaz'),
 (37, 'Casey Affleck'),
 (13, 'Cate Blanchett'),
 (70, 'Chow Yun-Fat'),
@@ -60,6 +61,7 @@ INSERT INTO `actor` (`id`, `nombre`) VALUES
 (31, 'Djimon Hounsou'),
 (7, 'Dominic Monaghan'),
 (23, 'Ed Harris'),
+(78, 'Eddie Murphy'),
 (44, 'Eli Roth'),
 (1, 'Elijah Wood'),
 (75, 'Elliot Page'),
@@ -73,6 +75,7 @@ INSERT INTO `actor` (`id`, `nombre`) VALUES
 (35, 'Jessica Chastain'),
 (21, 'Jim Carrey'),
 (27, 'Joaquin Phoenix'),
+(80, 'John Lithgow'),
 (11, 'John Rhys-Davies'),
 (63, 'Johnny Depp'),
 (73, 'Joseph Gordon-Levitt'),
@@ -90,6 +93,7 @@ INSERT INTO `actor` (`id`, `nombre`) VALUES
 (38, 'Michael Caine'),
 (43, 'Michael Fassbender'),
 (62, 'Michelle Rodriguez'),
+(77, 'Mike Myers'),
 (10, 'Miranda Otto'),
 (25, 'Natascha McElhone'),
 (24, 'Noah Emmerich'),
@@ -107,6 +111,7 @@ INSERT INTO `actor` (`id`, `nombre`) VALUES
 (52, 'Ty Simpkins'),
 (51, 'Vicent D\'Onofrio'),
 (4, 'Viggo Mortensen'),
+(81, 'Vincent Cassel'),
 (59, 'Zoe Saldana');
 
 -- --------------------------------------------------------
@@ -236,7 +241,12 @@ INSERT INTO `actorespeliculas` (`peliculaId`, `actorId`) VALUES
 (47, 73),
 (47, 74),
 (47, 75),
-(47, 76);
+(47, 76),
+(48, 77),
+(48, 78),
+(48, 79),
+(48, 80),
+(48, 81);
 
 -- --------------------------------------------------------
 
@@ -258,7 +268,6 @@ CREATE TABLE `comentario` (
 --
 
 INSERT INTO `comentario` (`id`, `mensaje`, `fechaPublicacion`, `peliculaId`, `usuarioId`) VALUES
-(54, 'Vamos a ver esa hora guapa', '2021-06-04 02:33:05', 6, 1),
 (55, 'Vamos a ver esa hora guapa2', '2021-06-04 02:33:14', 6, 1),
 (56, 'Vamos a ver esa hora guapa3', '2021-06-04 02:33:21', 6, 1),
 (57, 'jaja soy el admin, plebe', '2021-06-04 04:13:41', 43, 5),
@@ -282,6 +291,7 @@ CREATE TABLE `director` (
 
 INSERT INTO `director` (`id`, `nombre`) VALUES
 (6, 'Andrés Muschietti'),
+(32, 'Andrew Adamson'),
 (3, 'Christopher Nolan'),
 (24, 'Colin Trevorrow'),
 (10, 'Danny Leiner'),
@@ -340,7 +350,8 @@ INSERT INTO `directorespeliculas` (`peliculaId`, `directorId`) VALUES
 (44, 31),
 (45, 31),
 (46, 31),
-(47, 3);
+(47, 3),
+(48, 32);
 
 -- --------------------------------------------------------
 
@@ -487,7 +498,10 @@ INSERT INTO `generospeliculas` (`peliculaId`, `generoId`) VALUES
 (47, 4),
 (47, 5),
 (47, 6),
-(47, 7);
+(47, 7),
+(48, 1),
+(48, 8),
+(48, 11);
 
 -- --------------------------------------------------------
 
@@ -507,14 +521,16 @@ CREATE TABLE `lista` (
 --
 
 INSERT INTO `lista` (`id`, `nombre`, `usuarioId`) VALUES
-(19, 'Favoritos', 1),
-(20, 'Pendientes', 1),
 (21, 'Favortios', 3),
 (22, 'Pendientes', 3),
 (23, 'Favoritos', 2),
 (24, 'Pendientes', 2),
 (25, 'Favoritos', 4),
-(26, 'Pendientes', 4);
+(26, 'Pendientes', 4),
+(28, 'Favoritos', 5),
+(35, 'Favoritos', 1),
+(36, 'Pendientes', 1),
+(39, 'Favoritos', 22);
 
 -- --------------------------------------------------------
 
@@ -554,12 +570,17 @@ CREATE TABLE `listausuariopeliculas` (
 --
 
 INSERT INTO `listausuariopeliculas` (`peliculaId`, `listaId`) VALUES
-(4, 19),
-(5, 20),
-(6, 19),
-(7, 20),
-(12, 20),
-(17, 19);
+(1, 22),
+(1, 35),
+(1, 36),
+(1, 39),
+(3, 39),
+(5, 22),
+(11, 22),
+(11, 39),
+(43, 22),
+(43, 35),
+(43, 39);
 
 -- --------------------------------------------------------
 
@@ -606,7 +627,8 @@ INSERT INTO `pelicula` (`id`, `nombre`, `anio`, `puntuacion`, `fechaEntrada`, `s
 (44, 'Piratas del Caribe: La maldición de la Perla Negra', 2003, 4, '2021-06-04', 'El aventurero capitán Jack Sparrow recorre las aguas caribeñas. Pero su andanzas terminan cuando su enemigo, el capitán Barbossa le roba su barco, la Perla Negra, y ataca la ciudad de Port Royal, secuestrando a Elizabeth Swann, hija del gobernador. Will Turner, el amigo de la infancia de Elizabeth, se une a Jack para rescatarla y recuperar la Perla Negra. Pero el prometido de Elizabeth, comodoro Norrington, les persigue a bordo del HMS Impávido. Además, Barbossa y su tripulación son víctimas de un conjuro por el que están condenados a vivir eternamente, y a transformarse cada noche en esqueletos vivientes, en fantasmas guerreros.', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/5Itr2jHuJaw\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>', 'piratasdelcaribelamaldiciondelaperlanegra.jpg'),
 (45, 'Piratas del Caribe: El cofre del hombre muerto', 2006, 5, '2021-06-04', 'Will Turner y Elizabeth Swann se van a casar, pero ambos son hechos prisioneros por Lord Cutler Beckett y acusados de haber liberado al capitán Jack Sparrow. Para salvar su vida, Will tendrá que encontrar a Jack y conseguir su misteriosa brújula. Esta esconde un gran poder, además de la clave de una deuda de sangre del pirata con un temible y siniestro Davy Jones, el legendario capitán del barco fantasma Holandés Errante.', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/2GJh4ElbEjA\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>', 'piratasdelcaribeelcofredelhombremuerto.jpg'),
 (46, 'Piratas del Caribe: En el fin del mundo', 2007, 4, '2021-06-04', 'Siguiendo la estela de lo sucedido en “Piratas del caribe: el cofre del hombre muerto”, encontramos a nuestros héroes Will Turner y Elizabeth Swann aliados con el capitán Barbossa, en una búsqueda desesperada para liberar al capitán Jack Sparrow de las manos de Davy Jones. Mientras, el terrorífico barco fantasma, el Holandés Errante, bajo el control de la Compañía de las Indias Orientales, causa estragos a lo largo de los Siete Mares. Will y Elizabeth, navegando en medio de la traición, la felonía y mares salvajes, deben seguir adelante rumbo a Singapur y enfrentarse al astuto pirata chino Sao Feng. Ahora, en los mismísimos confines de la tierra, todos ellos deben elegir un bando en la batalla final, ya que no sólo sus vidas y fortunas, sino también el futuro de la piratería clásica, pende de un hilo...', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/3LioCI-QTPE\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>', 'piratasdelcaribeenelfindelmundo.jpg'),
-(47, 'Origen', 2010, 5, '2021-06-04', 'Dom Cobb es un ladrón hábil, el mejor de todos, especializado en el peligroso arte de extracción: el robo de secretos valiosos desde las profundidades del subconsciente durante el estado de sueño cuando la mente está más vulnerable. Esta habilidad excepcional de Cobb le ha hecho un jugador codiciado en el traicionero nuevo mundo de espionaje corporativo, pero al mismo tiempo, le ha convertido en un fugitivo internacional y ha tenido que sacrificar todo que le importaba. Ahora a Cobb se le ofrece una oportunidad para redimirse. Con un último trabajo podría recuperar su vida anterior, pero solamente si logra lo imposible.', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RV9L7ui9Cn8\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>', 'origen.jpg');
+(47, 'Origen', 2010, 5, '2021-06-04', 'Dom Cobb es un ladrón hábil, el mejor de todos, especializado en el peligroso arte de extracción: el robo de secretos valiosos desde las profundidades del subconsciente durante el estado de sueño cuando la mente está más vulnerable. Esta habilidad excepcional de Cobb le ha hecho un jugador codiciado en el traicionero nuevo mundo de espionaje corporativo, pero al mismo tiempo, le ha convertido en un fugitivo internacional y ha tenido que sacrificar todo que le importaba. Ahora a Cobb se le ofrece una oportunidad para redimirse. Con un último trabajo podría recuperar su vida anterior, pero solamente si logra lo imposible.', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RV9L7ui9Cn8\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>', 'origen.jpg'),
+(48, 'Shrek', 2001, 4, '2021-06-04', 'Hace mucho, mucho tiempo, en una lejanísima ciénaga vivía un intratable ogro llamado Shrek. Pero de repente, un día, su absoluta soledad se ve interrumpida por una invasión de sorprendentes personajes de cuento. Hay ratoncitos ciegos en su comida, un enorme y malísimo lobo en su cama, tres cerditos sin hogar y otros muchos seres increíbles que han sido deportados de su reino por el malvado Lord Farquaad. Para conseguir salvar su terreno, y de paso a sí mismo, Shrek hace un pacto con Farquaad y emprende viaje para conseguir que la preciosa princesa Fiona sea la novia del Lord. En tan importante misión le acompañan un burro chistoso, dispuesto a hacer cualquier cosa por Shrek. Todo, menos estarse calladito. Rescatar a la princesa de una dragona enamoradiza que suelta fuego al respirar va a resultar una tontería comparado con lo que ocurre cuando el oscuro secreto que la joven guardaba es revelado.', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/qhFPeFv4znA\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>', 'shrek.jpg');
 
 -- --------------------------------------------------------
 
@@ -617,17 +639,24 @@ INSERT INTO `pelicula` (`id`, `nombre`, `anio`, `puntuacion`, `fechaEntrada`, `s
 DROP TABLE IF EXISTS `plataforma`;
 CREATE TABLE `plataforma` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+  `nombre` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `icono` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `plataforma`
 --
 
-INSERT INTO `plataforma` (`id`, `nombre`) VALUES
-(3, 'Amazon Prime'),
-(2, 'HBO'),
-(1, 'Netflix');
+INSERT INTO `plataforma` (`id`, `nombre`, `icono`) VALUES
+(1, 'Netflix', 'iconNetflix.jpg'),
+(2, 'HBO', 'iconHBO.jpg'),
+(3, 'Amazon Prime Video', 'iconAmazon.jpg'),
+(4, 'Movistar+', 'iconMovistar.jpg'),
+(5, 'Disney+', 'iconDisney.jpg'),
+(6, 'Rakuten Tv', 'iconRakuten.jpg'),
+(7, 'Apple TV+', 'iconApple.jpg'),
+(8, 'Mitele', 'iconMitele.jpg'),
+(9, 'Youtube Premium', 'iconYoutube.jpg');
 
 -- --------------------------------------------------------
 
@@ -655,7 +684,9 @@ INSERT INTO `plataformaspeliculas` (`peliculaId`, `plataformaId`) VALUES
 (45, 1),
 (46, 1),
 (46, 3),
-(47, 2);
+(47, 2),
+(48, 1),
+(48, 2);
 
 -- --------------------------------------------------------
 
@@ -681,11 +712,12 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `identificador`, `nombre`, `apellidos`, `email`, `contrasenna`, `fotoPerfil`, `codigoCookie`, `administrador`) VALUES
-(1, 'jlopez', 'José', 'López', 'j@j', '$2y$10$TqpG.1qj.hi1b60XTcIsKen28LN1uqha4G1OYswrr7Wm5.Z91pzr6', 'usuario.png', 'SbOBh9mkHeEQ9jaKnLF9t8W5zWNv2Zza', NULL),
+(1, 'jlopez', 'José', 'López', 'j@j', '$2y$10$TqpG.1qj.hi1b60XTcIsKen28LN1uqha4G1OYswrr7Wm5.Z91pzr6', 'usuario.png', 'HtlkhG2DUAr6wcErXayed0d2iW6uJ8iB', NULL),
 (2, 'kevinp', 'Kevin', 'Peral', 'k@p', '$2y$10$AvbOMJ0o565c81DZtQjK8e4WZs6JghwZTXeAHSqDnFsYBn4Qh8BCW', 'usuario.png', NULL, NULL),
 (3, 'javim', 'Javi', 'Martínez', 'j@m', '$2y$10$IKp4EWRIcWdVgTOiubgwfuiL63M46obgf3TNtcXXT16Ez2xSz7YHO', 'usuario.png', NULL, NULL),
 (4, 'alainf', 'Alain', 'Fernández', 'a@f', '$2y$10$gMZ7R6LjDTuU0TptlwUcNOEr3Y4TKrUrSTv5cA2rQNZe6vVUbhThm', 'usuario.png', NULL, NULL),
-(5, 'admin', 'Admin', 'Admin', 'a@a', '$2y$10$rPUdd8/ENcxO5SYrlaxwDOl0MwYxKW9iPZiH4HVCzWyQMOe9AfZS.', 'usuario.png', 'D8GoxUJWLqLVvxEL6WTPG2vacRqI0NKT', 1);
+(5, 'admin', 'Admin', 'Admin', 'a@a', '$2y$10$rPUdd8/ENcxO5SYrlaxwDOl0MwYxKW9iPZiH4HVCzWyQMOe9AfZS.', 'usuario.png', 'bkTehzjYAswV5n6JR0jc2yvsZt7iHMHX', 1),
+(22, 'andresp', 'Andres', 'Pacheco', 'andres@andres', '$2y$10$q/5d7rtwgULyyGNzlas8i.dx8NqMoSSDVo/0b4zs0z6mLutkQ43d2', 'usuario.png', 'qPIP1T1AtMahiuiUKglF1Q81HNPktRjc', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -808,19 +840,19 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `actor`
 --
 ALTER TABLE `actor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT de la tabla `director`
 --
 ALTER TABLE `director`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `genero`
@@ -832,25 +864,25 @@ ALTER TABLE `genero`
 -- AUTO_INCREMENT de la tabla `lista`
 --
 ALTER TABLE `lista`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `pelicula`
 --
 ALTER TABLE `pelicula`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de la tabla `plataforma`
 --
 ALTER TABLE `plataforma`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Restricciones para tablas volcadas
