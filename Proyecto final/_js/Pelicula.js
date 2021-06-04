@@ -184,20 +184,20 @@ function crearPelicula(infoPelicula) {
     trailer.innerHTML = infoPelicula.trailer;
 
     var imgCaratula = document.createElement("img");
+    imgCaratula.setAttribute("class", "imgCaratula");
     imgCaratula.setAttribute("src", "../_img/"+infoPelicula.caratula);
 
     divContainer1.appendChild(imgCaratula);
     divContainer1.appendChild(sinopsis);
-    divContainer1.appendChild(trailer);
 
 
     var agregarALista = document.createElement("button");
-    agregarALista.setAttribute("class", "nav-link ml-auto");
+    agregarALista.setAttribute("class", "agregarLista");
     agregarALista.setAttribute("id", "abreModal");
     agregarALista.setAttribute("data-toggle", "modal");
     agregarALista.setAttribute("data-target", "#myModal");
     agregarALista.setAttribute("href", "#");
-    agregarALista.innerHTML= "Crear nueva lista +";
+    agregarALista.innerHTML= "Añadir a mis listas +";
 
     var puntuacion = document.createElement("p");
     puntuacion.innerHTML = "Puntuación obtenida: "+infoPelicula.puntuacion;
@@ -207,8 +207,9 @@ function crearPelicula(infoPelicula) {
     
     
     document.getElementById("infoPelicula").appendChild(titulo);
+    divContainer1.appendChild(agregarALista);
     document.getElementById("infoPelicula").appendChild(divContainer1);
-    document.getElementById("infoPelicula").appendChild(agregarALista);
+    document.getElementById("infoPelicula").appendChild(trailer);
     document.getElementById("infoPelicula").appendChild(puntuacion);
     document.getElementById("infoPelicula").appendChild(anio);
 
@@ -237,7 +238,7 @@ function crearActor(infoActor) {
 
 function crearGenero(infoGenero) {
     var nombre = document.createElement("p");
-    nombre.innerHTML = infoGenero.nombre+" ";
+    nombre.innerHTML = infoGenero.nombre+" / ";
     nombre.setAttribute("font-weight", "bold");
     nombre.setAttribute("href", "#");
     nombre.setAttribute("target", "_blank");
@@ -246,13 +247,17 @@ function crearGenero(infoGenero) {
 }
 
 function crearPlataforma(infoPlataforma) {
-    var nombre = document.createElement("p");
-    nombre.innerHTML = infoPlataforma.nombre+" ";
-    nombre.setAttribute("font-weight", "bold");
-    nombre.setAttribute("href", infoPlataforma.nombre);
-    nombre.setAttribute("target", "_blank");
-    
-    document.getElementById("infoPlataforma").appendChild(nombre);
+    var enlace = document.createElement("a");
+    enlace.setAttribute("href", "https://www.google.com/search?q="+ infoPlataforma.nombre);
+    enlace.setAttribute("target", "_blank");
+
+    var imagen = document.createElement("img");
+    imagen.setAttribute("id", infoPlataforma.icono);
+    imagen.setAttribute("class", "iconoPlataforma");
+    imagen.setAttribute("src", "../_img/utiles/"+infoPlataforma.icono);
+
+    enlace.appendChild(imagen);
+    document.getElementById("infoPlataforma").appendChild(enlace);
 }
 
  function ObtenerListasUsuario(idPelicula){

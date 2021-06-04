@@ -15,6 +15,9 @@ if ($arrayUsuarioNuevo["contrasenna"] !== $arrayUsuarioNuevo["contrasenna2"]) {
 } else if (!DAO::comprobarIdentificadorDisponible($arrayUsuarioNuevo["identificador"])) {
 
     if (DAO::crearUsuario($arrayUsuarioNuevo)) {
+        $usuario = DAO::usuarioObtenerPorIdentificador($arrayUsuarioNuevo["identificador"]);
+        $usuarioId = $usuario->getId();
+        DAO::crearLista("Favoritos", $usuarioId);
         $exito = true;
     }
 

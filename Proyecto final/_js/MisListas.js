@@ -94,7 +94,7 @@ function cargarListas() {
             var listas = JSON.parse(texto);
 
             for (var i=0; i<listas.length; i++) {
-                domCrearListas(listas[i]);
+                domCrearListas(listas[i], i);
             }
     },
     function(texto) {
@@ -135,7 +135,7 @@ function eliminarLista(listaId){
 }
 
 
-function domCrearListas(lista){
+function domCrearListas(lista, i){
     nombreLista = document.createElement("div");
     nombreLista.setAttribute("class", "collapsible container");
     nombreLista.addEventListener("click", function() {
@@ -155,17 +155,19 @@ function domCrearListas(lista){
     divPelis.setAttribute("id", lista.nombre);
     document.getElementById("listasUsuario").appendChild(divPelis);
 
-    btnEliminarLista = document.createElement("button");
-    btnEliminarLista.innerHTML = "X";
-    btnEliminarLista.setAttribute("class", "eliminarLista");
-    btnEliminarLista.setAttribute("data-toggle", "tooltip");
-    btnEliminarLista.setAttribute("title", "Eliminar "+lista.nombre);
-    btnEliminarLista.setAttribute("data-placement", "top");
-    btnEliminarLista.addEventListener("click", function(){
-        eliminarLista(lista.id);
-    });
+    if(i != 0){
+        btnEliminarLista = document.createElement("button");
+        btnEliminarLista.innerHTML = "X";
+        btnEliminarLista.setAttribute("class", "eliminarLista");
+        btnEliminarLista.setAttribute("data-toggle", "tooltip");
+        btnEliminarLista.setAttribute("title", "Eliminar "+lista.nombre);
+        btnEliminarLista.setAttribute("data-placement", "top");
+        btnEliminarLista.addEventListener("click", function(){
+            eliminarLista(lista.id);
+        });
 
-    nombreLista.appendChild(btnEliminarLista);
+        nombreLista.appendChild(btnEliminarLista);
+    }
     cargarPelisLista(lista, divPelis);
 }
 

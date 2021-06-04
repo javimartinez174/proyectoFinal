@@ -191,6 +191,16 @@ class DAO
         else return null;
     }
 
+    public static function usuarioObtenerPorIdentificador(string $identificador): Usuario
+    {
+        $rs = self::ejecutarConsulta(
+            "SELECT * FROM usuario WHERE identificador=?",
+            [$identificador]
+        );
+        if ($rs) return self::usuarioCrearDesdeRs($rs[0]);
+        else return null;
+    }
+
     public static function comprobarUsuarioAdmin(int $id)
     {
         $rs = self::ejecutarConsulta(
@@ -479,7 +489,7 @@ public static function generoObtenerPorPeliculaId(int $id): ?array
 
     private static function plataformaCrearDesdeRS(array $plataforma): Plataforma
     {
-        return new Plataforma($plataforma["id"], $plataforma["nombre"]);
+        return new Plataforma($plataforma["id"], $plataforma["nombre"], $plataforma["icono"]);
     }
 
     public static function plataformaObtener(string $nombre): ?Plataforma
@@ -590,6 +600,18 @@ public static function generoObtenerPorPeliculaId(int $id): ?array
         }
         return $exito;
     }
+
+    public static function aniadirPeliculaFavoritos(int $idPelicula, int $idUsuario): bool //insertar peliculas en una lista si no están ya incluídas en dicha lsita
+    {
+        $lista = self::ejecutarConsulta("SELECT * FROM lista WHERE nombre='Favoritos' AND usuarioId = ?", [$idUsuario]);
+
+        $idLista = $lista[0]["id"];
+        $exito = self::ejecutarActualizacion("INSERT INTO listausuariopeliculas (peliculaId, listaId) SELECT ?, ? 
+            WHERE NOT EXISTS(SELECT peliculaId, listaId FROM listausuariopeliculas WHERE peliculaId=? && listaId=?)", 
+            [$idPelicula, $idLista, $idPelicula, $idLista]);   
+    }
+
+
 
     public static function borrarPeliculaLista(int $idPelicula, int $idLista): bool
     {

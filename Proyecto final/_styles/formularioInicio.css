@@ -114,6 +114,10 @@ button {
     border-radius: 5px;
 }
 
+button:hover {
+  background-color: #85C9D6;
+}
+
 .btn{
   background-color:rgba(33, 163, 250, 0.863);
   color: white;
@@ -121,9 +125,7 @@ button {
 .btn:hover{
   background-color: #85C9D6;
 }
-button:hover {
-    background-color: #85C9D6;
-}
+
 #novedades{
   display: flex;
   justify-content: center;

@@ -249,10 +249,13 @@ class Plataforma extends Dato implements JsonSerializable
 
     private string $nombre;
 
-    public function __construct(int $id, string $nombre)
+    private string $icono;
+
+    public function __construct(int $id, string $nombre, string $icono)
     {
         $this->setId($id);
         $this->setNombre($nombre);
+        $this->setIcono($icono);
     }
 
     public function jsonSerialize()
@@ -260,6 +263,7 @@ class Plataforma extends Dato implements JsonSerializable
         return [
             "id" => $this->id,
             "nombre" => $this->nombre,
+            "icono" => $this->icono
         ];
     }
 
@@ -272,6 +276,16 @@ class Plataforma extends Dato implements JsonSerializable
     public function setNombre(string $nombre)
     {
         $this->nombre = $nombre;
+    }
+
+    public function getIcono(): string
+    {
+        return $this->icono;
+    }
+
+    public function setIcono(string $icono)
+    {
+        $this->icono = $icono;
     }
 }
 

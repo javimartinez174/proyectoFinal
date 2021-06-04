@@ -248,7 +248,7 @@ function crearBotonesInicio() {
         if(!exito){
             crearAlertaContrasennas();
         }else
-            window.location= "PaginaPrincipal.html";
+            window.location= "SesionInicioFormulario.html";
         
         
     }, function (texto){}

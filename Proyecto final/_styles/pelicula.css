@@ -96,12 +96,10 @@ body{
     margin: 20px;
   }
   #infoPelicula #pSinopsis{
-    width: 400px;
+    width: 70%;
     margin: 20px;
   }
-  #infoPelicula #pTrailer {
-    
-  }
+  
   #container1 {
       display: flex;
       flex-direction: row;
@@ -111,11 +109,17 @@ body{
       align-self: center;
   }
   #infoActor {
+      width: 30%;
       margin: 20px;
       align-self: center;
   }
   #infoGenero {
     margin: 20px;
+    align-self: center;
+  }
+  #infoGenero p{
+    display: inline;
+    margin: 1%;
     align-self: center;
   }
   #infoPlataforma {
@@ -164,7 +168,36 @@ body{
     width: 20em;
     height: 4em;
   }
-  
-  
-  
-  
+
+  .iconoPlataforma{
+    border-radius: 10%;
+    height: 4em;
+    width: 4em;
+  }
+
+  .imgCaratula{
+    height: 70%;
+    width: 25%;
+  }
+
+  @media (min-width: 600px) {
+    .contenedorPelicula{
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-flow: row wrap;
+      flex-flow: row wrap;
+      flex:1;
+    }
+}
+
+  .agregarLista {
+    background-color: #0CC7ED;
+    border: 1px solid #0093AF;
+    border-radius: 5px;
+    height: 30%;
+  }
+
+  .agregarLista:hover {
+    background-color: #85C9D6;
+    height: 30%;
+  }

@@ -106,11 +106,40 @@ function domCrearPelis(pelicula) {
 
     //FALTA genero, director, reparto de actores
 
+    var corazon = document.createElement("i");
+    corazon.setAttribute("class", "fas fa-heart");
+    corazon.setAttribute("id", "corazon");
+    corazon.setAttribute("data-toggle", "tooltip");
+    corazon.setAttribute("title", "Añadir "+ pelicula.nombre + " a Favoritos");
+    corazon.setAttribute("data-placement", "top");
+    corazon.addEventListener("click", function(){
+        aniadirAListaFavoritosAJAX(pelicula.id);
+    })
+    cartelera.appendChild(corazon);
+
     divFlip.appendChild(imgCaratula);
     divCube.appendChild(divFlip);
     divCube.appendChild(divFlop);
     cartelera.appendChild(divCube);
 
+    mostrarTooltip();
+}
+
+function mostrarTooltip(){
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();   
+    });
+}
+
+function aniadirAListaFavoritosAJAX(peliculaId){
+    llamadaAjax("../AniadirAListaFavoritosAJAX.php", "peliculaId="+parseInt(peliculaId),
+    function(texto) {
+            alert("Pelicula añadida a favoritos");
+    },
+    function(texto) {
+ 
+    }
+    );
 }
 
 function comprobarAdmin() {
@@ -286,6 +315,7 @@ function crearFormularioIntroducirPelicula() {
 function ajaxIntroducirPelicula(inputNombre, inputDirector, inputActores, inputGeneros, inputPlataformas, anio, puntuacion, sinopsis, trailer, caratula) {
     llamadaAjax("../IntroducirPelicula.php", "nombre="+inputNombre.value+"&director="+inputDirector.value+"&actores="+inputActores.value+"&generos="+inputGeneros.value+"&plataformas="+inputPlataformas.value+"&anio="+anio.value+"&puntuacion="+puntuacion.value+"&sinopsis="+sinopsis.value+"&trailer="+trailer.value+"&caratula="+caratula.value,
     function(texto) {
+            $('#myModal').modal('hide');
             cargarPelis();
     }, function (texto){}
 );
