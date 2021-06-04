@@ -101,7 +101,7 @@ body{
     cursor: pointer;
     padding: 18px;
     width: 30%;
-    border: none;
+    border: 1px solid black;
     text-align: center;
     outline: none;
     font-size: 2rem;
@@ -127,3 +127,55 @@ body{
     margin: 1%;
     background-color: white ;
   }
+
+
+  .containerPeli{
+    display:inline-block;
+    position:relative;
+    }
+    
+    .containerPeli button{
+    position: absolute;
+    top: 1em;
+    right:1.2em;
+    background-color:#8f00059c;
+    border-radius: 50%;
+    border:none;
+    color:white;
+    height: auto;
+    width: auto;
+    }
+
+    .containerPeli button:hover{
+      position: absolute;
+      top:1em;
+      right:1.2em;
+      background-color:#e92b3163;
+      border-radius: 50%;
+      color:white;
+      text-transform:uppercase;
+      height: auto;
+      width: auto;
+      }
+
+      .eliminarLista{
+        margin-right: 1em;
+        background-color:#8f0005c9;
+        border-radius: 50%;
+        font-size: medium;
+        border:none;
+        color:white;
+        height: auto;
+        width: auto;
+      }
+
+      .eliminarLista:hover{
+        margin-right: 1em;
+        background-color:#e92b31d8;
+        border-radius: 50%;
+        font-size: medium;
+        border:none;
+        color:white;
+        height: auto;
+        width: auto;
+      }

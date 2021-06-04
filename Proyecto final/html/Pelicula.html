@@ -60,7 +60,7 @@
             <li><a href="PaginaPrincipal.html">Cartelera</a></li>
         </ul>
 
-        <div class="container-fluid">
+        <div class="container">
             <div class="contenedorPelicula">
                 <div id="infoPelicula">
                 </div>
@@ -86,6 +86,20 @@
             &nbsp;<h3>Comentarios de Usuarios</h3>
             <div id="comentarios" class="comentarios">
                 <div></div>
+            </div>
+
+            <div class="modal fade" id="myModal" data-backdrop="static">
+                <div class="modal-dialog modal-dialog-centered modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header justify-content-center">
+                            <h4 class="featured-text text-center text-uppercase">Añadir Pelicula a mi lista</h4>
+                            <button id="btnClose" type="button" class="close" data-dismiss="modal"><i class= "fas fa-times"></i></button>
+                        </div>
+                        <div id="formulario" class= "modal-body align-items-center justify-content-center" >
+                            <form id="formId"></form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

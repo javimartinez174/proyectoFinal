@@ -547,11 +547,17 @@ public static function generoObtenerPorPeliculaId(int $id): ?array
         } else return null;
     }
 
-    public static function crearLista(string $nombre, int $usuarioId)
+    public static function crearLista(string $nombre, int $usuarioId):bool
     {
         if ($nombre != "")
-            self::ejecutarActualizacion("INSERT INTO lista (nombre, usuarioId) VALUES (?, ?);",
+            $exito=self::ejecutarActualizacion("INSERT INTO lista (nombre, usuarioId) VALUES (?, ?);",
                 [$nombre, $usuarioId]);
+
+        if ($exito){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public static function modificarLista(string $nombre, int $id)
@@ -560,15 +566,29 @@ public static function generoObtenerPorPeliculaId(int $id): ?array
             [$nombre, $id]);
     }
 
-    public static function borrarLista(string $id, int $usuarioId)
+    public static function borrarLista(string $id, int $usuarioId): bool
     {
-        self::ejecutarActualizacion("DELETE FROM lista WHERE id=? && usuarioId=? ;",
+        $exito = self::ejecutarActualizacion("DELETE FROM lista WHERE id=? && usuarioId=? ;",
             [$id, $usuarioId]);
+
+            if ($exito){
+                return true;
+            }else{
+                return false;
+            }
     }
 
-    public static function aniadirPeliculaLista(string $idPelicula, string $idLista) //insertar peliculas en una lista si no están ya incluídas en dicha lsita
+    public static function aniadirPeliculaLista(string $idPelicula, string $idListas): bool //insertar peliculas en una lista si no están ya incluídas en dicha lsita
     {
-        self::ejecutarActualizacion("INSERT INTO listausuariopeliculas (peliculaId, listaId) SELECT ?, ? WHERE NOT EXISTS(SELECT peliculaId, listaId FROM listausuariopeliculas WHERE peliculaId=? && listaId=?)", [$idPelicula, $idLista, $idPelicula, $idLista]);
+        $idListas = trim($idListas, ',');
+        $arrayId= explode(",", $idListas);
+        echo $idListas;
+        for($i = 0; $i < count($arrayId); $i++){
+            $exito = self::ejecutarActualizacion("INSERT INTO listausuariopeliculas (peliculaId, listaId) SELECT ?, ? 
+            WHERE NOT EXISTS(SELECT peliculaId, listaId FROM listausuariopeliculas WHERE peliculaId=? && listaId=?)", 
+            [$idPelicula, $arrayId[$i], $idPelicula, $arrayId[$i]]);               
+        }
+        return $exito;
     }
 
     public static function borrarPeliculaLista(int $idPelicula, int $idLista): bool

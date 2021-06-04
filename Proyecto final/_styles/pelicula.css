@@ -100,8 +100,7 @@ body{
     margin: 20px;
   }
   #infoPelicula #pTrailer {
-      border: 1px solid darkblue;
-      box-shadow: 5px 5px darkblue;
+    
   }
   #container1 {
       display: flex;

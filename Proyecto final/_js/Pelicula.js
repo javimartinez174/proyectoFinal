@@ -182,9 +182,22 @@ function crearPelicula(infoPelicula) {
     var trailer = document.createElement("p");
     trailer.setAttribute("id", "pTrailer");
     trailer.innerHTML = infoPelicula.trailer;
+
+    var imgCaratula = document.createElement("img");
+    imgCaratula.setAttribute("src", "../_img/"+infoPelicula.caratula);
+
+    divContainer1.appendChild(imgCaratula);
     divContainer1.appendChild(sinopsis);
     divContainer1.appendChild(trailer);
 
+
+    var agregarALista = document.createElement("button");
+    agregarALista.setAttribute("class", "nav-link ml-auto");
+    agregarALista.setAttribute("id", "abreModal");
+    agregarALista.setAttribute("data-toggle", "modal");
+    agregarALista.setAttribute("data-target", "#myModal");
+    agregarALista.setAttribute("href", "#");
+    agregarALista.innerHTML= "Crear nueva lista +";
 
     var puntuacion = document.createElement("p");
     puntuacion.innerHTML = "Puntuación obtenida: "+infoPelicula.puntuacion;
@@ -195,8 +208,12 @@ function crearPelicula(infoPelicula) {
     
     document.getElementById("infoPelicula").appendChild(titulo);
     document.getElementById("infoPelicula").appendChild(divContainer1);
+    document.getElementById("infoPelicula").appendChild(agregarALista);
     document.getElementById("infoPelicula").appendChild(puntuacion);
     document.getElementById("infoPelicula").appendChild(anio);
+
+    document.getElementById("abreModal").addEventListener("click", ObtenerListasUsuario(infoPelicula.id));
+
 
 }
 
@@ -238,6 +255,85 @@ function crearPlataforma(infoPlataforma) {
     document.getElementById("infoPlataforma").appendChild(nombre);
 }
 
+ function ObtenerListasUsuario(idPelicula){
+    llamadaAjax("../ObtenerListasUsuario.php", "",
+    function(texto) {
+        var listas = JSON.parse(texto);
+
+        for (var i=0; i<listas.length; i++) {
+            domCrearListasEnModal(listas[i], i,idPelicula, listas.length);
+        }
+    },
+    function(texto) {
+ 
+    }
+    );
+
+ }
+
+ function domCrearListasEnModal(lista, pos,  idPelicula, longitudListas){
+    var formulario = document.getElementById("formId");
+    
+
+    pNombreLista=document.createElement("p");
+    pNombreLista.innerHTML = "Lista: "+ lista.nombre;
+    pNombreLista.style.display = "inline-block";
+    pNombreLista.style.marginRight = "1em";
+
+    nombreListaInput = document.createElement("input");
+    nombreListaInput.setAttribute("type", "checkbox");
+    nombreListaInput.setAttribute("value", lista.id)
+    nombreListaInput.setAttribute("id", lista.id);
+  
+    var saltoLinea = document.createElement("br");
+
+    formulario.appendChild(pNombreLista);
+    formulario.appendChild(nombreListaInput);
+    formulario.appendChild(saltoLinea);
+
+    if(pos+1 == longitudListas){
+        var introducir = document.createElement("button");
+        introducir.setAttribute("name", "crear");
+        introducir.setAttribute("class", "crear");
+        introducir.setAttribute("id", "enviar");
+        introducir.innerHTML = "Insertar Película";
+        introducir.setAttribute("value", "Insertar Película");
+        formulario.appendChild(introducir); 
+        acumularId(idPelicula);
+    }
+ }
+
+ function acumularId(idPelicula){ 
+    $(document).ready(function() {
+        $('#enviar').click(function(){
+            var selected = '';    
+            $('#formid input[type=checkbox]').each(function(){
+                if (this.checked) {
+                    selected += $(this).val()+',';
+                }
+            }); 
+    
+            if (selected != '') 
+                ajaxAnnadirALista(selected, idPelicula);  
+            else
+                alert('Debes seleccionar al menos una opción.');
+    
+            return false;
+        });         
+    });  
+ }
+
+ function ajaxAnnadirALista(idListas, idPelicula){
+    llamadaAjax("../AnnadirPeliculaALista.php", "listaId=" + idListas +"&idPelicula="+parseInt(idPelicula),
+    function(texto) {
+            alert("Pelicula Insertada con exito");
+    },
+    function(texto) {
+ 
+    }
+    );
+}
+ 
 function obtenerUsuarioComentario(comentario) {
     llamadaAjax("../ObtenerUsuario.php", "id=" + parseInt(comentario.usuarioId),
     function(texto) {
