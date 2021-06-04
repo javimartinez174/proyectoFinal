@@ -167,11 +167,6 @@ class Pelicula extends Dato implements JsonSerializable
             "trailer" => $this->trailer,
             "caratula" => $this->caratula,
         ];
-
-        // Esto sería lo mismo:
-        //$array["nombre"] = $this->nombre;
-        //$array["id"] = $this->id;
-        //return $array;
     }
 
     public function getNombre(): string
@@ -248,7 +243,7 @@ class Pelicula extends Dato implements JsonSerializable
 
 /*----------------------------------PLATAFORMA--------------------------------*/
 
-class Plataforma extends Dato
+class Plataforma extends Dato implements JsonSerializable
 {
     use Identificable;
 
@@ -259,6 +254,15 @@ class Plataforma extends Dato
         $this->setId($id);
         $this->setNombre($nombre);
     }
+
+    public function jsonSerialize()
+    {
+        return [
+            "id" => $this->id,
+            "nombre" => $this->nombre,
+        ];
+    }
+
 
     public function getNombre(): string
     {
@@ -306,7 +310,7 @@ class Lista extends Dato implements JsonSerializable
 
 /*----------------------------------GENERO--------------------------------*/
 
-class Genero extends Dato
+class Genero extends Dato implements JsonSerializable
 {
     use Identificable;
 
@@ -316,6 +320,14 @@ class Genero extends Dato
     {
         $this->setId($id);
         $this->setNombre($nombre);
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "id" => $this->id,
+            "nombre" => $this->nombre,
+        ];
     }
 
     public function getNombre(): string

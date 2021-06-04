@@ -48,21 +48,34 @@
                 </span>
               </div>
         </ul>
-        <ul class="navRightPrincipal">
+        <ul class="navRightPrincipal" id="navRightPrincipal">
             
             <div class="nav-item">
                 <a class="nav-link" id="btnListas" href="MisListas.html"><i class="fas fa-stream"></i>Ver Mis Listas</a>
             </div>
             
             <div class="nav-item">
-                <a class="nav-link" id="btnPerfil" href="#"><i class="fas fa-user-cog"></i>Perfil</a>
+                <a class="nav-link" id="btnPerfil" href="PerfilUsuario.html"><i class="fas fa-user-cog"></i>Perfil</a>
             </div>
             
             <div class="nav-item" id="divCerrarSesion">
-                <a class="nav-link" id="btnCerrarSesion" href="#"><i class="fas fa-door-closed"></i>Cerrar Sesión</a>
+                <a class="nav-link" id="btnCerrarSesion" href="../SesionCerrar.php"><i class="fas fa-door-closed"></i>Cerrar Sesión</a>
             </div>
         </ul>
     </nav>
+
+    <div class="modal fade" id="myModal" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <h4 class="featured-text text-center text-uppercase">Introducir Película</h4>
+                    <button id="btnClose" type="button" class="close" data-dismiss="modal"><i class= "fas fa-times"></i></button>
+                </div>
+                <div id="formulario" class= "modal-body align-items-center justify-content-center" >
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div id="cartelera" class="container-fluid cartelera">

@@ -191,6 +191,16 @@ class DAO
         else return null;
     }
 
+    public static function comprobarUsuarioAdmin(int $id)
+    {
+        $rs = self::ejecutarConsulta(
+            "SELECT administrador FROM usuario WHERE id=?",
+            [$id]
+        );
+        if ($rs[0]["administrador"]==1) return true;
+        else return false;
+    }
+
     private static function ejecutarActualizacion(string $sql, array $parametros): bool
     {
         if (!isset(self::$pdo)) self::$pdo = self::obtenerPdoConexionBd();
@@ -288,7 +298,6 @@ class DAO
             array_push($peliculas, $pelicula);
         }
 
-
         if ($rs) {
             return $peliculas;
         }else return null;
@@ -316,7 +325,147 @@ class DAO
         return $categoria->getNombre();
     }
 
-    /*---------------------------------Plataforma---------------------------------------*/
+    public static function peliculaInsertar(string $nombre, string $director, string $actores, string $generos, string $plataformas, int $anio, int $puntuacion, string $sinopsis, string $trailer, string $caratula)
+    {
+        //insercción de película
+        self::ejecutarActualizacion("INSERT INTO pelicula (nombre, anio, puntuacion, fechaEntrada, sinopsis, trailer, caratula) VALUES (?, ?, ?, ?, ?, ?, ?);",
+            [$nombre, $anio, $puntuacion, date("y-m-d"), $sinopsis, $trailer, $caratula]);
+        $peliculaInsertada = self::peliculaObtener($nombre);
+        
+        //insercción de director
+        $rs = self::ejecutarConsulta(
+            "SELECT * FROM director WHERE nombre LIKE ?",
+            [$director]
+        );
+        if (!$rs) {
+        self::ejecutarActualizacion("INSERT INTO director (nombre) VALUES (?);",
+            [$director]);
+        }
+        $directorInsertado = self::directorObtenerPorNombre($director);
+        self::ejecutarActualizacion("INSERT INTO directorespeliculas (peliculaId, directorId) VALUES (?, ?);",
+            [$peliculaInsertada->getId(), $directorInsertado->getId()]);
+        
+        //insercción de actores
+        $arrayActores = explode(",", $actores);    
+        for($i = 0; $i < count($arrayActores); $i++){
+            $rs = self::ejecutarConsulta(
+                "SELECT * FROM actor WHERE nombre LIKE ?",
+                [$arrayActores[$i]]
+            );
+            if (!$rs) {
+                self::ejecutarActualizacion("INSERT INTO actor (nombre) VALUES (?);",
+                    [$arrayActores[$i]]);
+            }
+        }
+        $actoresInsertados = array();
+        for($i = 0; $i < count($arrayActores); $i++){
+            $actorInsertado = self::actorObtenerPorNombre($arrayActores[$i]);
+            array_push($actoresInsertados, $actorInsertado);
+        }
+        for($i = 0; $i < count($actoresInsertados); $i++){
+            self::ejecutarActualizacion("INSERT INTO actorespeliculas (peliculaId, actorId) VALUES (?, ?);",
+                [$peliculaInsertada->getId(), $actoresInsertados[$i]->getId()]); 
+        }
+
+        //insercción de géneros
+        $arrayGeneros = explode(",", $generos);    
+        /*for($i = 0; $i < count($arrayGeneros); $i++){
+            self::ejecutarActualizacion("INSERT INTO genero (nombre) VALUES (?);",
+                [$arrayGeneros[$i]]);
+        }*/
+        $generosInsertados = array();
+        for($i = 0; $i < count($arrayGeneros); $i++){
+            $generoInsertado = self::generoObtenerPorNombre($arrayGeneros[$i]);
+            array_push($generosInsertados, $generoInsertado);
+        }
+        for($i = 0; $i < count($generosInsertados); $i++){
+            self::ejecutarActualizacion("INSERT INTO generospeliculas (peliculaId, generoId) VALUES (?, ?);",
+                [$peliculaInsertada->getId(), $generosInsertados[$i]->getId()]); 
+        }
+
+        //insercción de plataformas
+        $arrayPlataformas = explode(",", $plataformas);    
+        /*for($i = 0; $i < count($arrayPlataformas); $i++){
+            self::ejecutarActualizacion("INSERT INTO plataforma (nombre) VALUES (?);",
+                [$arrayPlataformas[$i]]);
+        }*/
+        $plataformasInsertados = array();
+        for($i = 0; $i < count($arrayPlataformas); $i++){
+            $plataformaInsertado = self::plataformaObtenerPorNombre($arrayPlataformas[$i]);
+            array_push($plataformasInsertados, $plataformaInsertado);
+        }
+        for($i = 0; $i < count($plataformasInsertados); $i++){
+            self::ejecutarActualizacion("INSERT INTO plataformaspeliculas (peliculaId, plataformaId) VALUES (?, ?);",
+                [$peliculaInsertada->getId(), $plataformasInsertados[$i]->getId()]); 
+        }
+       
+    }
+
+/*---------------------------------GENERO---------------------------------------*/
+
+public static function generoObtenerPorId(int $id): ?Genero
+{
+    $rs = self::ejecutarConsulta(
+        "SELECT * FROM genero WHERE id=?",
+        [$id]
+    );
+    if ($rs) return self::generoCrearDesdeRs($rs[0]);
+    else return null;
+}
+
+private static function generoCrearDesdeRS(array $genero): Genero
+{
+    return new Genero($genero["id"], $genero["nombre"]);
+}
+
+public static function generoObtener(string $nombre): ?Genero
+{
+    $rs = self::ejecutarConsulta(
+        "SELECT * FROM genero WHERE nombre=?",
+        [$nombre]
+    );
+    if ($rs) return self::generoCrearDesdeRS($rs[0]);
+    else return null;
+}
+
+public static function generoObtenerPorNombre(string $nombre): ?Genero
+    {
+        $rs = self::ejecutarConsulta(
+            "SELECT * FROM genero WHERE nombre LIKE ?",
+            [$nombre]
+        );
+        if ($rs) return self::generoCrearDesdeRS($rs[0]);
+        else return null;
+    }
+
+public static function generoObtenerPorPeliculaId(int $id): ?array
+{
+
+    $generos = [];
+
+    $rs = self::ejecutarConsulta(
+        "SELECT genero.* FROM genero 
+        INNER JOIN generospeliculas ON genero.id = generospeliculas.generoId 
+        LEFT JOIN pelicula ON generospeliculas.peliculaId = pelicula.id 
+        WHERE pelicula.id = ?",
+        [$id]
+    );
+
+    foreach ($rs as $fila) {
+        $genero = self::generoCrearDesdeRS($fila);
+        array_push($generos, $genero);
+    }
+
+
+    if ($rs) {
+        return $generos;
+    } else {
+        return null;
+    }
+}
+
+
+    /*---------------------------------PLATAFORMA---------------------------------------*/
 
     public static function plataformaObtenerPorId(int $id): ?Plataforma
     {
@@ -342,6 +491,43 @@ class DAO
         if ($rs) return self::plataformaCrearDesdeRS($rs[0]);
         else return null;
     }
+
+    public static function plataformaObtenerPorNombre(string $nombre): ?Plataforma
+    {
+        $rs = self::ejecutarConsulta(
+            "SELECT * FROM plataforma WHERE nombre LIKE ?",
+            [$nombre]
+        );
+        if ($rs) return self::plataformaCrearDesdeRS($rs[0]);
+        else return null;
+    }
+
+    public static function plataformaObtenerPorPeliculaId(int $id): ?array
+    {
+
+        $plataformas = [];
+
+        $rs = self::ejecutarConsulta(
+            "SELECT plataforma.* FROM plataforma 
+            INNER JOIN plataformaspeliculas ON plataforma.id = plataformaspeliculas.plataformaId 
+            LEFT JOIN pelicula ON plataformaspeliculas.peliculaId = pelicula.id 
+            WHERE pelicula.id = ?",
+            [$id]
+        );
+
+        foreach ($rs as $fila) {
+            $plataforma = self::plataformaCrearDesdeRS($fila);
+            array_push($plataformas, $plataforma);
+        }
+
+
+        if ($rs) {
+            return $plataformas;
+        } else {
+            return null;
+        }
+    }
+
 
     /*----------------------------LISTA-------------------------------*/
 
@@ -591,6 +777,16 @@ class DAO
         else return null;
     }
 
+    public static function directorObtenerPorNombre(string $nombre): ?Director
+    {
+        $rs = self::ejecutarConsulta(
+            "SELECT * FROM director WHERE nombre LIKE ?",
+            [$nombre]
+        );
+        if ($rs) return self::directorCrearDesdeRS($rs[0]);
+        else return null;
+    }
+
     private static function directorCrearDesdeRS(array $director): Director
     {
         return new Director($director["id"], $director["nombre"]);
@@ -613,7 +809,6 @@ class DAO
             array_push($directores, $director);
         }
 
-
         if ($rs) {
             return $directores;
         } else {
@@ -634,6 +829,16 @@ public static function actorObtenerPorId(int $id): ?Actor
     if ($rs) return self::actorCrearDesdeRs($rs[0]);
     else return null;
 }
+
+public static function actorObtenerPorNombre(string $nombre): ?Actor
+    {
+        $rs = self::ejecutarConsulta(
+            "SELECT * FROM actor WHERE nombre LIKE ?",
+            [$nombre]
+        );
+        if ($rs) return self::actorCrearDesdeRS($rs[0]);
+        else return null;
+    }
 
 private static function actorCrearDesdeRS(array $actor): Actor
 {
@@ -658,7 +863,6 @@ public static function actorObtenerPorPeliculaId(int $id): ?array
         array_push($actores, $actor);
     }
 
-
     if ($rs) {
         return $actores;
     } else {
@@ -679,7 +883,7 @@ public static function comentariosObtener(int $id): ?array
     $comentarios = [];
 
     $rs = self::ejecutarConsulta(
-        "SELECT * FROM comentario WHERE peliculaId = ? ORDER BY fechaPublicacion DESC",
+        "SELECT * FROM comentario WHERE peliculaId = ? ORDER BY fechaPublicacion ASC",
         [$id]
     );
 
@@ -708,11 +912,11 @@ public static function comentarioObtenerInsertado(): ?Comentario
 
 
 
-public static function insertarComentario(string $mensaje, int $peliculaId, int $usuarioId): boolean
+public static function insertarComentario(string $mensaje, int $peliculaId, int $usuarioId): bool
 {
     if ($mensaje != "")
         self::ejecutarActualizacion("INSERT INTO comentario (mensaje, fechaPublicacion, peliculaId, usuarioId) VALUES (?, ?, ?, ?);",
-            [$mensaje, date("y-m-d"), $peliculaId, $usuarioId]);
+            [$mensaje, date("Y-m-d H:i:s"), $peliculaId, $usuarioId]);
       
 }
 

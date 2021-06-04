@@ -56,6 +56,8 @@ function crearPagina() {
     obtenerInfoPelicula(idPelicula);
     obtenerInfoDirector(idPelicula);
     obtenerInfoActor(idPelicula);
+    obtenerInfoGenero(idPelicula);
+    obtenerInfoPlataforma(idPelicula);
     obtenerComentarios(idPelicula);
 } 
 
@@ -96,6 +98,36 @@ function obtenerInfoActor(idPelicula) {
 
             for(var i=0; i<actores.length; i++) {
                 crearActor(actores[i]);
+            }     
+    },
+    function(texto) {
+ 
+    }
+    );
+}
+
+function obtenerInfoGenero(idPelicula) {
+    llamadaAjax("../ObtenerInfoGenero.php", "id=" + parseInt(idPelicula),
+    function(texto) {
+            var generos = JSON.parse(texto);
+
+            for(var i=0; i<generos.length; i++) {
+                crearGenero(generos[i]);
+            }     
+    },
+    function(texto) {
+ 
+    }
+    );
+}
+
+function obtenerInfoPlataforma(idPelicula) {
+    llamadaAjax("../ObtenerInfoPlataforma.php", "id=" + parseInt(idPelicula),
+    function(texto) {
+            var plataformas = JSON.parse(texto);
+
+            for(var i=0; i<plataformas.length; i++) {
+                crearPlataforma(plataformas[i]);
             }     
     },
     function(texto) {
@@ -184,6 +216,26 @@ function crearActor(infoActor) {
     nombre.setAttribute("target", "_blank");
     
     document.getElementById("infoActor").appendChild(nombre);
+}
+
+function crearGenero(infoGenero) {
+    var nombre = document.createElement("p");
+    nombre.innerHTML = infoGenero.nombre+" ";
+    nombre.setAttribute("font-weight", "bold");
+    nombre.setAttribute("href", "#");
+    nombre.setAttribute("target", "_blank");
+    
+    document.getElementById("infoGenero").appendChild(nombre);
+}
+
+function crearPlataforma(infoPlataforma) {
+    var nombre = document.createElement("p");
+    nombre.innerHTML = infoPlataforma.nombre+" ";
+    nombre.setAttribute("font-weight", "bold");
+    nombre.setAttribute("href", infoPlataforma.nombre);
+    nombre.setAttribute("target", "_blank");
+    
+    document.getElementById("infoPlataforma").appendChild(nombre);
 }
 
 function obtenerUsuarioComentario(comentario) {

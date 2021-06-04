@@ -5,7 +5,6 @@ window.onpaint =  crearCarruselNovedades();
 window.onload = function() {
     document.getElementById("abreModal").addEventListener("click", crearBotonesInicio);
     document.getElementById("descubrenos").addEventListener("click", crearBotonesInicio);
-    //crearAlertaCredencialesErroneas(); //hay que ejecutarla cuando las credenciales sean erróneas al iniciar sesión
 }
 
 function importarScript(nombre) {
@@ -77,7 +76,6 @@ function crearBotonesInicio() {
 
         crearBtnAtras();
 
-        
         var pUsuario = document.createElement("p");
         pUsuario.innerHTML = "Usuario: ";
 
@@ -131,12 +129,12 @@ function crearBotonesInicio() {
 
     function ajaxIniciarSesion(inputId, contrasenna, recuerdame){
         
-            llamadaAjax("../IniciarSesionAJAX.php", "identificador="+inputId.value+"&contrasenna="+contrasenna.value+"&recuerdame="+recuerdame.checked,
+        llamadaAjax("../IniciarSesionAJAX.php", "identificador="+inputId.value+"&contrasenna="+contrasenna.value+"&recuerdame="+recuerdame.checked,
             function(texto) {
                 var exito = JSON.parse(texto);
 
                 if(!exito){
-                    crearAlertaCredencialesErroneas()
+                    crearAlertaCredencialesErroneas();
                 }else{
                     window.location= "PaginaPrincipal.html";
                 }
