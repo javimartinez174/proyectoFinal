@@ -93,7 +93,7 @@ function domCrearPelis(pelicula) {
     divFlip.setAttribute("class", "flip");
     divFlop = document.createElement("div");
     divFlop.setAttribute("class", "flop");
-    divCube.addEventListener("click", redireccionarPelicula);
+    //divCube.addEventListener("click", redireccionarPelicula);
 
     imgCaratula = document.createElement("img");
     imgCaratula.setAttribute("id", "imgNovedades");
@@ -102,27 +102,103 @@ function domCrearPelis(pelicula) {
     imgCaratula.setAttribute("width", "270px");
     imgCaratula.setAttribute("height", "400px");
 
-    var titulo = document.createElement("p");
-    titulo.innerHTML = pelicula.nombre;
-    divFlop.appendChild(titulo);
+    //diseño FLOP
+    /*
+    <div class="peliculaCard card">
+        <div class="wrapper">
+          <div class="header">
+            <div class="date">
+              <span class="day">12</span>
+              <span class="month">Aug</span>
+              <span class="year">2016</span>
+            </div>
+            <ul class="menu-content">
+              <li>
+                <a href="#" class="fa fa-bookmark-o"></a>
+              </li>
+              <li><a href="#" class="fa fa-heart-o"><span>18</span></a></li>
+              <li><a href="#" class="fa fa-comment-o"><span>3</span></a></li>
+            </ul>
+          </div>
+          <div class="data">
+            <div class="content">
+              <span class="author">Jane Doe</span>
+              <h1 class="title"><a href="#">Stranger Things: The sound of the Upside Down</a></h1>
+              <p class="text">The antsy bingers of Netflix will eagerly anticipate the digital release of the Survive soundtrack, out today.</p>
+              <a href="#" class="button">Read more</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      */
 
-    sp = document.createElement("br");
-    divFlop.appendChild(sp);
+      var divRow = document.createElement("div");
+      divRow.setAttribute("class", "row");
+      var div1 = document.createElement("div");
+      div1.setAttribute("class", "peliculaCard card");
+      var divWrapper = document.createElement("div");
+      divWrapper.setAttribute("class", "wrapper");
+      //header
+      var divHeader = document.createElement("div");
+      divHeader.setAttribute("class", "header");
+      var divDate = document.createElement("div");
+      divDate.setAttribute("class", "date");
+      var spanDate = document.createElement("span");
+      spanDate.setAttribute("class", "year");
+      spanDate.innerHTML = pelicula.anio;
+      divDate.appendChild(spanDate);
+      var ulIconos = document.createElement("ul");
+      ulIconos.setAttribute("class", "menu-content");
+      var liCorazon = document.createElement("li");
+      var aCorazon = document.createElement("a");
+      aCorazon.setAttribute("href", "#");
+      aCorazon.setAttribute("class", "fas fa-heart-o");
+      /*aCorazon.setAttribute("data-toggle", "tooltip");
+      aCorazon.setAttribute("title", "Añadir "+ pelicula.nombre + " a Favoritos");
+      aCorazon.setAttribute("data-placement", "top");*/
+      aCorazon.addEventListener("click", function(){
+          aniadirAListaFavoritosAJAX(pelicula.id);
+      })
+      var spanA = document.createElement("span");
     
-    var anio = document.createElement("p");
-    anio.innerHTML = "Año de estreno: "+pelicula.anio;
-    divFlop.appendChild(anio);
+      aCorazon.appendChild(spanA);
+      liCorazon.appendChild(aCorazon);
+      ulIconos.appendChild(liCorazon);
+      divHeader.appendChild(divDate);
+      divHeader.appendChild(ulIconos);
+      //data
+      var divData = document.createElement("div");
+      divData.setAttribute("class", "data");
+      var divContent = document.createElement("div");
+      divContent.setAttribute("class", "content");
+      var spanPuntuacion = document.createElement("span");
+      spanPuntuacion.setAttribute("class", "author");
+      spanPuntuacion.innerHTML = "Valorada con "+pelicula.puntuacion+" puntos en WatchFilm";
+      var h1Titulo = document.createElement("h1");
+      h1Titulo.setAttribute("class", "title");
+      h1Titulo.innerHTML = pelicula.nombre;
+      var pText = document.createElement("p");
+      pText.setAttribute("class", "text");
+      pText.innerHTML = pelicula.sinopsis;
+      var aLeerMas = document.createElement("a");
+      aLeerMas.setAttribute("href", "#");
+      aLeerMas.setAttribute("class", "button");
+      aLeerMas.setAttribute("id", ""+pelicula.id);
+      aLeerMas.addEventListener("click", redireccionarPelicula);
+      aLeerMas.innerHTML = "Leer Más";
 
-    sp = document.createElement("br");
-    divFlop.appendChild(sp);
+      divContent.appendChild(spanPuntuacion);
+      divContent.appendChild(h1Titulo);
+      divContent.appendChild(pText);
+      divContent.appendChild(aLeerMas);
+      divData.appendChild(divContent);
 
-    var puntuacion = document.createElement("p");
-    puntuacion.innerHTML = "Puntuación obtenida: "+pelicula.puntuacion;
-    divFlop.appendChild(puntuacion);
-
-    sp = document.createElement("br");
-    divFlop.appendChild(sp);
-
+      divWrapper.appendChild(divHeader);
+      divWrapper.appendChild(divData);
+      div1.appendChild(divWrapper);
+      divRow.appendChild(div1);
+      divFlop.appendChild(divRow);
+      
     //FALTA genero, director, reparto de actores
 
     var corazon = document.createElement("i");
@@ -134,14 +210,17 @@ function domCrearPelis(pelicula) {
     corazon.addEventListener("click", function(){
         aniadirAListaFavoritosAJAX(pelicula.id);
     })
-    divPelicula = document.createElement("div");
-    divPelicula.appendChild(corazon);
+
+    
+    //cartelera.appendChild(corazon);
 
     divFlip.appendChild(imgCaratula);
     divCube.appendChild(divFlip);
     divCube.appendChild(divFlop);
-    divPelicula.appendChild(divCube);
-    cartelera.appendChild(divPelicula);
+    var divCubeCorazon = document.createElement("div");
+    divCubeCorazon.appendChild(corazon);
+    divCubeCorazon.appendChild(divCube);
+    cartelera.appendChild(divCubeCorazon);
 
     mostrarTooltip();
 }
