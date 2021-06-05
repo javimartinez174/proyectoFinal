@@ -8,13 +8,12 @@ function crearBtnCrearNuevaLista() {
     divInsertPeli = document.createElement("div");
     divInsertPeli.setAttribute("class", "divInsertPeli");
 
-    aNuevaLista = document.createElement("h4");
-    aNuevaLista.setAttribute("class", "nav-link ml-auto");
+    aNuevaLista = document.createElement("button");
     aNuevaLista.setAttribute("id", "abreModal");
     aNuevaLista.setAttribute("data-toggle", "modal");
     aNuevaLista.setAttribute("data-target", "#myModal");
     aNuevaLista.setAttribute("href", "#");
-    aNuevaLista.innerHTML= "Crear nueva lista +";
+    aNuevaLista.innerHTML= "Crear Lista";
 
     divInsertPeli.appendChild(aNuevaLista);
 
@@ -125,6 +124,8 @@ function eliminarLista(listaId){
     function(texto) {
         var exito = JSON.parse(texto);
             if(exito){
+                mensaje = "Lista eliminada con exito";
+                crearAlerta(mensaje);
                 cargarListas();
                 crearBtnCrearNuevaLista();
             }
@@ -174,11 +175,41 @@ function domCrearListas(lista, i){
 function eliminarPelicula(listaId, peliculaId){
     llamadaAjax("../BorrarPeliculaLista.php", "listaId="+parseInt(listaId)+"&peliculaId="+parseInt(peliculaId),
     function(texto) {
+        mensaje = "Pelicula eliminada con exito"
+        crearAlerta(mensaje);
         cargarListas();
     },
     function(texto) {
         alert("algo ha ido mal")
     });
+}
+
+function crearAlerta(mensaje){
+    
+    modal = document.createElement("div");
+    modal.setAttribute("class", "modal");
+    modal.setAttribute("id", "modalAlerta");
+
+    modalDialog = document.createElement("div");
+    modalDialog.setAttribute("class", "modal-dialog modal-dialog-centered modal-sm");
+   
+
+    alerta = document.createElement("div");
+    alerta.setAttribute("class", "alert alert-success");
+    alerta.innerHTML = mensaje;
+
+    btnCerrar = document.createElement("button");
+    btnCerrar.setAttribute("type", "button");
+    btnCerrar.setAttribute("class", "close");
+
+    alerta.appendChild(btnCerrar);
+
+    modalDialog.appendChild(alerta);
+    modal.appendChild(modalDialog);
+
+    document.getElementById("pagina").appendChild(modal);
+
+    $("#modalAlerta").modal("show");
 }
 
 function domCrearPeliculas(pelicula, divPelis, lista){

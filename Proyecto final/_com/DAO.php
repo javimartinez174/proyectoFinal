@@ -608,7 +608,7 @@ public static function generoObtenerPorPeliculaId(int $id): ?array
         return $exito;
     }
 
-    public static function aniadirPeliculaFavoritos(int $idPelicula, int $idUsuario): bool //insertar peliculas en una lista si no están ya incluídas en dicha lsita
+    public static function aniadirPeliculaFavoritos(int $idPelicula, int $idUsuario) //insertar peliculas en una lista si no están ya incluídas en dicha lsita
     {
         $lista = self::ejecutarConsulta("SELECT * FROM lista WHERE nombre='Favoritos' AND usuarioId = ?", [$idUsuario]);
 
@@ -616,6 +616,7 @@ public static function generoObtenerPorPeliculaId(int $id): ?array
         $exito = self::ejecutarActualizacion("INSERT INTO listausuariopeliculas (peliculaId, listaId) SELECT ?, ? 
             WHERE NOT EXISTS(SELECT peliculaId, listaId FROM listausuariopeliculas WHERE peliculaId=? && listaId=?)", 
             [$idPelicula, $idLista, $idPelicula, $idLista]);   
+        return $exito;
     }
 
 

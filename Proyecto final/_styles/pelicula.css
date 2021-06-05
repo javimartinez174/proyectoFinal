@@ -201,3 +201,19 @@ body{
     background-color: #85C9D6;
     height: 30%;
   }
+
+  .modal-open .container{
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+}
+
+#modalAlerta{
+  width: 100%;
+}
+
+.alert{
+  width: max-content;
+}

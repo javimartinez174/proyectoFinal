@@ -179,3 +179,32 @@ body{
         height: auto;
         width: auto;
       }
+
+      #abreModal{
+        border-radius: 5%;
+        border: none;
+        box-shadow: rgba(0,0,0,0.8) 5px 1px 5px;
+      }
+
+      #abreModal:hover{
+        border-radius: 5%;
+        border: none;
+        background-color: #00768d;
+        box-shadow: rgba(0,0,0,0.8) 5px 1px 5px;
+      }
+
+  .modal-open .container{
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+  }
+
+  #modalAlerta{
+    width: 100%;
+}
+
+.alert{
+  width: max-content;
+}

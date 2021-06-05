@@ -147,7 +147,8 @@ function crearBotonesInicio() {
                 var exito = JSON.parse(texto);
 
                 if(!exito){
-                    crearAlertaCredencialesErroneas();
+                    mensaje = "Error! Las credenciales son erroneas";
+                    crearAlerta(mensaje);
                 }else{
                     window.location= "PaginaPrincipal.html";
                 }
@@ -259,7 +260,8 @@ function crearBotonesInicio() {
         var exito = JSON.parse(texto);
 
         if(!exito){
-            crearAlertaContrasennas();
+            mensaje = "Error! El identificador ya está en uso o las contraseñas que ha escrito no coinciden";
+            crearAlerta();
         }else
             window.location= "SesionInicioFormulario.html";
         
@@ -280,14 +282,14 @@ function crearBtnAtras() {
 }
 
 //creación de mennsaje de alerta
-function crearAlertaCredencialesErroneas(){
+function crearAlerta(mensaje){
    
     modal = document.createElement("div");
     modal.setAttribute("class", "modal");
     modal.setAttribute("id", "modalAlerta");
 
     modalDialog = document.createElement("div");
-    modalDialog.setAttribute("class", "modal-dialog modal-dialog-centered");
+    modalDialog.setAttribute("class", "modal-dialog modal-dialog-centered modal-sm");
    
 
     alerta = document.createElement("div");
@@ -308,33 +310,7 @@ function crearAlertaCredencialesErroneas(){
     $("#modalAlerta").modal("show");
 }
 
-function crearAlertaContrasennas(){
 
-    modal = document.createElement("div");
-    modal.setAttribute("class", "modal");
-    modal.setAttribute("id", "modalAlerta");
-
-    modalDialog = document.createElement("div");
-    modalDialog.setAttribute("class", "modal-dialog modal-dialog-centered");
-   
-
-    alerta = document.createElement("div");
-    alerta.setAttribute("class", "alert alert-danger");
-    alerta.innerHTML = "Error, las contraseñas no son iguales o el identificador ya se usa!";
-
-    btnCerrar = document.createElement("button");
-    btnCerrar.setAttribute("type", "button");
-    btnCerrar.setAttribute("class", "close");
-
-    alerta.appendChild(btnCerrar);
-
-    modalDialog.appendChild(alerta);
-    modal.appendChild(modalDialog);
-
-    document.getElementById("pagina").appendChild(modal);
-
-    $("#modalAlerta").modal("show");
-}
 //Sección de Novedades (Carrusel)
 
 function crearCarruselNovedades(){

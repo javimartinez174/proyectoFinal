@@ -75,6 +75,16 @@ button .close {
   border: none;
 }
 
+.modal-open .masthead
+{
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+}
+
+
 .fas {
   size: 24px;
   color: #72c47d;

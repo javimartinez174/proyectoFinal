@@ -46,6 +46,16 @@ nav button{
       box-shadow: #14839A;
 }
 
+.modal-open .container-fluid
+{
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+}
+
+
 ul {
     text-decoration: none;
 }
@@ -178,4 +188,12 @@ button:hover{
     color: red;
     font-size: 1.5em;
     height: 24px;
+}
+
+#modalAlerta{
+    width: 100%;
+}
+
+.alert{
+    width: max-content;
 }

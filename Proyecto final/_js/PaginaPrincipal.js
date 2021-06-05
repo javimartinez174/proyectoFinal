@@ -138,12 +138,39 @@ function mostrarTooltip(){
 function aniadirAListaFavoritosAJAX(peliculaId){
     llamadaAjax("../AniadirAListaFavoritosAJAX.php", "peliculaId="+parseInt(peliculaId),
     function(texto) {
-            alert("Pelicula añadida a favoritos");
+            crearAlertaInsertada();
     },
     function(texto) {
  
     }
     );
+}
+
+function crearAlertaInsertada(){
+    modal = document.createElement("div");
+    modal.setAttribute("class", "modal");
+    modal.setAttribute("id", "modalAlerta");
+
+    modalDialog = document.createElement("div");
+    modalDialog.setAttribute("class", "modal-dialog modal-dialog-centered modal-sm");
+   
+
+    alerta = document.createElement("div");
+    alerta.setAttribute("class", "alert alert-success");
+    alerta.innerHTML = "Pelicula Insertada en Favoritos";
+
+    btnCerrar = document.createElement("button");
+    btnCerrar.setAttribute("type", "button");
+    btnCerrar.setAttribute("class", "close");
+
+    alerta.appendChild(btnCerrar);
+
+    modalDialog.appendChild(alerta);
+    modal.appendChild(modalDialog);
+
+    document.getElementById("pagina").appendChild(modal);
+
+    $("#modalAlerta").modal("show");
 }
 
 function comprobarAdmin() {
