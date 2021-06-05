@@ -134,12 +134,14 @@ function domCrearPelis(pelicula) {
     corazon.addEventListener("click", function(){
         aniadirAListaFavoritosAJAX(pelicula.id);
     })
-    cartelera.appendChild(corazon);
+    divPelicula = document.createElement("div");
+    divPelicula.appendChild(corazon);
 
     divFlip.appendChild(imgCaratula);
     divCube.appendChild(divFlip);
     divCube.appendChild(divFlop);
-    cartelera.appendChild(divCube);
+    divPelicula.appendChild(divCube);
+    cartelera.appendChild(divPelicula);
 
     mostrarTooltip();
 }

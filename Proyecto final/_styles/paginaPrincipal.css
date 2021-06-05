@@ -14,14 +14,10 @@ h4{
     color: #0CC7ED;
 }
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
 nav{
     background-color: #071c22d3;
+    width: 100%;
 }
 
 nav button{
@@ -61,8 +57,7 @@ ul {
 }
 .form-control {
     background-color: #6ef3ff;
-    height: 40px;
-    width: 480px !important;
+    width: 100% !important;
     border: 1px solid #1b2b2f;
 }
 .form-control::placeholder {
@@ -70,34 +65,32 @@ ul {
 }
 .form-control:hover {
     background-color: #8cff92;
-    height: 40px;
     border: 1px solid #1b2b2f;
 }
 .form-control:active {
     background-color: #07e4bf;
-    height: 40px;
     border: 1px solid #0c31ff;
 } 
 .form-control:focus {
     background-color: #07e4bf;
-    height: 40px;
     border: 1px solid #0c31ff;
 } 
 
-.navRightPrincipal {
+.buscar{
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    min-width: 50%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .fas {
-    size: 24px;
+    size: 2em;
     color: #72c47d;
     cursor: pointer;
     line-height: 2;
  }
  .fas:hover {
-   size: 24px;
+   size: 2em;
    color: #00cbf3;
    cursor: pointer;
  }
@@ -128,7 +121,6 @@ button:hover{
     border-radius: 5px;
 }
 .cartelera {
-    margin: 20px;
     display: flex;
     flex-direction: column;
 }

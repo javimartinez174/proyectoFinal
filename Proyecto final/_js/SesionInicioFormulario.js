@@ -13,7 +13,7 @@
     function jQueyCarrusel(){
         $(document).ready(setTimeout(function(){  
             $('.autoplay').slick({
-            slidesToShow: 3,
+            slidesToShow: 4,
             slidesToScroll: 1,
             autoplay: true,
             infinite: true,
@@ -358,8 +358,6 @@ function domCrearCarruselNovedades(pelicula){
     imgCaratula.setAttribute("id", "imgNovedades");
     imgCaratula.setAttribute("class", "imgNovedades");
     imgCaratula.setAttribute("src", "../_img/"+pelicula.caratula);    
-    imgCaratula.setAttribute("width", "270px");
-    imgCaratula.setAttribute("height", "400px");
 
     divPelicula.appendChild(imgCaratula);
     novedades.appendChild(divPelicula);
