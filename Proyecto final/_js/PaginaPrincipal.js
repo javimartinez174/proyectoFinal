@@ -51,6 +51,7 @@ function cargarBusqueda() {
             function(texto) {
                 
                 if ( texto == "" ) { //COMO SI CONTARAS LA LONGITUD DE CADENA
+                    divLimpiarAlerta();
                     mensaje = "OOP...! Parece que no hay ninguna película con esas características";
                     crearAlertaInsertada(mensaje);
                     cargarPelis();
@@ -67,10 +68,12 @@ function cargarBusqueda() {
         
             }
         );
-    }else
+    }else{
+        divLimpiarAlerta();
         mensaje = "No puede hacer una busqueda vacía";
         crearAlertaInsertada(mensaje);
         cargarPelis();
+    }
 }
 
     function divLimpiarCartelera(){
