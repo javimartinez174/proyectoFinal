@@ -118,16 +118,23 @@ class DAO
            [$identificador]
         );
 
-        if(password_verify($contrasennaSimple, $contrasenna_hash[0]["contrasenna"])){
-            $contrasenna = $contrasenna_hash[0]["contrasenna"];
+        if($contrasenna_hash){
+            if(password_verify($contrasennaSimple, $contrasenna_hash[0]["contrasenna"])){
+                $contrasenna = $contrasenna_hash[0]["contrasenna"];
+            }
+     
+            $rs = self::ejecutarConsulta(
+                "SELECT * FROM usuario WHERE identificador=? AND contrasenna =?",
+                [$identificador, $contrasenna]
+            );
+        }else{
+            $rs = false;
         }
-
-        $rs = self::ejecutarConsulta(
-            "SELECT * FROM usuario WHERE identificador=? AND contrasenna =?",
-            [$identificador, $contrasenna]
-        );
-        if ($rs) return self::usuarioCrearDesdeRS($rs[0]);
-        else return null;
+        if ($rs){
+            return self::usuarioCrearDesdeRS($rs[0]);
+        } else {
+            return null;
+        }
     }
 
     public static function borrarCookieRecordar()

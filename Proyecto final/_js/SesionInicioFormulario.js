@@ -5,6 +5,19 @@ window.onpaint =  crearCarruselNovedades();
 window.onload = function() {
     document.getElementById("abreModal").addEventListener("click", crearBotonesInicio);
     document.getElementById("descubrenos").addEventListener("click", crearBotonesInicio);
+    jQueyCarrusel();
+}
+
+function jQueyCarrusel(){
+    $(document).ready(setTimeout(function(){  
+        $('.autoplay').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        infinite: true,
+        autoplaySpeed: 2000,
+        });
+    }), 1000);
 }
 
 function importarScript(nombre) {
@@ -269,37 +282,58 @@ function crearBtnAtras() {
 //creación de mennsaje de alerta
 function crearAlertaCredencialesErroneas(){
    
+    modal = document.createElement("div");
+    modal.setAttribute("class", "modal");
+    modal.setAttribute("id", "modalAlerta");
+
+    modalDialog = document.createElement("div");
+    modalDialog.setAttribute("class", "modal-dialog modal-dialog-centered");
+   
+
     alerta = document.createElement("div");
-    alerta.setAttribute("class", "alert alert-danger alert-dismissible");
-    
+    alerta.setAttribute("class", "alert alert-danger");
+    alerta.innerHTML = "Error, credenciales erróneas";
 
-    cruz= document.createElement("i");
-    cruz.setAttribute("class", "fas fa-times close");
-    cruz.setAttribute("data-dismiss", "alert");
+    btnCerrar = document.createElement("button");
+    btnCerrar.setAttribute("type", "button");
+    btnCerrar.setAttribute("class", "close");
 
-    alerta.appendChild(cruz);
+    alerta.appendChild(btnCerrar);
 
-    msg = document.createElement("p");
-    msg.innerHTML = "Credenciales erroneas";
-    alerta.appendChild(msg);
-    document.getElementById("formulario").appendChild(alerta);
+    modalDialog.appendChild(alerta);
+    modal.appendChild(modalDialog);
+
+    document.getElementById("pagina").appendChild(modal);
+
+    $("#modalAlerta").modal("show");
 }
 
 function crearAlertaContrasennas(){
+
+    modal = document.createElement("div");
+    modal.setAttribute("class", "modal");
+    modal.setAttribute("id", "modalAlerta");
+
+    modalDialog = document.createElement("div");
+    modalDialog.setAttribute("class", "modal-dialog modal-dialog-centered");
+   
+
     alerta = document.createElement("div");
-    alerta.setAttribute("class", "alert alert-danger alert-dismissible");
-    
+    alerta.setAttribute("class", "alert alert-danger");
+    alerta.innerHTML = "Error, las contraseñas no son iguales o el identificador ya se usa!";
 
-    cruz= document.createElement("i");
-    cruz.setAttribute("class", "fas fa-times close");
-    cruz.setAttribute("data-dismiss", "alert");
+    btnCerrar = document.createElement("button");
+    btnCerrar.setAttribute("type", "button");
+    btnCerrar.setAttribute("class", "close");
 
-    alerta.appendChild(cruz);
+    alerta.appendChild(btnCerrar);
 
-    msg = document.createElement("p");
-    msg.innerHTML = "Las contrasennas no coinciden o el Usuario ya está registrado";
-    alerta.appendChild(msg);
-    document.getElementById("formulario").appendChild(alerta);
+    modalDialog.appendChild(alerta);
+    modal.appendChild(modalDialog);
+
+    document.getElementById("pagina").appendChild(modal);
+
+    $("#modalAlerta").modal("show");
 }
 //Sección de Novedades (Carrusel)
 

@@ -375,11 +375,6 @@ class Director extends Dato implements JsonSerializable
             "id" => $this->id,
             "nombre" => $this->nombre,
         ];
-
-        // Esto sería lo mismo:
-        //$array["nombre"] = $this->nombre;
-        //$array["id"] = $this->id;
-        //return $array;
     }
 
     public function getNombre(): string
