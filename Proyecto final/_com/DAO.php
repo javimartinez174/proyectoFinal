@@ -233,8 +233,6 @@ class DAO
         $apellidos = $_REQUEST["apellidos"];
         $email = $_REQUEST["email"];
 
-
-
         if (!isset(self::$pdo)) self::$pdo = self::obtenerPdoConexionBd();
         self::ejecutarActualizacion("UPDATE usuario SET identificador=?,nombre=?,apellidos=?,email=? WHERE identificador=?", [$identificador, $nombre, $apellidos, $email, $identificador]);
     }
@@ -246,6 +244,29 @@ class DAO
 
         if (!isset(self::$pdo)) self::$pdo = self::obtenerPdoConexionBd();
         self::ejecutarActualizacion("UPDATE usuario SET contrasenna=? WHERE identificador=?", [$contrasennaNueva, $identificador]);
+    }
+
+    public static function usuarioModificarIdentificador(string $nuevoIdentificador, string $input): bool
+    {
+        
+        self::ejecutarActualizacion("UPDATE usuario SET ".$input."=? WHERE identificador=?", [$nuevoIdentificador, $_SESSION["identificador"]]);
+        $usuario = self::usuarioObtenerPorId($_SESSION["id"]);
+        switch ($input) {
+            case "identificador":
+                $_SESSION[$input] = $usuario->getIdentificador();
+                break;
+            case "nombre":
+                $_SESSION[$input] = $usuario->getNombre();
+                break;
+            case "apellidos":
+                $_SESSION[$input] = $usuario->getApellidos();
+                break;
+            case "email":
+                $_SESSION[$input] = $usuario->getEmail();
+                break;
+        }
+        
+        return true;
     }
 
 

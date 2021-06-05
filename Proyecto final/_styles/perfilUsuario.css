@@ -104,16 +104,17 @@ body{
     padding-left: 8px;
     display: flex;
     flex-direction: row;
-    border: 1px solid black;
     width: 8em;
     font-weight: bold;
+  }
+  .inputEditIdentificador {
+    display: inline;
   }
   .divNombre {
     margin: 8px;
     padding-left: 8px;
     display: flex;
     flex-direction: row;
-    border: 1px solid black;
     width: 8em;
     font-weight: bold;
   }
@@ -122,7 +123,6 @@ body{
     padding-left: 8px;
     display: flex;
     flex-direction: row;
-    border: 1px solid black;
     width: 8em;
     font-weight: bold;
   }
@@ -131,7 +131,6 @@ body{
     padding-left: 8px;
     display: flex;
     flex-direction: row;
-    border: 1px solid black;
     width: 8em;
     font-weight: bold;
   }
@@ -140,7 +139,6 @@ body{
     padding-left: 8px;
     display: flex;
     flex-direction: row;
-    border: 1px solid black;
     width: 8em;
     font-weight: bold;
   }
@@ -156,7 +154,7 @@ body{
   .divIdentificador2 {
     width: 6em;
   }
-  .divnombre2 {
+  .divNombre2 {
     width: 6em;
   }
   .divApellidos2 {
