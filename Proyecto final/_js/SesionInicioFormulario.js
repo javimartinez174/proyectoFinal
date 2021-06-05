@@ -1,89 +1,99 @@
-window.onpaint =  ajaxComprobarSesionIniciada(); //se ejecuta antes de cargar la página
-window.onpaint =  crearCarruselNovedades();
+    window.onpaint =  ajaxComprobarSesionIniciada(); //se ejecuta antes de cargar la página
+    window.onpaint =  crearCarruselNovedades();
 
 
-window.onload = function() {
-    document.getElementById("abreModal").addEventListener("click", crearBotonesInicio);
-    document.getElementById("descubrenos").addEventListener("click", crearBotonesInicio);
-    jQueyCarrusel();
-}
-
-function jQueyCarrusel(){
-    $(document).ready(setTimeout(function(){  
-        $('.autoplay').slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        infinite: true,
-        autoplaySpeed: 2000,
-        });
-    }), 1000);
-}
-
-function importarScript(nombre) {
-    var s = document.createElement("script");
-    s.src = nombre;
-    document.querySelector("head").appendChild(s);
-}
-
-function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
-    //TODO PARA DEPURACIÓN: alert("Haciendo ajax a " + url + "\nCon parámetros " + parametros);
-
-    var request = new XMLHttpRequest();
-
-    request.open("POST", url);
-    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-    request.onreadystatechange = function() {
-        if (this.readyState == 4 && request.status == 200) {
-            manejadorOK(request.responseText);
-        }
-        if (manejadorError != null && request.readyState == 4 && this.status != 200) {
-            manejadorError(request.responseText);
-        }
-    };
-    
-    request.send(parametros);
-}
-
-function ajaxComprobarSesionIniciada(){
-    llamadaAjax("../SesionIniciada.php", "", 
-    function(texto){
-        var sesionIniciada = JSON.parse(texto);
-        if(sesionIniciada){
-            window.location ="PaginaPrincipal.html";
-        }
-    },  function(texto) {
-        }
-    );
-}
-
-function crearBotonesInicio() {
-
-    //Limpiar modal
-    var formulario = document.getElementById("formulario");
-    while(formulario.firstChild){
-        formulario.removeChild(formulario.lastChild);
+    window.onload = function() {
+        document.getElementById("abreModal").addEventListener("click", crearBotonesInicio);
+        document.getElementById("descubrenos").addEventListener("click", crearBotonesInicio);
+        formulario = document.getElementById("formulario");
+        divAlerta= document.getElementById("alerta");
+        jQueyCarrusel();
     }
 
-    //Crear botones para iniciar sesión o registrarse
-    var btnIniciarSesion = document.createElement("button");
-    btnIniciarSesion.setAttribute("id", "iniciarSesion");
-    btnIniciarSesion.setAttribute("class", "iniciarSesion");
-    btnIniciarSesion.innerHTML = "Iniciar Sesion";
-    document.getElementById("formulario").appendChild(btnIniciarSesion);
-    btnIniciarSesion.addEventListener("click", crearFormularioInicio);
+    function jQueyCarrusel(){
+        $(document).ready(setTimeout(function(){  
+            $('.autoplay').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: true,
+            infinite: true,
+            autoplaySpeed: 2000,
+            });
+        }), 1000);
+    }
 
-    var btnRegistrarse = document.createElement("button");
-    btnRegistrarse.setAttribute("id", "registrarse");
-    btnRegistrarse.setAttribute("class", "registrarse");
-    btnRegistrarse.innerHTML = "Registrarse";
-    document.getElementById("formulario").appendChild(btnRegistrarse);
-    btnRegistrarse.addEventListener("click", crearFormularioRegistrarse)
+    function importarScript(nombre) {
+        var s = document.createElement("script");
+        s.src = nombre;
+        document.querySelector("head").appendChild(s);
+    }
 
+    function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
+        //TODO PARA DEPURACIÓN: alert("Haciendo ajax a " + url + "\nCon parámetros " + parametros);
+
+        var request = new XMLHttpRequest();
+
+        request.open("POST", url);
+        request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        request.onreadystatechange = function() {
+            if (this.readyState == 4 && request.status == 200) {
+                manejadorOK(request.responseText);
+            }
+            if (manejadorError != null && request.readyState == 4 && this.status != 200) {
+                manejadorError(request.responseText);
+            }
+        };
+        
+        request.send(parametros);
+    }
+
+    function ajaxComprobarSesionIniciada(){
+        llamadaAjax("../SesionIniciada.php", "", 
+        function(texto){
+            var sesionIniciada = JSON.parse(texto);
+            if(sesionIniciada){
+                window.location ="PaginaPrincipal.html";
+            }
+        },  function(texto) {
+            }
+        );
+    }
+
+    function crearBotonesInicio() {
+
+        //Limpiar modal
+        divLimpiarFormulario();
+
+        //Crear botones para iniciar sesión o registrarse
+        var btnIniciarSesion = document.createElement("button");
+        btnIniciarSesion.setAttribute("id", "iniciarSesion");
+        btnIniciarSesion.setAttribute("class", "iniciarSesion");
+        btnIniciarSesion.innerHTML = "Iniciar Sesion";
+        document.getElementById("formulario").appendChild(btnIniciarSesion);
+        
+
+        var btnRegistrarse = document.createElement("button");
+        btnRegistrarse.setAttribute("id", "registrarse");
+        btnRegistrarse.setAttribute("class", "registrarse");
+        btnRegistrarse.innerHTML = "Registrarse";
+        document.getElementById("formulario").appendChild(btnRegistrarse);
+        
+
+        btnIniciarSesion.addEventListener("click", function(){
+            crearFormularioInicio(btnIniciarSesion, btnRegistrarse);
+        });
+        btnRegistrarse.addEventListener("click", function(){
+            crearFormularioRegistrarse(btnIniciarSesion, btnRegistrarse);
+        });
+        
+
+    
+        
+    }
 
     //Crear formulario para iniciar sesión con cuenta existente
-    function crearFormularioInicio(){
+    function crearFormularioInicio(btnIniciarSesion, btnRegistrarse){
         document.getElementById("formulario").removeChild(btnIniciarSesion);
         document.getElementById("formulario").removeChild(btnRegistrarse);
 
@@ -139,25 +149,8 @@ function crearBotonesInicio() {
         
     }
 
-
-    function ajaxIniciarSesion(inputId, contrasenna, recuerdame){
-        
-        llamadaAjax("../IniciarSesionAJAX.php", "identificador="+inputId.value+"&contrasenna="+contrasenna.value+"&recuerdame="+recuerdame.checked,
-            function(texto) {
-                var exito = JSON.parse(texto);
-
-                if(!exito){
-                    mensaje = "Error! Las credenciales son erroneas";
-                    crearAlerta(mensaje);
-                }else{
-                    window.location= "PaginaPrincipal.html";
-                }
-                
-            }, function (texto){}
-        );
-    }
-    //Crear formulario para cuenta nueva
-    function crearFormularioRegistrarse(){
+     //Crear formulario para cuenta nueva
+    function crearFormularioRegistrarse(btnIniciarSesion, btnRegistrarse){
         document.getElementById("formulario").removeChild(btnIniciarSesion);
         document.getElementById("formulario").removeChild(btnRegistrarse);
 
@@ -226,9 +219,6 @@ function crearBotonesInicio() {
         contrasenna2.setAttribute("placeholder", "Confirme su contraseña");
         contrasenna2.setAttribute("required", true);
 
-        var saltoLinea = document.createElement("br");
-        var saltoLinea = document.createElement("br");
-
         var registrarme = document.createElement("button");
         registrarme.setAttribute("name", "registrarme");
         registrarme.setAttribute("value", "registrarme");
@@ -251,64 +241,96 @@ function crearBotonesInicio() {
         document.getElementById("formulario").appendChild(contrasenna2);
         document.getElementById("formulario").appendChild(registrarme);
     }
-}
- function ajaxRegistrarNuevoUsuario(nombre, apellidos, identificador, email, contrasenna, contrasenna2){
-    llamadaAjax("../RegistrarUsuarioAjax.php", "nombre="+nombre.value+"&apellidos="+apellidos.value+
-                                                "&identificador="+identificador.value+"&email="+email.value
-                                                +"&contrasenna="+contrasenna.value+"&contrasenna2="+contrasenna2.value,
-    function(texto) {
-        var exito = JSON.parse(texto);
 
-        if(!exito){
-            mensaje = "Error! El identificador ya está en uso o las contraseñas que ha escrito no coinciden";
-            crearAlerta();
-        }else
-            window.location= "SesionInicioFormulario.html";
+    function ajaxIniciarSesion(inputId, contrasenna, recuerdame){
+            
+        llamadaAjax("../IniciarSesionAJAX.php", "identificador="+inputId.value+"&contrasenna="+contrasenna.value+"&recuerdame="+recuerdame.checked,
+            function(texto) {
+                var exito = JSON.parse(texto);
+
+                if(!exito){
+                    divLimpiarAlerta();
+                    mensaje = "Error! Las credenciales son erroneas";
+                    crearAlerta(mensaje);
+                }else{
+                    window.location= "PaginaPrincipal.html";
+                }
+                
+            }, function (texto){}
+        );
+    }
+
+    function divLimpiarFormulario(){
+        while(formulario.firstChild){
+            formulario.removeChild(formulario.lastChild);
+        }
+    }
+
+    function ajaxRegistrarNuevoUsuario(nombre, apellidos, identificador, email, contrasenna, contrasenna2){
+        llamadaAjax("../RegistrarUsuarioAjax.php", "nombre="+nombre.value+"&apellidos="+apellidos.value+
+                                                    "&identificador="+identificador.value+"&email="+email.value
+                                                    +"&contrasenna="+contrasenna.value+"&contrasenna2="+contrasenna2.value,
+            function(texto) {
+                var exito = JSON.parse(texto);
+
+                if(!exito){
+                    divLimpiarAlerta();
+                    mensaje = "Error! Algo ha ido mal. Puede que su identificador ya se esté usando";
+                    crearAlerta(mensaje);
+                }else
+                    window.location= "SesionInicioFormulario.html";
+                
+                
+            }, function (texto){}
+        );
+    }
+
+    //boton para volver atras
+    function crearBtnAtras() {
         
-        
-    }, function (texto){}
-);
- }
-//boton para volver atras
-function crearBtnAtras() {
+        var divAtras = document.createElement("div");
+        divAtras.setAttribute("class", "divAtras");
+        var btnAtras = document.createElement("i");
+        btnAtras.setAttribute("class", "fas fa-angle-left fa-2x"); //fa-2x para size
+        divAtras.appendChild(btnAtras);
+        divAtras.addEventListener("click", crearBotonesInicio);
+        document.getElementById("formulario").appendChild(divAtras);
+    }
+
+    //creación de mennsaje de alerta
+    function crearAlerta(mensaje){
     
-    var divAtras = document.createElement("div");
-    divAtras.setAttribute("class", "divAtras");
-    var btnAtras = document.createElement("i");
-    btnAtras.setAttribute("class", "fas fa-angle-left fa-2x"); //fa-2x para size
-    divAtras.appendChild(btnAtras);
-    divAtras.addEventListener("click", crearBotonesInicio);
-    document.getElementById("formulario").appendChild(divAtras);
-}
+        modal = document.createElement("div");
+        modal.setAttribute("class", "modal");
+        modal.setAttribute("id", "modalAlerta");
 
-//creación de mennsaje de alerta
-function crearAlerta(mensaje){
-   
-    modal = document.createElement("div");
-    modal.setAttribute("class", "modal");
-    modal.setAttribute("id", "modalAlerta");
+        modalDialog = document.createElement("div");
+        modalDialog.setAttribute("class", "modal-dialog modal-dialog-centered modal-sm");
+    
 
-    modalDialog = document.createElement("div");
-    modalDialog.setAttribute("class", "modal-dialog modal-dialog-centered modal-sm");
-   
+        alerta = document.createElement("div");
+        alerta.setAttribute("class", "alert alert-danger");
+        alerta.innerHTML = mensaje;
 
-    alerta = document.createElement("div");
-    alerta.setAttribute("class", "alert alert-danger");
-    alerta.innerHTML = "Error, credenciales erróneas";
+        btnCerrar = document.createElement("button");
+        btnCerrar.setAttribute("type", "button");
+        btnCerrar.setAttribute("class", "close");
 
-    btnCerrar = document.createElement("button");
-    btnCerrar.setAttribute("type", "button");
-    btnCerrar.setAttribute("class", "close");
+        alerta.appendChild(btnCerrar);
 
-    alerta.appendChild(btnCerrar);
+        modalDialog.appendChild(alerta);
+        modal.appendChild(modalDialog);
 
-    modalDialog.appendChild(alerta);
-    modal.appendChild(modalDialog);
+        divAlerta.appendChild(modal);
 
-    document.getElementById("pagina").appendChild(modal);
+        $("#modalAlerta").modal("show");
+    }
 
-    $("#modalAlerta").modal("show");
-}
+    function divLimpiarAlerta(){
+        while(divAlerta.firstChild){
+            divAlerta.removeChild(divAlerta.lastChild);
+        }
+    }
 
 
 //Sección de Novedades (Carrusel)

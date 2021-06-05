@@ -2,6 +2,8 @@ window.onload = function(){
     cargarListas();
     crearBtnCrearNuevaLista();
     cargarBreadcrumbs();
+    divAlerta = document.getElementById("alerta");
+    formulario = document.getElementById("formulario");
 }
 
 function crearBtnCrearNuevaLista() {
@@ -22,10 +24,7 @@ function crearBtnCrearNuevaLista() {
 }
 
 function crearFormularioNuevaLista(){
-    var formulario = document.getElementById("formulario");
-    while(formulario.firstChild){
-        formulario.removeChild(formulario.lastChild);
-    }
+    limpiarDivFormulario();
 
     pNombreLista=document.createElement("p");
     pNombreLista.innerHTML = "Indique el nombre de su nueva lista: ";
@@ -48,6 +47,11 @@ function crearFormularioNuevaLista(){
     formulario.appendChild(nombreListaInput);
     formulario.appendChild(introducir);
 }
+ function limpiarDivFormulario() {
+    while(formulario.firstChild){
+        formulario.removeChild(formulario.lastChild);
+    }
+ }
 
 function ajaxCrearNuevaLista(listaInput){
     llamadaAjax("../CrearNuevaLista.php", "nombreLista="+listaInput.value,
@@ -124,6 +128,7 @@ function eliminarLista(listaId){
     function(texto) {
         var exito = JSON.parse(texto);
             if(exito){
+                limpiarDivAlertas();
                 mensaje = "Lista eliminada con exito";
                 crearAlerta(mensaje);
                 cargarListas();
@@ -135,7 +140,11 @@ function eliminarLista(listaId){
     });
 }
 
-
+function limpiarDivAlertas(){
+    while(divAlerta.firstChild){
+        divAlerta.removeChild(divAlerta.lastChild);
+    }
+}
 function domCrearListas(lista, i){
     nombreLista = document.createElement("div");
     nombreLista.setAttribute("class", "collapsible container");
@@ -175,6 +184,7 @@ function domCrearListas(lista, i){
 function eliminarPelicula(listaId, peliculaId){
     llamadaAjax("../BorrarPeliculaLista.php", "listaId="+parseInt(listaId)+"&peliculaId="+parseInt(peliculaId),
     function(texto) {
+        limpiarDivAlertas();
         mensaje = "Pelicula eliminada con exito"
         crearAlerta(mensaje);
         cargarListas();
@@ -207,7 +217,7 @@ function crearAlerta(mensaje){
     modalDialog.appendChild(alerta);
     modal.appendChild(modalDialog);
 
-    document.getElementById("pagina").appendChild(modal);
+    divAlerta.appendChild(modal);
 
     $("#modalAlerta").modal("show");
 }
@@ -251,6 +261,7 @@ function mostrarTooltip(){
         );   
     });
 }
+
 function limpiarDiv(){
     while(listasUsuario.firstChild){
         listasUsuario.removeChild(listasUsuario.lastChild);

@@ -3,6 +3,7 @@ window.onpaint =  ajaxComprobarSesionIniciada(); //se ejecuta antes de cargar la
 window.onload = function() {
     crearPagina();
     document.getElementById("btnInsertComentario").addEventListener("click", insertarComentario);
+    divAlerta = document.getElementById("alerta");
 }
 
 function importarScript(nombre) {
@@ -320,9 +321,11 @@ function crearPlataforma(infoPlataforma) {
     
             if (selected != '') 
                 ajaxAnnadirALista(selected, idPelicula);  
-            else
-                alert('Debes seleccionar al menos una opción.');
-    
+            else{
+                limpiarDivAlertas();
+                mensaje = "Debes seleccionar al menos una opción";
+                crearAlerta(mensaje);
+            }
             return false;
         });         
     });  
@@ -331,7 +334,9 @@ function crearPlataforma(infoPlataforma) {
  function ajaxAnnadirALista(idListas, idPelicula){
     llamadaAjax("../AnnadirPeliculaALista.php", "listaId=" + idListas +"&idPelicula="+parseInt(idPelicula),
     function(texto) {
-            alert("Pelicula Insertada con exito");
+            limpiarDivAlertas();
+            mensaje = "Pelicula insertada con éxito";
+            crearAlerta(mensaje);
     },
     function(texto) {
  
@@ -349,6 +354,40 @@ function obtenerUsuarioComentario(comentario) {
  
     }
     );
+}
+
+function crearAlerta(mensaje){
+    
+    modal = document.createElement("div");
+    modal.setAttribute("class", "modal");
+    modal.setAttribute("id", "modalAlerta");
+
+    modalDialog = document.createElement("div");
+    modalDialog.setAttribute("class", "modal-dialog modal-dialog-centered modal-sm");
+   
+
+    alerta = document.createElement("div");
+    alerta.setAttribute("class", "alert alert-success");
+    alerta.innerHTML = mensaje;
+
+    btnCerrar = document.createElement("button");
+    btnCerrar.setAttribute("type", "button");
+    btnCerrar.setAttribute("class", "close");
+
+    alerta.appendChild(btnCerrar);
+
+    modalDialog.appendChild(alerta);
+    modal.appendChild(modalDialog);
+
+    divAlerta.appendChild(modal);
+
+    $("#modalAlerta").modal("show");
+}
+
+function limpiarDivAlertas(){
+    while(divAlerta.firstChild){
+        divAlerta.removeChild(divAlerta.lastChild);
+    }
 }
 
 function crearComentario(comentario, usuario) {

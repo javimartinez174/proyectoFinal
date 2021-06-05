@@ -121,12 +121,13 @@ class DAO
         if($contrasenna_hash){
             if(password_verify($contrasennaSimple, $contrasenna_hash[0]["contrasenna"])){
                 $contrasenna = $contrasenna_hash[0]["contrasenna"];
+                $rs = self::ejecutarConsulta(
+                    "SELECT * FROM usuario WHERE identificador=? AND contrasenna =?",
+                    [$identificador, $contrasenna]
+                );
+            }else{
+                $rs = false;
             }
-     
-            $rs = self::ejecutarConsulta(
-                "SELECT * FROM usuario WHERE identificador=? AND contrasenna =?",
-                [$identificador, $contrasenna]
-            );
         }else{
             $rs = false;
         }

@@ -3,6 +3,8 @@ window.onload = function() {
     cargarPelis();
     comprobarAdmin();
     cartelera = document.getElementById("cartelera");
+    formulario = document.getElementById("formulario");
+    alerta = document.getElementById("alerta");
 }
 
 function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
@@ -41,29 +43,43 @@ function cargarPelis() {
 
 function cargarBusqueda() {
 
-    while(cartelera.firstChild){
-        cartelera.removeChild(cartelera.lastChild);
-    }
+    divLimpiarCartelera();
     var busqueda = document.getElementById("busqueda");
 
-    llamadaAjax("../BusquedaAJAX.php", "busqueda=" + busqueda.value,
-    function(texto) {
-        
-        if ( texto == "" ) { //COMO SI CONTARAS LA LONGITUD DE CADENA
-            alert("SIN DATOS!")
-        }else{
-            var peliculas = JSON.parse(texto);
+    if(busqueda.value != ""){
+        llamadaAjax("../BusquedaAJAX.php", "busqueda=" + busqueda.value,
+            function(texto) {
+                
+                if ( texto == "" ) { //COMO SI CONTARAS LA LONGITUD DE CADENA
+                    mensaje = "OOP...! Parece que no hay ninguna película con esas características";
+                    crearAlertaInsertada(mensaje);
+                    cargarPelis();
+                    busqueda.value = "";
+                }else{
+                    var peliculas = JSON.parse(texto);
 
-            for(var i=0; i<peliculas.length; i++) {
-                domCrearPelis(peliculas[i]);
+                    for(var i=0; i<peliculas.length; i++) {
+                        domCrearPelis(peliculas[i]);
+                    }
+                }
+            },
+            function(texto) {
+        
             }
-        }
-    },
-    function(texto) {
- 
-    }
-    );
+        );
+    }else
+        mensaje = "No puede hacer una busqueda vacía";
+        crearAlertaInsertada(mensaje);
+        cargarPelis();
 }
+
+    function divLimpiarCartelera(){
+        while(cartelera.firstChild){
+            cartelera.removeChild(cartelera.lastChild);
+        }
+    }
+
+
 function domCrearPelis(pelicula) {
     
     divCube = document.createElement("div");
@@ -138,7 +154,9 @@ function mostrarTooltip(){
 function aniadirAListaFavoritosAJAX(peliculaId){
     llamadaAjax("../AniadirAListaFavoritosAJAX.php", "peliculaId="+parseInt(peliculaId),
     function(texto) {
-            crearAlertaInsertada();
+            divLimpiarAlerta();
+            mensaje = "Pelicula insertada en favoritos";
+            crearAlertaInsertada(mensaje);
     },
     function(texto) {
  
@@ -146,32 +164,40 @@ function aniadirAListaFavoritosAJAX(peliculaId){
     );
 }
 
-function crearAlertaInsertada(){
-    modal = document.createElement("div");
-    modal.setAttribute("class", "modal");
-    modal.setAttribute("id", "modalAlerta");
+function divLimpiarAlerta(){
+    while(alerta.firstChild){
+        alerta.removeChild(alerta.lastChild);
+    }
+}
+
+function crearAlertaInsertada(mensaje){
+    modalAlerta = document.createElement("div");
+    modalAlerta.setAttribute("class", "modal");
+    modalAlerta.setAttribute("id", "modalAlerta");
 
     modalDialog = document.createElement("div");
     modalDialog.setAttribute("class", "modal-dialog modal-dialog-centered modal-sm");
    
 
-    alerta = document.createElement("div");
-    alerta.setAttribute("class", "alert alert-success");
-    alerta.innerHTML = "Pelicula Insertada en Favoritos";
+    mensajeAlerta = document.createElement("div");
+    mensajeAlerta.setAttribute("class", "alert alert-success");
+    mensajeAlerta.innerHTML = mensaje;
 
     btnCerrar = document.createElement("button");
     btnCerrar.setAttribute("type", "button");
     btnCerrar.setAttribute("class", "close");
 
-    alerta.appendChild(btnCerrar);
+    mensajeAlerta.appendChild(btnCerrar);
 
-    modalDialog.appendChild(alerta);
-    modal.appendChild(modalDialog);
+    modalDialog.appendChild(mensajeAlerta);
+    modalAlerta.appendChild(modalDialog);
 
-    document.getElementById("pagina").appendChild(modal);
+    alerta.appendChild(modalAlerta);
 
     $("#modalAlerta").modal("show");
 }
+
+
 
 function comprobarAdmin() {
     llamadaAjax("../ComprobarAdmin.php", "",
@@ -207,10 +233,7 @@ function crearBtnInsertarPeliculaAdmin() {
 }
 
 function crearFormularioIntroducirPelicula() {
-    var formulario = document.getElementById("formulario");
-    while(formulario.firstChild){
-        formulario.removeChild(formulario.lastChild);
-    }
+    
     var pNombre = document.createElement("p");
     pNombre.innerHTML = "Título: ";
 
@@ -341,6 +364,12 @@ function crearFormularioIntroducirPelicula() {
     document.getElementById("formulario").appendChild(pCaratula);
     document.getElementById("formulario").appendChild(caratula);
     document.getElementById("formulario").appendChild(introducir);   
+}
+
+function divLimpiarFormulario(){
+    while(formulario.firstChild){
+        formulario.removeChild(formulario.lastChild);
+    }
 }
 
 function ajaxIntroducirPelicula(inputNombre, inputDirector, inputActores, inputGeneros, inputPlataformas, anio, puntuacion, sinopsis, trailer, caratula) {
