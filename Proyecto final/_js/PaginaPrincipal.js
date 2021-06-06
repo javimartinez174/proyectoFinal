@@ -5,6 +5,7 @@ window.onload = function() {
     cartelera = document.getElementById("cartelera");
     formulario = document.getElementById("formulario");
     alerta = document.getElementById("alerta");
+    redesSociales();
 }
 
 function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
@@ -142,7 +143,7 @@ function domCrearPelis(pelicula) {
       divContent.setAttribute("class", "content");
       var spanPuntuacion = document.createElement("span");
       spanPuntuacion.setAttribute("class", "author");
-      spanPuntuacion.innerHTML = "Valorada con "+pelicula.puntuacion+" puntos en WatchFilm";
+      spanPuntuacion.innerHTML = "Valorada con "+pelicula.puntuacion+"../img/estrella.png"+" en WatchFilm";
       var h1Titulo = document.createElement("h2");
       h1Titulo.setAttribute("class", "title");
       h1Titulo.innerHTML = pelicula.nombre;
@@ -423,4 +424,27 @@ function ajaxIntroducirPelicula(inputNombre, inputDirector, inputActores, inputG
 
 function redireccionarPelicula(){
     window.location = "Pelicula.html?verinfo="+this.id;
+}
+
+
+//footer redes sociales
+const shareButton = document.getElementsByClassName("shareButton");
+function redesSociales() {
+    shareButton[0].addEventListener("click", (e) => {
+        for( let i=0; i < shareButton.length; i++ ) {
+        shareButton[i].classList.toggle("open")
+        shareButton[0].classList.remove("sent")
+        }
+    })
+
+    for( let i=1; i < shareButton.length; i++ ) {
+    
+    shareButton[i].addEventListener("click", (e) => {
+        
+        for( let i=0; i < shareButton.length; i++ ) {
+            shareButton[i].classList.toggle("open")
+        }
+        shareButton[0].classList.toggle("sent")
+        })
+    }
 }

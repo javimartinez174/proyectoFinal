@@ -44,6 +44,11 @@ function ajaxComprobarSesionIniciada(){
     );
 }
 
+function decirTexto(texto) {
+    let audio = new SpeechSynthesisUtterance();
+    audio.text = texto;
+    speechSynthesis.speak(audio);
+}
 
 var idPelicula; //variable global
 function capturarIdURL() {
@@ -61,6 +66,8 @@ function crearPagina() {
     obtenerInfoPlataforma(idPelicula);
     obtenerComentarios(idPelicula);
 } 
+
+
 
 function obtenerInfoPelicula(idPelicula) {
     
@@ -138,9 +145,6 @@ function obtenerInfoPlataforma(idPelicula) {
 }
 
 function obtenerComentarios(idPelicula) {
-    /*while(document.getElementById("comentarios").firstChild){
-        document.getElementById("comentarios").removeChild(document.getElementById("comentarios").lastChild); //provisional
-    }*/
     llamadaAjax("../ObtenerComentarios.php", "peliculaId=" + parseInt(idPelicula),
     function(texto) {
             var comentarios = JSON.parse(texto);
@@ -179,6 +183,7 @@ function crearPelicula(infoPelicula) {
     var sinopsis = document.createElement("p");
     sinopsis.setAttribute("id", "pSinopsis");
     sinopsis.innerHTML = infoPelicula.sinopsis;
+    document.getElementById("iconoAudio").addEventListener("click", function(){let textoEscuchar = infoPelicula.sinopsis; decirTexto(textoEscuchar)});
 
     var trailer = document.createElement("p");
     trailer.setAttribute("id", "pTrailer");
@@ -190,6 +195,7 @@ function crearPelicula(infoPelicula) {
 
     divContainer1.appendChild(imgCaratula);
     divContainer1.appendChild(sinopsis);
+    
 
 
     var agregarALista = document.createElement("button");
@@ -422,3 +428,4 @@ function insertarComentario() {
     }
     );
 }
+
