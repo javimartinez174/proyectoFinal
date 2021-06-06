@@ -1,3 +1,5 @@
+window.onpaint =  ajaxComprobarSesionIniciada(); //se ejecuta antes de cargar la página
+
 window.onload = function(){
     cargarUsuario();
     infoUsuario = document.getElementById("infoUsuario");
@@ -20,6 +22,18 @@ function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
     };
     
     request.send(parametros);
+}
+
+function ajaxComprobarSesionIniciada(){
+    llamadaAjax("../SesionIniciada.php", "", 
+    function(texto){
+        var sesionIniciada = JSON.parse(texto);
+        if(sesionIniciada){
+            window.location ="PaginaPrincipal.html";
+        }
+    },  function(texto) {
+        }
+    );
 }
 
 function cerrarSesion() {
