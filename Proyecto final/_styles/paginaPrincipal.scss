@@ -37,9 +37,9 @@ a {
   text-decoration: none;
 }
 
-h1 {
+h2{
   font-family: $open-sans;
-  font-weight: 300;
+  font-weight: bold;
 }
 
 .row {
@@ -79,15 +79,10 @@ h1 {
     position: relative;
     overflow: hidden;
     box-shadow: 0 19px 38px rgba($black, 0.3), 0 15px 12px rgba($black, 0.2);
-    &:hover {
-      .data {
-        transform: translateY(0);
-      }
-    }
   }
   .data {
     position: absolute;
-    bottom: 0;
+    bottom: 150px;
     width: 100%;
     transform: translateY(calc(70px + 1em));
     transition: transform 0.3s;
@@ -195,33 +190,79 @@ h1 {
 
 
 
-
-
-
-h2{
-    font-family: sans-serif;
-    color: #0CC7ED;
-}
-
 h4{
     font-family: sans-serif;
     color: #0CC7ED;
 }
 
 .navbar {
-    font-family: sans-serif;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  font-family: sans-serif;
+  background-color: #071c22d3;
+  font-family: sans-serif;
+  justify-content: flex-start; 
 }
 
-nav{
-    font-family: sans-serif;
-    background-color: #071c22d3;
+.logo{
+  max-width: 10%;
 }
+
+.logo img{
+  min-width: 3em;
+  max-width: 3em;
+}
+
+.navbar-nav{
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar-nav li{
+  margin-left: 1.5em;
+}
+
 
 nav button{
     background-color: rgba(4, 155, 255, 0.651);
+}
+
+.buscar{
+  width: 50%;
+}
+.input-group{
+  display: flex;
+  justify-content: center;
+}
+
+
+.form-control {
+  background-color: #6ef3ff;
+  border: 1px solid #1b2b2f;
+}
+.form-control::placeholder {
+    color: black;
+}
+.form-control:hover {
+    background-color: #8cff92;
+    height: 40px;
+    border: 1px solid #1b2b2f;
+}
+.form-control:active {
+    background-color: #07e4bf;
+    height: 40px;
+    border: 1px solid #0c31ff;
+} 
+.form-control:focus {
+    background-color: #07e4bf;
+    height: 40px;
+    border: 1px solid #0c31ff;
+} 
+
+.fas.fa-bars{
+  font-size: 2em;
+  max-width: fit-content;
+  align-self: center;
 }
 
 .modal-dialog{
@@ -252,40 +293,6 @@ nav button{
 }
 
 
-/*ul {
-    text-decoration: none;
-}*/
-.form-control {
-    background-color: #6ef3ff;
-    height: 40px;
-    width: 480px !important;
-    border: 1px solid #1b2b2f;
-}
-.form-control::placeholder {
-    color: black;
-}
-.form-control:hover {
-    background-color: #8cff92;
-    height: 40px;
-    border: 1px solid #1b2b2f;
-}
-.form-control:active {
-    background-color: #07e4bf;
-    height: 40px;
-    border: 1px solid #0c31ff;
-} 
-.form-control:focus {
-    background-color: #07e4bf;
-    height: 40px;
-    border: 1px solid #0c31ff;
-} 
-
-.navRightPrincipal {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-}
-
 .fas {
     size: 24px;
     color: #72c47d;
@@ -298,19 +305,10 @@ nav button{
    cursor: pointer;
  }
 
-/*a{
-    font-family: sans-serif;
-    text-decoration: none;
-    color: #14839A;
-}*/
+
 a:hover{
     color: #00cbf3;
 }
-
-/*p{
-    font-family: sans-serif;
-    color: #000000;
-}*/
 
 button{
     background-color: #0CC7ED;
@@ -326,20 +324,30 @@ button:hover{
     border-radius: 5px;
 }
 .cartelera {
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
+  padding: 3%;
+  max-width: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
+
 .cube {
-    margin: 20px !important;
-    width: 270px;
-    height: 400px;
-    text-align: left;
-    margin: 0 auto;
-    -webkit-transition: -webkit-transform .33s;
-    transition: transform .33s;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
+  margin: 20px !important;
+  width: 270px;
+  max-width: fit-content;
+  height: 400px;
+  text-align: left;
+  margin: 0 auto;
+  -webkit-transition: -webkit-transform .33s;
+  transition: -webkit-transform .33s;
+  transition: transform .33s;
+  transition: transform .33s, -webkit-transform .33s;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 .cube .flip,
 .cube .flop {

@@ -102,36 +102,6 @@ function domCrearPelis(pelicula) {
     imgCaratula.setAttribute("width", "270px");
     imgCaratula.setAttribute("height", "400px");
 
-    //diseño FLOP
-    /*
-    <div class="peliculaCard card">
-        <div class="wrapper">
-          <div class="header">
-            <div class="date">
-              <span class="day">12</span>
-              <span class="month">Aug</span>
-              <span class="year">2016</span>
-            </div>
-            <ul class="menu-content">
-              <li>
-                <a href="#" class="fa fa-bookmark-o"></a>
-              </li>
-              <li><a href="#" class="fa fa-heart-o"><span>18</span></a></li>
-              <li><a href="#" class="fa fa-comment-o"><span>3</span></a></li>
-            </ul>
-          </div>
-          <div class="data">
-            <div class="content">
-              <span class="author">Jane Doe</span>
-              <h1 class="title"><a href="#">Stranger Things: The sound of the Upside Down</a></h1>
-              <p class="text">The antsy bingers of Netflix will eagerly anticipate the digital release of the Survive soundtrack, out today.</p>
-              <a href="#" class="button">Read more</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      */
-
       var divRow = document.createElement("div");
       divRow.setAttribute("class", "row");
       var div1 = document.createElement("div");
@@ -150,18 +120,17 @@ function domCrearPelis(pelicula) {
       var ulIconos = document.createElement("ul");
       ulIconos.setAttribute("class", "menu-content");
       var liCorazon = document.createElement("li");
-      var aCorazon = document.createElement("a");
+      var aCorazon = document.createElement("i");
       aCorazon.setAttribute("href", "#");
-      aCorazon.setAttribute("class", "fas fa-heart-o");
-      /*aCorazon.setAttribute("data-toggle", "tooltip");
+      aCorazon.setAttribute("class", "fas fa-heart");
+      aCorazon.setAttribute("id", "corazon");
+      aCorazon.setAttribute("data-toggle", "tooltip");
       aCorazon.setAttribute("title", "Añadir "+ pelicula.nombre + " a Favoritos");
-      aCorazon.setAttribute("data-placement", "top");*/
+      aCorazon.setAttribute("data-placement", "top");
       aCorazon.addEventListener("click", function(){
           aniadirAListaFavoritosAJAX(pelicula.id);
       })
-      var spanA = document.createElement("span");
-    
-      aCorazon.appendChild(spanA);
+      
       liCorazon.appendChild(aCorazon);
       ulIconos.appendChild(liCorazon);
       divHeader.appendChild(divDate);
@@ -174,7 +143,7 @@ function domCrearPelis(pelicula) {
       var spanPuntuacion = document.createElement("span");
       spanPuntuacion.setAttribute("class", "author");
       spanPuntuacion.innerHTML = "Valorada con "+pelicula.puntuacion+" puntos en WatchFilm";
-      var h1Titulo = document.createElement("h1");
+      var h1Titulo = document.createElement("h2");
       h1Titulo.setAttribute("class", "title");
       h1Titulo.innerHTML = pelicula.nombre;
       var pText = document.createElement("p");
@@ -201,26 +170,13 @@ function domCrearPelis(pelicula) {
       
     //FALTA genero, director, reparto de actores
 
-    var corazon = document.createElement("i");
-    corazon.setAttribute("class", "fas fa-heart");
-    corazon.setAttribute("id", "corazon");
-    corazon.setAttribute("data-toggle", "tooltip");
-    corazon.setAttribute("title", "Añadir "+ pelicula.nombre + " a Favoritos");
-    corazon.setAttribute("data-placement", "top");
-    corazon.addEventListener("click", function(){
-        aniadirAListaFavoritosAJAX(pelicula.id);
-    })
-
-    
     //cartelera.appendChild(corazon);
 
     divFlip.appendChild(imgCaratula);
     divCube.appendChild(divFlip);
     divCube.appendChild(divFlop);
-    var divCubeCorazon = document.createElement("div");
-    divCubeCorazon.appendChild(corazon);
-    divCubeCorazon.appendChild(divCube);
-    cartelera.appendChild(divCubeCorazon);
+   
+    cartelera.appendChild(divCube);
 
     mostrarTooltip();
 }

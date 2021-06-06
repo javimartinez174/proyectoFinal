@@ -1,12 +1,12 @@
 window.onload = function(){
     cargarListas();
-    crearBtnCrearNuevaLista();
     cargarBreadcrumbs();
     divAlerta = document.getElementById("alerta");
     formulario = document.getElementById("formulario");
 }
 
 function crearBtnCrearNuevaLista() {
+    limpiarDiv();
     divInsertPeli = document.createElement("div");
     divInsertPeli.setAttribute("class", "divInsertPeli");
 
@@ -91,6 +91,7 @@ function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
 
 function cargarListas() {
     limpiarDiv();
+    crearBtnCrearNuevaLista();
     llamadaAjax("../ObtenerListasUsuario.php", "",
     function(texto) {
         
