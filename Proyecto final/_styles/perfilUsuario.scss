@@ -28,11 +28,10 @@ body{
   font-family: $open-sans;
   }
   
-  h2 {
+  h3 {
     color: $azulOscuro;
     font-weight: normal;
-    font-size: 35px;
-    font-family: Arial;
+    font-family: Audiowide;
     text-transform: uppercase;
   }
   
@@ -112,29 +111,45 @@ body{
 
   .inicioPerfil {
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 20%;
   }
 
+  .inicioPerfil button {
+    margin-left: 10%;
+    background-color: transparent;
+    border: 1px solid transparent;
+    height: 48px;
+    color: $azulClaro;
+  }
 
   .fotoPerfil{
-    margin: 40px;
-    width: 10em;
-    height: 10em;
+    margin-left: 10em;
+    margin-top: 5%;
+    max-width: 10em;
+    max-height: 10em;
     border: 1px solid transparent;
     border-radius: 100%;
     box-shadow: -4px -4px 20px 10px rgb(235, 248, 49);
   }
 
+  .divImg {
+    max-width: 20%;
+  }
   .formCambiarImg {
-    margin: 40px;
-    display: flex;
-    flex-direction: row;
+    margin: 10%;
+    background-color: $azulClaro;
   }
 
   .jumbotron {
     margin: 40px;
     padding: 0px;
     display: flex;
-
+    border-radius: 5em;
   }
   .contenedor1 {
     padding: 10%;
@@ -142,14 +157,14 @@ body{
     width: 100%;
     display: flex;
     flex-direction: column;
+    border-radius: 5em;
   }
   .contenedor1 h2 {
     width: 100%;
   }
   .contenedor2 {
-    
     background-color: $azulClaro;
-    width: 100%;
+    max-width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -161,12 +176,13 @@ body{
     display: flex;
     flex-direction: column;
     border: 60px solid transparent;
-    border-image: url("../_img/bordeCinta.png") 50 45;
+    
     border-radius: 20%;
   }
   .imgToyStory {
     margin-left: 20%;
     padding-bottom: 1em;
+    max-width:20em; 
     border-bottom: 1px solid black;
   }
   h4 {
@@ -182,45 +198,35 @@ body{
     margin-left: 20%;
     display: flex;
     flex-direction: row;
-    width: 25em;
+    max-width: 25em;
     font-weight: bold;
   }
-  #iconoVer {
-    position: relative;
-    right: 116px;
-  }
+
   #iconoEdit {
-    font-size: 24px;
-    margin-left: 240px;
+    font-size: 1.5em;
+    margin-left: 9em;
   }
 
   .divIdentificador2 {
-    width: 6em;
+    max-width: 8em;
   }
   .divNombre2 {
-    width: 6em;
+    max-width: 8em;
   }
   .divApellidos2 {
-    width: 6em;
+    max-width: 8em;
   }
   .divEmail2 {
-    width: 6em;
+    max-width: 8em;
   }
   .divContrasenna2 {
-    width: 6em;
+    max-width: 8em;
   }
   .inputEdit, .inputEdit2 {
     margin: 1%;
     border: 1px solid black;
   }
   
-  
-  /*.remove-bg {
-    filter: brightness(1.1);
-    mix-blend-mode: multiply;
-  }*/
-
-
 
   /*setup*/
 *{
@@ -296,63 +302,35 @@ body{
 }
 
 p a{
-  font-size:1.5em;
-  color:#228DFF;
-  font-family:Pacifico;
+  font-size:3em;
+  color:#ffffff;
+  font-family:Audiowide;
   -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
   -moz-animation: neon2 1.5s ease-in-out infinite alternate;
   animation: neon2 1.5s ease-in-out infinite alternate;
 }
 
 p a:hover{
-  color:#ffffff;  
+  color:#98e2ff;  
 }
 
 
 @-webkit-keyframes neon2 {
   from {
-    text-shadow: 0 0 10px #fff,
-               0 0 20px  #fff,
-               0 0 30px  #fff,
-               0 0 40px  #228DFF,
-               0 0 70px  #228DFF,
-               0 0 80px  #228DFF,
-               0 0 100px #228DFF,
-               0 0 150px #228DFF;
+    text-shadow: 0 0 5px #0099ff, 0 0 15px #0099ff, 0 0 20px #0099ff, 0 0 40px #28a9ff, 0 0 60px #0011ff, 0 0 10px #0011ff, 0 0 98px #0011ff;
   }
   to {
-    text-shadow: 0 0 5px #fff,
-               0 0 10px #fff,
-               0 0 15px #fff,
-               0 0 20px #228DFF,
-               0 0 35px #228DFF,
-               0 0 40px #228DFF,
-               0 0 50px #228DFF,
-               0 0 75px #228DFF;
+    text-shadow: 0 0 5px #0099ff, 0 0 15px #0099ff, 0 0 20px #0099ff, 0 0 40px #28a9ff, 0 0 60px #0011ff, 0 0 10px #0011ff, 0 0 98px #0011ff;
   }
 }
 
 
 @-moz-keyframes neon2 {
   from {
-    text-shadow: 0 0 10px #fff,
-               0 0 20px  #fff,
-               0 0 30px  #fff,
-               0 0 40px  #228DFF,
-               0 0 70px  #228DFF,
-               0 0 80px  #228DFF,
-               0 0 100px #228DFF,
-               0 0 150px #228DFF;
+    text-shadow: 0 0 5px #0099ff, 0 0 15px #0099ff, 0 0 20px #0099ff, 0 0 40px #28a9ff, 0 0 60px #0011ff, 0 0 10px #0011ff, 0 0 98px #0011ff;
   }
   to {
-    text-shadow: 0 0 5px #fff,
-               0 0 10px #fff,
-               0 0 15px #fff,
-               0 0 20px #228DFF,
-               0 0 35px #228DFF,
-               0 0 40px #228DFF,
-               0 0 50px #228DFF,
-               0 0 75px #228DFF;
+    text-shadow: 0 0 5px #0099ff, 0 0 15px #0099ff, 0 0 20px #0099ff, 0 0 40px #28a9ff, 0 0 60px #0011ff, 0 0 10px #0011ff, 0 0 98px #0011ff;
   }
 }
 
@@ -360,27 +338,12 @@ p a:hover{
 
 @keyframes neon2 {
   from {
-    text-shadow: 0 0 10px #fff,
-               0 0 20px  #fff,
-               0 0 30px  #fff,
-               0 0 40px  #228DFF,
-               0 0 70px  #228DFF,
-               0 0 80px  #228DFF,
-               0 0 100px #228DFF,
-               0 0 150px #228DFF;
+    text-shadow: 0 0 5px #0099ff, 0 0 15px #0099ff, 0 0 20px #0099ff, 0 0 40px #28a9ff, 0 0 60px #0011ff, 0 0 10px #0011ff, 0 0 98px #0011ff;
   }
   to {
-    text-shadow: 0 0 5px #fff,
-               0 0 10px #fff,
-               0 0 15px #fff,
-               0 0 20px #228DFF,
-               0 0 35px #228DFF,
-               0 0 40px #228DFF,
-               0 0 50px #228DFF,
-               0 0 75px #228DFF;
+    text-shadow: 0 0 5px #0099ff, 0 0 15px #0099ff, 0 0 20px #0099ff, 0 0 40px #28a9ff, 0 0 60px #0011ff, 0 0 10px #0011ff, 0 0 98px #0011ff;
   }
 }
-
 
 
 
@@ -388,11 +351,15 @@ p a:hover{
 @media (max-width: 650px) {
   
   #container{
-    width: 100%;
+    max-width: 5em;
   }
   
   #container p{
-    font-size:3.5em;
+    font-size: 1em;
+  }
+
+  .imgToyStory {
+    max-width: 8em;
   }
 
 }

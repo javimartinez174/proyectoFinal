@@ -165,7 +165,17 @@ function domCrearPerfil(usuario){
     var imagenPerfil = document.createElement("img");
     imagenPerfil.setAttribute("src", "../_fotoDePerfil/"+usuario.fotoPerfil);
     imagenPerfil.setAttribute("class", "fotoPerfil");
+    var botonImg = document.createElement("button");
+    botonImg.setAttribute("class", "despliegaForm");
+    botonImg.innerHTML = "Cambiar foto de perfil";
+    document.getElementById("divImg").appendChild(botonImg);
     document.getElementById("divImg").insertBefore(imagenPerfil, document.getElementById("formCambiarImg"));
+    document.getElementById("formCambiarImg").style.display = "none";
+    botonImg.addEventListener("click", function() {
+        document.getElementById("formCambiarImg").style.display = "block";
+        botonImg.style.display = "none";
+    });
+    document.getElementById("h2perfil").innerHTML = (usuario.identificador).toUpperCase();
 
     //identificador
     var h4Identificador = document.createElement("h4"); 
