@@ -36,54 +36,99 @@ body{
   }
   
   a {
-      text-decoration: none;
-    color: #01447e;
-  }
-  
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-  }
+    text-decoration: none;
+}
 
-    nav{
-        background-color: #071c22d3;
-    }
+.logo {
+  max-width: 20%;
+  margin-right: 3em;
+}
+.logo img{
+  min-width: 4em;
+  max-width: 4em;
+}
 
-    nav button{
-        background-color: rgba(4, 155, 255, 0.651);
-    }
-    .navRightPrincipal {
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-    }
-  
-    a{
-      text-decoration: none;
-      color: #14839A;
-    }
+.navbar {
+  display: flex;
+  align-items: center;
+  font-family: $open-sans;
+  background-color: #071c22d3;
+  justify-content: center; 
+}
 
-    a:hover{
-      color: #00cbf3;
-    }
-  
+.nav-uls {
+  display: flex;
+  align-items: center;
+  font-family: $open-sans;
+  justify-content: flex-start; 
+  align-self: flex-end;
+  min-width: 80%;
+}
 
-  .fas {
-    font-size: 24px;
-    color: #181800;
-    cursor: pointer;
-    line-height: 2;
-  }
-  .fa-file-image {
-    margin-right: 5%;
-    font-size: 24px;
-    color: #ffff37;
-    cursor: pointer;
-    line-height: 1;
-  }
- 
+.navbar-nav{
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar-nav li{
+  margin-left: 1.5em;
+}
+
+nav button{
+    background-color: rgba(4, 155, 255, 0.651);
+}
+
+.fas.fa-bars{
+  font-size: 2em;
+  max-width: fit-content;
+  align-self: center;
+}
+.fas.fa-bars:hover{
+  font-size: 2em;
+  max-width: fit-content;
+  align-self: center;
+}
+
+#navRightPrincipal {
+  padding: 8%;
+  background-color: rgb(23, 63, 90);
+  border: 1px solid #0011ff;
+}
+
+.fas {
+  font-size: 1em;
+  color: #49b6ff;
+  cursor: pointer;
+  line-height: 2;
+}
+.fas:hover {
+ font-size: 1em;
+ color: #d8ee14;
+ cursor: pointer;
+}
+
+.fa-edit{
+  font-size: 0.8em;
+  color: rgb(36, 35, 35);
+}
+
+.fa-edit:hover{
+  font-size: 0.8em;
+  color: rgb(36, 35, 35);
+}
+
+a:hover{
+  color: #00cbf3;
+}
+
+button{
+  background-color: #0CC7ED;
+  border: 1px solid #0093AF;
+  border-radius: 5px;
+}
+button:hover{
+  background-color: #85C9D6;
+}
   /*Migas de Pan*/
 
   ul.breadcrumb {
@@ -158,7 +203,6 @@ body{
     width: 100%;
   }
   .contenedor2 {
-    background-color: $azulClaro;
     max-width: 100%;
     display: flex;
     flex-direction: row;

@@ -16,30 +16,39 @@
 
 <body>
 <div>
-    <nav class="navbar navbar-expand-sm">
-    <!-- Brand/logo -->
-        <a class="navbar-brand" href="#">
-            <img src="../_img/logo.png" width="70" height="70"/>
-        </a>
+    <nav class="navbar">
+        <!-- Brand/logo -->
+            <a class="logo" href="#">
+                <img src="../_img/logo.png"/>
+            </a>
     
-    <!-- Links -->
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="PaginaPrincipal.html">Inicio</a>
-            </li>
-        </ul>
-
-        <ul class="navRightPrincipal">
-            
-            <div class="nav-item">
-                <a class="nav-link" href="MisListas.html"><i class="fas fa-stream"></i>Ver Mis Listas</a>
+            <!-- Links -->
+            <div class="nav-uls">
+                <ul class="navbar-nav float-left" >
+                    <li class="nav-item">
+                        <a class="nav-link" href="PaginaPrincipal.html"><i class="fas fa-home"></i>Inicio</a>
+                    </li>
+    
+                    <li class="nav-item">
+                        <a class="nav-link" id="btnListas" href="MisListas.html"><i class="fas fa-stream"></i>Ver Mis Listas</a>
+                    </li>
+                </ul>
+       
+                <ul class="navbar-nav ml-auto">            
+                    <!-- Navbar links -->
+                    <li class="nav-item dropdown ml-auto dropdown">
+                        <a class="nav-link dropdown-toggle float-right" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bars"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="navRightPrincipal">
+                            <a class="nav-link" id="btnPerfil" href="PerfilUsuario.html"><i class="fas fa-user-cog"></i>Perfil</a>
+                            <a class="nav-link" id="btnCerrarSesion" href="../SesionCerrar.php"><i class="fas fa-door-closed"></i>Cerrar Sesión</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
-            
-            <div class="nav-item" id="divCerrarSesion">
-                <a class="nav-link" id="btnCerrarSesion" href="../SesionCerrar.php"><i class="fas fa-door-closed"></i>Cerrar Sesión</a>
-            </div>
-        </ul>
-    </nav>
+    
+        </nav>
 
     <ul class="breadcrumb" id="breadcrumb">
         <li><a href="PaginaPrincipal.html">Cartelera</a></li>
