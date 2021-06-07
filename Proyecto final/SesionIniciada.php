@@ -2,12 +2,12 @@
 
 require_once "_com/DAO.php";
 
-if (DAO::haySesionRamIniciada() || DAO::intentarCanjearSesionCookie()){
+if (DAO::haySesionRamIniciada() && DAO::intentarCanjearSesionCookie()){
     $sesionIniciada = true;
 }else if(!DAO::haySesionRamIniciada() && DAO::intentarCanjearSesionCookie()){
-    $usuario = obtenerUsuarioPorCookie($_COOKIE["codigoCookie"]);
-    marcarSesionComoIniciada($usuario);
-    return true;
+    $usuario = DAO::obtenerUsuarioPorCookie($_COOKIE["codigoCookie"]);
+    DAO::marcarSesionComoIniciada($usuario);
+    $sesionIniciada = true;
 }else{
     $sesionIniciada = false;
 }

@@ -1,208 +1,286 @@
-
-body{
-    background: rgb(165, 173, 179);
-  }
-  h1{
-      color: #106a7c;
-  }
-  h2{
-      color: #106a7c;
-  }
-  
-  h4{
-      color: #106a7c;
-  }
-
-  a {
-      text-decoration: none;
-    color: #01447e;
-  }
-  
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-  }
-
-    nav{
-      background-color: #071c22d3;
-    }
-
-    nav button{
-        background-color: rgba(4, 155, 255, 0.651);
-    }
-    .navRightPrincipal {
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-    }
-  
-    a{
-      text-decoration: none;
-      color: #14839A;
-    }
-
-    a:hover{
-      color: #00cbf3;
-    }
-  
-  .fas {
-    size: 24px;
-    color:#49b6ff;
-    cursor: pointer;
-    line-height: 2;
- }
- .fas:hover {
-   size: 24px;
-   color:#d8ee14;
-   cursor: pointer;
- }
-
-  /*Migas de Pan*/
-
-  ul.breadcrumb {
-    padding: 10px 16px;
-    list-style: none;
-    background-color: #eee;
-  }
-  ul.breadcrumb li {
-    display: inline;
-    font-size: 18px;
-  }
-  ul.breadcrumb li+li:before {
-    padding: 8px;
-    color: black;
-    content: "/\00a0";
-  }
-  ul.breadcrumb li a {
-    color: #0275d8;
-    text-decoration: none;
-  }
-  ul.breadcrumb li a:hover {
-    color: #01447e;
-    text-decoration: underline;
-  }
-
-  .contenedorPelicula {
-    display: flex;
-    flex-direction: row;
-  }
-  #infoPelicula {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    margin: 20px;
-  }
-  #infoPelicula #pSinopsis{
-    width: 70%;
-    margin: 20px;
-  }
-  
-  #container1 {
-      display: flex;
-      flex-direction: row;
-  }
-  #infoDirector {
-      margin: 20px;
-      align-self: center;
-  }
-  #infoActor {
-      width: 30%;
-      margin: 20px;
-      align-self: center;
-  }
-  #infoGenero {
-    margin: 20px;
-    align-self: center;
-  }
-  #infoGenero p{
-    display: inline;
-    margin: 1%;
-    align-self: center;
-  }
-  #infoPlataforma {
-    margin: 20px;
-    align-self: center;
-  }
-
-  .comentarios {
-    margin: 20px;
-  }
-  .divComent {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 24px;
-    background-color: #b5dbf5;
-    width: 480px;
-    border-radius: 10px;
-    margin-bottom: 3%;
-  }
-  .divComent p:first-child {
-    font-size: 8pt;
-    align-self: flex-end;
-    
-  }
-  .divComent p:last-child {
-    font-weight: bold;
-    
-  }
-  .divInsertComentario {
-    margin: 20px;
-  }
-  .divInsertComentario button{
-    margin: 20px;
-    background-color: #0CC7ED;
-    border: 1px solid #0093AF;
-    border-radius: 5px;
-  }
-  .insertComentario {
-    background-color: #b5dbf5;
-    border-radius: 10px;
-  }
-  .insertComentario:hover {
-    background-color: #76c2f5;
-    border-radius: 10px;
-    width: 20em;
-    height: 4em;
-  }
-
-  .iconoPlataforma{
-    border-radius: 10%;
-    height: 4em;
-    width: 4em;
-  }
-
-  .imgCaratula{
-    height: 70%;
-    width: 25%;
-  }
-
-  @media (min-width: 600px) {
-    .contenedorPelicula{
-      display: -webkit-flex;
-      display: flex;
-      -webkit-flex-flow: row wrap;
-      flex-flow: row wrap;
-      flex:1;
-    }
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
+body {
+  padding: 0px;
+  margin: 0px;
+  height: 100vh;
+  background: #0e3364;
+  background-image: repeating-linear-gradient(to bottom, transparent 10px, rgba(0, 3, 44, 0.8) 9px, rgba(0, 27, 58, 0.8) 13px, transparent 13px);
+  color: white;
+  height: 100vh;
+  font-family: "Open Sans", sans-serif;
 }
 
-  .agregarLista {
-    background-color: #0CC7ED;
-    border: 1px solid #0093AF;
-    border-radius: 5px;
-    height: 30%;
-  }
+h1 {
+  color: #65c1ff;
+}
 
-  .agregarLista:hover {
-    background-color: #85C9D6;
-    height: 30%;
-  }
+h2 {
+  color: #65c1ff;
+}
 
-  .modal-open .container{
+h4 {
+  color: #65c1ff;
+}
+
+a {
+  text-decoration: none;
+  color: #01447e;
+}
+
+.navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+nav {
+  background-color: #071c22d3;
+}
+
+nav button {
+  background-color: rgba(4, 155, 255, 0.651);
+}
+
+.navRightPrincipal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+a {
+  text-decoration: none;
+  color: #77d7b9;
+}
+
+a:hover {
+  color: #00cbf3;
+}
+
+.fas {
+  size: 24px;
+  color: #49b6ff;
+  cursor: pointer;
+  line-height: 2;
+}
+
+.fas:hover {
+  size: 24px;
+  color: #d8ee14;
+  cursor: pointer;
+}
+
+/*Migas de Pan*/
+ul.breadcrumb {
+  padding: 10px 16px;
+  list-style: none;
+  background-color: #eee;
+  color: #034378;
+}
+
+ul.breadcrumb li {
+  display: inline;
+  font-size: 18px;
+}
+
+ul.breadcrumb li + li:before {
+  padding: 8px;
+  color: black;
+  content: "/\00a0";
+}
+
+ul.breadcrumb li a {
+  color: #0275d8;
+  text-decoration: none;
+}
+
+ul.breadcrumb li a:hover {
+  color: #01447e;
+  text-decoration: underline;
+}
+
+.contenedorPelicula {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+#infoPelicula {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin: 20px;
+}
+
+#infoPelicula #pSinopsis {
+  width: 70%;
+  margin: 20px;
+}
+
+.infoAdicional {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+#container1 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+#infoDirector {
+  margin: 20px;
+}
+
+#infoActor {
+  width: 30%;
+  margin: 20px;
+}
+
+#infoGenero {
+  margin: 20px;
+}
+
+#infoGenero p {
+  display: inline;
+  margin: 1%;
+}
+
+#infoPlataforma {
+  margin: 20px;
+}
+
+.comentarios {
+  margin: 20px;
+}
+
+.divComent {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  padding: 24px;
+  background-color: #b5dbf5;
+  width: 480px;
+  border-radius: 10px;
+  margin-bottom: 3%;
+  color: #034378;
+}
+
+.divComent p:first-child {
+  font-size: 8pt;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+.divComent p:last-child {
+  font-weight: bold;
+}
+
+.divInsertComentario {
+  margin: 20px;
+}
+
+.divInsertComentario button {
+  margin: 20px;
+  background-color: #0CC7ED;
+  border: 1px solid #0093AF;
+  border-radius: 5px;
+}
+
+.insertComentario {
+  background-color: #b5dbf5;
+  border-radius: 10px;
+}
+
+.insertComentario:hover {
+  background-color: #76c2f5;
+  border-radius: 10px;
+  width: 20em;
+  height: 4em;
+}
+
+.iconoPlataforma {
+  border-radius: 10%;
+  height: 4em;
+  width: 4em;
+}
+
+.imgCaratula {
+  height: 70%;
+  width: 25%;
+}
+
+@media (min-width: 600px) {
+  .contenedorPelicula {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+  }
+}
+
+.agregarLista {
+  background-color: #0CC7ED;
+  border: 1px solid #0093AF;
+  border-radius: 5px;
+  height: 30%;
+}
+
+.agregarLista:hover {
+  background-color: #85C9D6;
+  height: 30%;
+}
+
+.modal-open .container {
   -webkit-filter: blur(2px);
   -moz-filter: blur(2px);
   -o-filter: blur(2px);
@@ -210,10 +288,13 @@ body{
   filter: blur(2px);
 }
 
-#modalAlerta{
+#modalAlerta {
   width: 100%;
 }
 
-.alert{
+.alert {
+  width: -webkit-max-content;
+  width: -moz-max-content;
   width: max-content;
 }
+/*# sourceMappingURL=pelicula.css.map */

@@ -28,8 +28,8 @@ function ajaxComprobarSesionIniciada(){
     llamadaAjax("../SesionIniciada.php", "", 
     function(texto){
         var sesionIniciada = JSON.parse(texto);
-        if(sesionIniciada){
-            window.location ="PaginaPrincipal.html";
+        if(!sesionIniciada){
+            window.location ="../SesionCerrar.php";
         }
     },  function(texto) {
         }

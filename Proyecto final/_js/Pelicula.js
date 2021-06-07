@@ -37,7 +37,7 @@ function ajaxComprobarSesionIniciada(){
     function(texto){
         var sesionIniciada = JSON.parse(texto);
         if(!sesionIniciada){
-            window.location ="SesionInicioFormulario.html"
+            window.location = "../SesionCerrar.php";
         }
     },  function(texto) {
         }
@@ -183,7 +183,7 @@ function crearPelicula(infoPelicula) {
     var sinopsis = document.createElement("p");
     sinopsis.setAttribute("id", "pSinopsis");
     sinopsis.innerHTML = infoPelicula.sinopsis;
-    document.getElementById("iconoAudio").addEventListener("click", function(){let textoEscuchar = infoPelicula.sinopsis; decirTexto(textoEscuchar)});
+    document.getElementById("iconoAudio").addEventListener("click", function(){decirTexto(infoPelicula.sinopsis)});
 
     var trailer = document.createElement("p");
     trailer.setAttribute("id", "pTrailer");
@@ -193,6 +193,7 @@ function crearPelicula(infoPelicula) {
     imgCaratula.setAttribute("class", "imgCaratula");
     imgCaratula.setAttribute("src", "../_img/"+infoPelicula.caratula);
 
+    document.getElementsByClassName("imagen").appendChild(divContainer1);
     divContainer1.appendChild(imgCaratula);
     divContainer1.appendChild(sinopsis);
     
@@ -428,4 +429,5 @@ function insertarComentario() {
     }
     );
 }
+
 

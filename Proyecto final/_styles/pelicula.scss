@@ -1,0 +1,244 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
+  $regal-blue: #034378;
+  $san-juan: #2d4e68;
+  $bermuda: #77d7b9;
+  $azulClaro: #65c1ff;
+  $white: #fff;
+  $black: #000;
+  $open-sans: 'Open Sans',
+  sans-serif;  
+  body{
+    padding: 0px;
+    margin: 0px;
+    height: 100vh;
+    background: rgb(14, 51, 100);
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 10px,
+      rgba(0, 3, 44, 0.8) 9px,
+      rgba(0, 27, 58, 0.8) 13px,
+      transparent 13px
+    );
+    color: white;
+    height: 100vh;
+    font-family: $open-sans;
+  }
+  
+  h1{
+      color: $azulClaro;
+  }
+  h2{
+      color: $azulClaro;
+  }
+  
+  h4{
+      color: $azulClaro;
+  }
+
+  a {
+      text-decoration: none;
+    color: #01447e;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
+
+    nav{
+      background-color: #071c22d3;
+    }
+
+    nav button{
+        background-color: rgba(4, 155, 255, 0.651);
+    }
+    .navRightPrincipal {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+  
+    a{
+      text-decoration: none;
+      color: $bermuda;
+    }
+
+    a:hover{
+      color: #00cbf3;
+    }
+  
+  .fas {
+    size: 24px;
+    color:#49b6ff;
+    cursor: pointer;
+    line-height: 2;
+ }
+ .fas:hover {
+   size: 24px;
+   color:#d8ee14;
+   cursor: pointer;
+ }
+
+  /*Migas de Pan*/
+
+  ul.breadcrumb {
+    padding: 10px 16px;
+    list-style: none;
+    background-color: #eee;
+    color: $regal-blue;
+  }
+  ul.breadcrumb li {
+    display: inline;
+    font-size: 18px;
+  }
+  ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: "/\00a0";
+  }
+  ul.breadcrumb li a {
+    color: #0275d8;
+    text-decoration: none;
+  }
+  ul.breadcrumb li a:hover {
+    color: #01447e;
+    text-decoration: underline;
+  }
+
+  .contenedorPelicula {
+    display: flex;
+    flex-direction: row;
+  }
+  #infoPelicula {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 20px;
+  }
+  #infoPelicula #pSinopsis{
+    width: 70%;
+    margin: 20px;
+  }
+  
+  .infoAdicional{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+  }
+  #container1 {
+      display: flex;
+      flex-direction: row;
+  }
+  #infoDirector {
+      margin: 20px;
+  }
+  #infoActor {
+      width: 30%;
+      margin: 20px;
+  }
+  #infoGenero {
+    margin: 20px;
+  }
+  #infoGenero p{
+    display: inline;
+    margin: 1%;
+  }
+  #infoPlataforma {
+    margin: 20px;
+  }
+
+  .comentarios {
+    margin: 20px;
+  }
+  .divComent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+    background-color: #b5dbf5;
+    width: 480px;
+    border-radius: 10px;
+    margin-bottom: 3%;
+    color: $regal-blue;
+  }
+  .divComent p:first-child {
+    font-size: 8pt;
+    align-self: flex-end;
+    
+  }
+  .divComent p:last-child {
+    font-weight: bold;
+    
+  }
+  .divInsertComentario {
+    margin: 20px;
+  }
+  .divInsertComentario button{
+    margin: 20px;
+    background-color: #0CC7ED;
+    border: 1px solid #0093AF;
+    border-radius: 5px;
+  }
+  .insertComentario {
+    background-color: #b5dbf5;
+    border-radius: 10px;
+  }
+  .insertComentario:hover {
+    background-color: #76c2f5;
+    border-radius: 10px;
+    width: 20em;
+    height: 4em;
+  }
+
+  .iconoPlataforma{
+    border-radius: 10%;
+    height: 4em;
+    width: 4em;
+  }
+
+  .imgCaratula{
+    height: 70%;
+    width: 25%;
+  }
+
+  @media (min-width: 600px) {
+    .contenedorPelicula{
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-flow: row wrap;
+      flex-flow: row wrap;
+      flex:1;
+    }
+}
+
+  .agregarLista {
+    background-color: #0CC7ED;
+    border: 1px solid #0093AF;
+    border-radius: 5px;
+    height: 30%;
+  }
+
+  .agregarLista:hover {
+    background-color: #85C9D6;
+    height: 30%;
+  }
+
+  .modal-open .container{
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+}
+
+#modalAlerta{
+  width: 100%;
+}
+
+.alert{
+  width: max-content;
+}
+
