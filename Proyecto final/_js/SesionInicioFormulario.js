@@ -11,6 +11,7 @@
         
     }
 
+    //------------------MÉTODOS JQUEY---------------------
     function jQueyCarrusel(){
         $(document).ready(setTimeout(function(){  
             $('.autoplay').slick({
@@ -23,12 +24,7 @@
         }), 1000);
     }
 
-    function importarScript(nombre) {
-        var s = document.createElement("script");
-        s.src = nombre;
-        document.querySelector("head").appendChild(s);
-    }
-
+//---------------------------MÉTODOS AJAX-------------------
     function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
         //TODO PARA DEPURACIÓN: alert("Haciendo ajax a " + url + "\nCon parámetros " + parametros);
 
@@ -61,6 +57,62 @@
         );
     }
 
+    function ajaxIniciarSesion(inputId, contrasenna, recuerdame){
+            
+        llamadaAjax("../IniciarSesionAJAX.php", "identificador="+inputId.value+"&contrasenna="+contrasenna.value+"&recuerdame="+recuerdame.checked,
+            function(texto) {
+                var exito = JSON.parse(texto);
+
+                if(!exito){
+                    $('#myModal').modal('hide');
+                    divLimpiarAlerta();
+                    mensaje = "Error! Las credenciales son erroneas";
+                    crearAlerta(mensaje);
+                }else{
+                    window.location= "PaginaPrincipal.html";
+                }
+                
+            }, function (texto){}
+        );
+    }
+
+    function ajaxRegistrarNuevoUsuario(nombre, apellidos, identificador, email, contrasenna, contrasenna2){
+        llamadaAjax("../RegistrarUsuarioAjax.php", "nombre="+nombre.value+"&apellidos="+apellidos.value+
+                                                    "&identificador="+identificador.value+"&email="+email.value
+                                                    +"&contrasenna="+contrasenna.value+"&contrasenna2="+contrasenna2.value,
+            function(texto) {
+                var exito = JSON.parse(texto);
+
+                if(!exito){
+                    $('#myModal').modal('hide');
+                    divLimpiarAlerta();
+                    mensaje = "Error! Algo ha ido mal. Puede que su identificador ya se esté usando";
+                    crearAlerta(mensaje);
+                }else
+                    window.location= "SesionInicioFormulario.html";
+                
+                
+            }, function (texto){}
+        );
+    }
+
+    function crearCarruselNovedades(){
+
+        llamadaAjax("../PeliculasNovedades.php", "",
+            function(texto) {
+                var peliculas = JSON.parse(texto);
+    
+                for (var i=0; i<peliculas.length; i++) {
+                    // No se fuerza la ordenación, ya que PHP nos habrá dado los elementos en orden correcto y sería una pérdida de tiempo.
+                    domCrearCarruselNovedades(peliculas[i]);
+                }
+            }, function (texto){}
+        );
+    }
+    
+
+//----------------------------MÉTODOS DEL DOM-----------------------------
+
     function crearBotonesInicio() {
 
         //Limpiar modal
@@ -87,9 +139,6 @@
         btnRegistrarse.addEventListener("click", function(){
             crearFormularioRegistrarse(btnIniciarSesion, btnRegistrarse);
         });
-        
-
-    
         
     }
 
@@ -243,51 +292,6 @@
         document.getElementById("formulario").appendChild(registrarme);
     }
 
-    function ajaxIniciarSesion(inputId, contrasenna, recuerdame){
-            
-        llamadaAjax("../IniciarSesionAJAX.php", "identificador="+inputId.value+"&contrasenna="+contrasenna.value+"&recuerdame="+recuerdame.checked,
-            function(texto) {
-                var exito = JSON.parse(texto);
-
-                if(!exito){
-                    $('#myModal').modal('hide');
-                    divLimpiarAlerta();
-                    mensaje = "Error! Las credenciales son erroneas";
-                    crearAlerta(mensaje);
-                }else{
-                    window.location= "PaginaPrincipal.html";
-                }
-                
-            }, function (texto){}
-        );
-    }
-
-    function divLimpiarFormulario(){
-        while(formulario.firstChild){
-            formulario.removeChild(formulario.lastChild);
-        }
-    }
-
-    function ajaxRegistrarNuevoUsuario(nombre, apellidos, identificador, email, contrasenna, contrasenna2){
-        llamadaAjax("../RegistrarUsuarioAjax.php", "nombre="+nombre.value+"&apellidos="+apellidos.value+
-                                                    "&identificador="+identificador.value+"&email="+email.value
-                                                    +"&contrasenna="+contrasenna.value+"&contrasenna2="+contrasenna2.value,
-            function(texto) {
-                var exito = JSON.parse(texto);
-
-                if(!exito){
-                    $('#myModal').modal('hide');
-                    divLimpiarAlerta();
-                    mensaje = "Error! Algo ha ido mal. Puede que su identificador ya se esté usando";
-                    crearAlerta(mensaje);
-                }else
-                    window.location= "SesionInicioFormulario.html";
-                
-                
-            }, function (texto){}
-        );
-    }
-
     //boton para volver atras
     function crearBtnAtras() {
         
@@ -329,28 +333,8 @@
         $("#modalAlerta").modal("show");
     }
 
-    function divLimpiarAlerta(){
-        while(divAlerta.firstChild){
-            divAlerta.removeChild(divAlerta.lastChild);
-        }
-    }
-
-
+  
 //Sección de Novedades (Carrusel)
-
-function crearCarruselNovedades(){
-
-    llamadaAjax("../PeliculasNovedades.php", "",
-        function(texto) {
-            var peliculas = JSON.parse(texto);
-
-            for (var i=0; i<peliculas.length; i++) {
-                // No se fuerza la ordenación, ya que PHP nos habrá dado los elementos en orden correcto y sería una pérdida de tiempo.
-                domCrearCarruselNovedades(peliculas[i]);
-            }
-        }, function (texto){}
-    );
-}
 
 function domCrearCarruselNovedades(pelicula){
     novedades = document.getElementById("novedades");
@@ -365,5 +349,20 @@ function domCrearCarruselNovedades(pelicula){
     divPelicula.appendChild(imgCaratula);
     novedades.appendChild(divPelicula);
     
+}
+
+//-----------------------UTILIDADES------------------------------------
+
+function divLimpiarAlerta(){
+    while(divAlerta.firstChild){
+        divAlerta.removeChild(divAlerta.lastChild);
+    }
+}
+
+
+function divLimpiarFormulario(){
+    while(formulario.firstChild){
+        formulario.removeChild(formulario.lastChild);
+    }
 }
 

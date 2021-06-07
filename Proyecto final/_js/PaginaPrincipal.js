@@ -10,6 +10,20 @@ window.onload = function() {
     redesSociales();
 }
 
+//-----------------------------MÉTODOS JQUERY-----------------------------
+
+function mostrarTooltip(){
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip(
+            $('[data-toggle="tooltip"]').click(function () {
+                $('[data-toggle="tooltip"]').tooltip("hide");
+             }),
+        );   
+    });
+}
+
+
+//--------------------------MÉTODOS AJAX---------------------------------
 function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
 
     var request = new XMLHttpRequest();
@@ -31,19 +45,17 @@ function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
 
 function ajaxComprobarSesionIniciada(){
     llamadaAjax("../SesionIniciada.php", "", 
-    function(texto){
-        var sesionIniciada = JSON.parse(texto);
-        if(!sesionIniciada){
-            window.location ="../SecsionCerrar.php";
-        }
-    },  function(texto) {
+        function(texto){
+            var sesionIniciada = JSON.parse(texto);
+            if(!sesionIniciada){
+                window.location ="../SecsionCerrar.php";
+            }
+        }, function(texto) {
         }
     );
 }
 
 function cargarPelis() {
-    
-
     llamadaAjax("../CargarPeliculas.php", "",
         function(texto) {
             
@@ -91,12 +103,43 @@ function cargarBusqueda() {
     }
 }
 
-    function divLimpiarCartelera(){
-        while(cartelera.firstChild){
-            cartelera.removeChild(cartelera.lastChild);
-        }
-    }
 
+function aniadirAListaFavoritosAJAX(peliculaId){
+    llamadaAjax("../AniadirAListaFavoritosAJAX.php", "peliculaId="+parseInt(peliculaId),
+        function(texto) {
+                divLimpiarAlerta();
+                mensaje = "Pelicula insertada en favoritos";
+                crearAlertaInsertada(mensaje);
+        },
+        function(texto) {
+    
+        }
+    );
+}
+
+function comprobarAdmin() {
+    llamadaAjax("../ComprobarAdmin.php", "",
+        function(texto) {
+            var admin = JSON.parse(texto);
+            if(admin)
+                crearBtnInsertarPeliculaAdmin();
+        },
+        function(texto) {
+    
+        }
+    );
+}
+
+function ajaxIntroducirPelicula(inputNombre, inputDirector, inputActores, inputGeneros, inputPlataformas, anio, puntuacion, sinopsis, trailer, caratula) {
+    llamadaAjax("../IntroducirPelicula.php", "nombre="+inputNombre.value+"&director="+inputDirector.value+"&actores="+inputActores.value+"&generos="+inputGeneros.value+"&plataformas="+inputPlataformas.value+"&anio="+anio.value+"&puntuacion="+puntuacion.value+"&sinopsis="+sinopsis.value+"&trailer="+trailer.value+"&caratula="+caratula.value,
+    function(texto) {
+            $('#myModal').modal('hide');
+            cargarPelis();
+    }, function (texto){}
+);
+}
+
+//-------------------------------MÉTODOS DEL DOM-----------------------
 
 function domCrearPelis(pelicula) {
     
@@ -196,35 +239,6 @@ function domCrearPelis(pelicula) {
     mostrarTooltip();
 }
 
-function mostrarTooltip(){
-    $(document).ready(function(){
-        $('[data-toggle="tooltip"]').tooltip(
-            $('[data-toggle="tooltip"]').click(function () {
-                $('[data-toggle="tooltip"]').tooltip("hide");
-             }),
-        );   
-    });
-}
-
-function aniadirAListaFavoritosAJAX(peliculaId){
-    llamadaAjax("../AniadirAListaFavoritosAJAX.php", "peliculaId="+parseInt(peliculaId),
-    function(texto) {
-            divLimpiarAlerta();
-            mensaje = "Pelicula insertada en favoritos";
-            crearAlertaInsertada(mensaje);
-    },
-    function(texto) {
- 
-    }
-    );
-}
-
-function divLimpiarAlerta(){
-    while(alerta.firstChild){
-        alerta.removeChild(alerta.lastChild);
-    }
-}
-
 function crearAlertaInsertada(mensaje){
     modalAlerta = document.createElement("div");
     modalAlerta.setAttribute("class", "modal");
@@ -250,21 +264,6 @@ function crearAlertaInsertada(mensaje){
     alerta.appendChild(modalAlerta);
 
     $("#modalAlerta").modal("show");
-}
-
-
-
-function comprobarAdmin() {
-    llamadaAjax("../ComprobarAdmin.php", "",
-    function(texto) {
-        var admin = JSON.parse(texto);
-        if(admin)
-            crearBtnInsertarPeliculaAdmin();
-    },
-    function(texto) {
- 
-    }
-    );
 }
 
 function crearBtnInsertarPeliculaAdmin() {
@@ -421,25 +420,29 @@ function crearFormularioIntroducirPelicula() {
     document.getElementById("formulario").appendChild(introducir);   
 }
 
+//---------------------------------------UTILIDADES----------------------------------
+
+function divLimpiarAlerta(){
+    while(alerta.firstChild){
+        alerta.removeChild(alerta.lastChild);
+    }
+}
+
+function divLimpiarCartelera(){
+    while(cartelera.firstChild){
+        cartelera.removeChild(cartelera.lastChild);
+    }
+}
+
 function divLimpiarFormulario(){
     while(formulario.firstChild){
         formulario.removeChild(formulario.lastChild);
     }
 }
 
-function ajaxIntroducirPelicula(inputNombre, inputDirector, inputActores, inputGeneros, inputPlataformas, anio, puntuacion, sinopsis, trailer, caratula) {
-    llamadaAjax("../IntroducirPelicula.php", "nombre="+inputNombre.value+"&director="+inputDirector.value+"&actores="+inputActores.value+"&generos="+inputGeneros.value+"&plataformas="+inputPlataformas.value+"&anio="+anio.value+"&puntuacion="+puntuacion.value+"&sinopsis="+sinopsis.value+"&trailer="+trailer.value+"&caratula="+caratula.value,
-    function(texto) {
-            $('#myModal').modal('hide');
-            cargarPelis();
-    }, function (texto){}
-);
-}
-
 function redireccionarPelicula(){
     window.location = "Pelicula.html?verinfo="+this.id;
 }
-
 
 //footer redes sociales
 const shareButton = document.getElementsByClassName("shareButton");

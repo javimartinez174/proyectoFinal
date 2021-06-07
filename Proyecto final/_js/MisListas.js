@@ -5,73 +5,18 @@ window.onload = function(){
     formulario = document.getElementById("formulario");
 }
 
-function crearBtnCrearNuevaLista() {
-    limpiarDiv();
-    divInsertPeli = document.createElement("div");
-    divInsertPeli.setAttribute("class", "divInsertPeli");
-
-    aNuevaLista = document.createElement("button");
-    aNuevaLista.setAttribute("id", "abreModal");
-    aNuevaLista.setAttribute("data-toggle", "modal");
-    aNuevaLista.setAttribute("data-target", "#myModal");
-    aNuevaLista.setAttribute("href", "#");
-    aNuevaLista.innerHTML= "Crear Lista  <i class='fas fa-plus'></i>";
-
-    
-   
-
-    divInsertPeli.appendChild(aNuevaLista);
-
-    document.getElementById("listasUsuario").appendChild(divInsertPeli);
-    document.getElementById("abreModal").addEventListener("click", crearFormularioNuevaLista);
+//----------------------------MÉTODOS JQUERY----------------------
+function mostrarTooltip(){
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip(
+            $('[data-toggle="tooltip"]').click(function () {
+                $('[data-toggle="tooltip"]').tooltip("hide");
+             }),
+        );   
+    });
 }
+//----------------------------MÉTODOS AJAX-------------------------
 
-function crearFormularioNuevaLista(){
-    limpiarDivFormulario();
-
-    pNombreLista=document.createElement("p");
-    pNombreLista.innerHTML = "Indique el nombre de su nueva lista: ";
-
-    nombreListaInput = document.createElement("input");
-    nombreListaInput.setAttribute("type", "text");
-    nombreListaInput.setAttribute("placeholder", "Nombre de la nueva Lista");
-    nombreListaInput.setAttribute("required", true);
-
-    var introducir = document.createElement("button");
-    introducir.addEventListener("click", function(){
-        ajaxCrearNuevaLista(nombreListaInput);
-    })
-    introducir.setAttribute("name", "crear");
-    introducir.setAttribute("class", "crear");
-    introducir.innerHTML = "Crear Lista";
-    introducir.setAttribute("value", "Crear Lista");
-
-    formulario.appendChild(pNombreLista);
-    formulario.appendChild(nombreListaInput);
-    formulario.appendChild(introducir);
-}
- function limpiarDivFormulario() {
-    while(formulario.firstChild){
-        formulario.removeChild(formulario.lastChild);
-    }
- }
-
-function ajaxCrearNuevaLista(listaInput){
-    llamadaAjax("../CrearNuevaLista.php", "nombreLista="+listaInput.value,
-    function(texto) {
-        
-            var exito = JSON.parse(texto);
-            if(exito){
-                $('#myModal').modal('hide');
-                cargarListas();
-                crearBtnCrearNuevaLista();
-            }
-    },
-    function(texto) {
- 
-    }
-    );
-}
 function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
 
     var request = new XMLHttpRequest();
@@ -91,6 +36,22 @@ function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
     request.send(parametros);
 }
 
+function ajaxCrearNuevaLista(listaInput){
+    llamadaAjax("../CrearNuevaLista.php", "nombreLista="+listaInput.value,
+    function(texto) {
+        
+            var exito = JSON.parse(texto);
+            if(exito){
+                $('#myModal').modal('hide');
+                cargarListas();
+                crearBtnCrearNuevaLista();
+            }
+    },
+    function(texto) {
+ 
+    }
+    );
+}
 
 function cargarListas() {
     limpiarDiv();
@@ -126,7 +87,6 @@ function cargarPelisLista(lista, divPelis){
     });
 }
 
-
 function eliminarLista(listaId){
     llamadaAjax("../EliminarLista.php", "listaId="+parseInt(listaId),
     function(texto) {
@@ -144,11 +104,65 @@ function eliminarLista(listaId){
     });
 }
 
-function limpiarDivAlertas(){
-    while(divAlerta.firstChild){
-        divAlerta.removeChild(divAlerta.lastChild);
-    }
+function eliminarPelicula(listaId, peliculaId){
+    llamadaAjax("../BorrarPeliculaLista.php", "listaId="+parseInt(listaId)+"&peliculaId="+parseInt(peliculaId),
+    function(texto) {
+        limpiarDivAlertas();
+        mensaje = "Pelicula eliminada con exito"
+        crearAlerta(mensaje);
+        cargarListas();
+    },
+    function(texto) {
+        alert("algo ha ido mal")
+    });
 }
+
+
+//--------------------------MÉTODOS DEL DOM------------------------------------
+
+function crearBtnCrearNuevaLista() {
+    limpiarDiv();
+    divInsertPeli = document.createElement("div");
+    divInsertPeli.setAttribute("class", "divInsertPeli");
+
+    aNuevaLista = document.createElement("button");
+    aNuevaLista.setAttribute("id", "abreModal");
+    aNuevaLista.setAttribute("data-toggle", "modal");
+    aNuevaLista.setAttribute("data-target", "#myModal");
+    aNuevaLista.setAttribute("href", "#");
+    aNuevaLista.innerHTML= "Crear Lista  <i class='fas fa-plus'></i>";
+
+    divInsertPeli.appendChild(aNuevaLista);
+
+    document.getElementById("listasUsuario").appendChild(divInsertPeli);
+    document.getElementById("abreModal").addEventListener("click", crearFormularioNuevaLista);
+}
+
+function crearFormularioNuevaLista(){
+    limpiarDivFormulario();
+
+    pNombreLista=document.createElement("p");
+    pNombreLista.innerHTML = "Indique el nombre de su nueva lista: ";
+
+    nombreListaInput = document.createElement("input");
+    nombreListaInput.setAttribute("type", "text");
+    nombreListaInput.setAttribute("placeholder", "Nombre de la nueva Lista");
+    nombreListaInput.setAttribute("required", true);
+
+    var introducir = document.createElement("button");
+    introducir.addEventListener("click", function(){
+        ajaxCrearNuevaLista(nombreListaInput);
+    })
+    introducir.setAttribute("name", "crear");
+    introducir.setAttribute("class", "crear");
+    introducir.innerHTML = "Crear Lista";
+    introducir.setAttribute("value", "Crear Lista");
+
+    formulario.appendChild(pNombreLista);
+    formulario.appendChild(nombreListaInput);
+    formulario.appendChild(introducir);
+}
+
 function domCrearListas(lista, i){
     nombreLista = document.createElement("div");
     nombreLista.setAttribute("class", "collapsible container");
@@ -187,18 +201,6 @@ function domCrearListas(lista, i){
     cargarPelisLista(lista, divPelis);
 }
 
-function eliminarPelicula(listaId, peliculaId){
-    llamadaAjax("../BorrarPeliculaLista.php", "listaId="+parseInt(listaId)+"&peliculaId="+parseInt(peliculaId),
-    function(texto) {
-        limpiarDivAlertas();
-        mensaje = "Pelicula eliminada con exito"
-        crearAlerta(mensaje);
-        cargarListas();
-    },
-    function(texto) {
-        alert("algo ha ido mal")
-    });
-}
 
 function crearAlerta(mensaje){
     
@@ -258,24 +260,30 @@ function domCrearPeliculas(pelicula, divPelis, lista){
     mostrarTooltip();
 }
 
-function mostrarTooltip(){
-    $(document).ready(function(){
-        $('[data-toggle="tooltip"]').tooltip(
-            $('[data-toggle="tooltip"]').click(function () {
-                $('[data-toggle="tooltip"]').tooltip("hide");
-             }),
-        );   
-    });
+function cargarBreadcrumbs() {
+    var breadcrumbs = document.createElement("li");
+    breadcrumbs.innerHTML = "Mis Listas";
+    document.getElementById("breadcrumb").appendChild(breadcrumbs);
 }
 
+//-------------------------------UTILIDADES-------------------------------
+
+function limpiarDivFormulario() {
+    while(formulario.firstChild){
+        formulario.removeChild(formulario.lastChild);
+    }
+ }
+
+
+function limpiarDivAlertas(){
+    while(divAlerta.firstChild){
+        divAlerta.removeChild(divAlerta.lastChild);
+    }
+}
 function limpiarDiv(){
     while(listasUsuario.firstChild){
         listasUsuario.removeChild(listasUsuario.lastChild);
     }
 }
 
-function cargarBreadcrumbs() {
-    var breadcrumbs = document.createElement("li");
-    breadcrumbs.innerHTML = "Mis Listas";
-    document.getElementById("breadcrumb").appendChild(breadcrumbs);
-}
+

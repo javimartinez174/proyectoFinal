@@ -1,4 +1,6 @@
-window.onpaint =  ajaxComprobarSesionIniciada(); //se ejecuta antes de cargar la página
+//------------------------RESPUESTA DE LA PÁGINA AL CARGAR----------------------
+
+window.onpaint =  ajaxComprobarSesionIniciada(); 
 
 window.onload = function() {
     crearPagina();
@@ -6,11 +8,32 @@ window.onload = function() {
     divAlerta = document.getElementById("alerta");
 }
 
-function importarScript(nombre) {
-    var s = document.createElement("script");
-    s.src = nombre;
-    document.querySelector("head").appendChild(s);
-}
+
+//---------------------------------MÉTODOS JQUERY-----------------------------
+function acumularId(idPelicula){ 
+
+    $(document).ready(function() {
+        $('#enviar').click(function(){
+            var selected = '';    
+            $('#formid input[type=checkbox]').each(function(){
+                if (this.checked) {
+                    selected += $(this).val()+',';
+                }
+            }); 
+    
+            if (selected != '') 
+                ajaxAnnadirALista(selected, idPelicula);  
+            else{
+                limpiarDivAlertas();
+                mensaje = "Debes seleccionar al menos una opción";
+                crearAlerta(mensaje);
+            }
+            return false;
+        });         
+    });  
+ }
+
+//----------------------------MÉTODOS AJAX-----------------------------------------
 
 function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
     //TODO PARA DEPURACIÓN: alert("Haciendo ajax a " + url + "\nCon parámetros " + parametros);
@@ -44,18 +67,164 @@ function ajaxComprobarSesionIniciada(){
     );
 }
 
-function decirTexto(texto) {
-    let audio = new SpeechSynthesisUtterance();
-    audio.text = texto;
-    speechSynthesis.speak(audio);
+function obtenerInfoPelicula(idPelicula) {
+    
+    llamadaAjax("../ObtenerInfoPelicula.php", "id=" + parseInt(idPelicula),
+        function(texto) {
+                var infoPelicula = JSON.parse(texto);
+                crearPelicula(infoPelicula);        
+        },
+        function(texto) {
+    
+        }
+    );
+
 }
 
-var idPelicula; //variable global
-function capturarIdURL() {
-    var url = window.location.href;
-    var pos1 = url.indexOf("=");
-    idPelicula = url.substring(pos1+1, url.length);
+function obtenerInfoDirector(idPelicula) {
+    llamadaAjax("../ObtenerInfoDirector.php", "id=" + parseInt(idPelicula),
+        function(texto) {
+                var directores = JSON.parse(texto);
+
+                for(var i=0; i<directores.length; i++) {
+                    crearDirector(directores[i]);
+                }
+                        
+        },
+        function(texto) {
+    
+        }
+    );
 }
+
+function obtenerInfoActor(idPelicula) {
+    llamadaAjax("../ObtenerInfoActor.php", "id=" + parseInt(idPelicula),
+        function(texto) {
+                var actores = JSON.parse(texto);
+
+                for(var i=0; i<actores.length; i++) {
+                    crearActor(actores[i]);
+                }     
+        },
+        function(texto) {
+    
+        }
+    );
+}
+
+function obtenerInfoGenero(idPelicula) {
+    llamadaAjax("../ObtenerInfoGenero.php", "id=" + parseInt(idPelicula),
+        function(texto) {
+                var generos = JSON.parse(texto);
+
+                for(var i=0; i<generos.length; i++) {
+                    crearGenero(generos[i]);
+                }     
+        },
+        function(texto) {
+    
+        }
+    );
+}
+
+function obtenerInfoPlataforma(idPelicula) {
+    llamadaAjax("../ObtenerInfoPlataforma.php", "id=" + parseInt(idPelicula),
+        function(texto) {
+                var plataformas = JSON.parse(texto);
+
+                for(var i=0; i<plataformas.length; i++) {
+                    crearPlataforma(plataformas[i]);
+                }     
+        },
+        function(texto) {
+    
+        }
+    );
+}
+
+function obtenerComentarios(idPelicula) {
+    llamadaAjax("../ObtenerComentarios.php", "peliculaId=" + parseInt(idPelicula),
+        function(texto) {
+                var comentarios = JSON.parse(texto);
+
+                for(var i=0; i<comentarios.length; i++) {
+                    obtenerUsuarioComentario(comentarios[i]);
+                }
+        },
+        function(texto) {
+    
+        }
+    );
+}
+
+function obtenerComentarioInsertado() {
+    llamadaAjax("../ObtenerComentarioinsertado.php", "",
+        function(texto) {
+                var comentario = JSON.parse(texto);
+                obtenerUsuarioComentario(comentario);
+        },
+        function(texto) {
+    
+        }
+    );
+}
+
+function ObtenerListasUsuario(idPelicula){
+    llamadaAjax("../ObtenerListasUsuario.php", "",
+        function(texto) {
+            var listas = JSON.parse(texto);
+
+            for (var i=0; i<listas.length; i++) {
+                domCrearListasEnModal(listas[i], i,idPelicula, listas.length);
+            }
+        },
+        function(texto) {
+    
+        }
+    );
+
+ }
+
+function ajaxAnnadirALista(idListas, idPelicula){
+    llamadaAjax("../AnnadirPeliculaALista.php", "listaId=" + idListas +"&idPelicula="+parseInt(idPelicula),
+        function(texto) {
+                $('#myModal').modal('hide');
+                limpiarDivAlertas();
+                mensaje = "Pelicula insertada con éxito";
+                crearAlerta(mensaje);
+        },
+        function(texto) {
+    
+        }
+    );
+}
+ 
+function obtenerUsuarioComentario(comentario) {
+    llamadaAjax("../ObtenerUsuario.php", "id=" + parseInt(comentario.usuarioId),
+        function(texto) {
+                var usuario = JSON.parse(texto);
+                crearComentario(comentario, usuario);
+        },
+        function(texto) {
+    
+        }
+    );
+}
+
+function insertarComentario() {
+    llamadaAjax("../InsertarComentario.php", "mensaje=" + document.getElementById("insertComentario").value+
+                "&peliculaId="+parseInt(idPelicula),
+        function(texto) {
+                document.getElementById("insertComentario").value = "";
+                obtenerComentarioInsertado(); 
+        },
+        function(texto) {
+    
+        }
+    );
+}
+
+//-------------------------------------MÉTODOS RELACIONADOS CON DOM-------------------------------
 
 function crearPagina() {
     capturarIdURL();
@@ -66,111 +235,6 @@ function crearPagina() {
     obtenerInfoPlataforma(idPelicula);
     obtenerComentarios(idPelicula);
 } 
-
-
-
-function obtenerInfoPelicula(idPelicula) {
-    
-    llamadaAjax("../ObtenerInfoPelicula.php", "id=" + parseInt(idPelicula),
-    function(texto) {
-            var infoPelicula = JSON.parse(texto);
-            crearPelicula(infoPelicula);        
-    },
-    function(texto) {
- 
-    }
-    );
-
-}
-
-function obtenerInfoDirector(idPelicula) {
-    llamadaAjax("../ObtenerInfoDirector.php", "id=" + parseInt(idPelicula),
-    function(texto) {
-            var directores = JSON.parse(texto);
-
-            for(var i=0; i<directores.length; i++) {
-                crearDirector(directores[i]);
-            }
-                    
-    },
-    function(texto) {
- 
-    }
-    );
-}
-
-function obtenerInfoActor(idPelicula) {
-    llamadaAjax("../ObtenerInfoActor.php", "id=" + parseInt(idPelicula),
-    function(texto) {
-            var actores = JSON.parse(texto);
-
-            for(var i=0; i<actores.length; i++) {
-                crearActor(actores[i]);
-            }     
-    },
-    function(texto) {
- 
-    }
-    );
-}
-
-function obtenerInfoGenero(idPelicula) {
-    llamadaAjax("../ObtenerInfoGenero.php", "id=" + parseInt(idPelicula),
-    function(texto) {
-            var generos = JSON.parse(texto);
-
-            for(var i=0; i<generos.length; i++) {
-                crearGenero(generos[i]);
-            }     
-    },
-    function(texto) {
- 
-    }
-    );
-}
-
-function obtenerInfoPlataforma(idPelicula) {
-    llamadaAjax("../ObtenerInfoPlataforma.php", "id=" + parseInt(idPelicula),
-    function(texto) {
-            var plataformas = JSON.parse(texto);
-
-            for(var i=0; i<plataformas.length; i++) {
-                crearPlataforma(plataformas[i]);
-            }     
-    },
-    function(texto) {
- 
-    }
-    );
-}
-
-function obtenerComentarios(idPelicula) {
-    llamadaAjax("../ObtenerComentarios.php", "peliculaId=" + parseInt(idPelicula),
-    function(texto) {
-            var comentarios = JSON.parse(texto);
-
-            for(var i=0; i<comentarios.length; i++) {
-                obtenerUsuarioComentario(comentarios[i]);
-            }
-    },
-    function(texto) {
- 
-    }
-    );
-}
-
-function obtenerComentarioInsertado() {
-    llamadaAjax("../ObtenerComentarioinsertado.php", "",
-    function(texto) {
-            var comentario = JSON.parse(texto);
-            obtenerUsuarioComentario(comentario);
-    },
-    function(texto) {
- 
-    }
-    );
-}
-
 
 function crearPelicula(infoPelicula) {
     cargarBreadcrumbs(infoPelicula);
@@ -184,7 +248,9 @@ function crearPelicula(infoPelicula) {
     sinopsis.setAttribute("id", "pSinopsis");
     sinopsis.setAttribute("class", "pSinopsis");
     sinopsis.innerHTML = infoPelicula.sinopsis;
-    document.getElementById("iconoAudio").addEventListener("click", function(){decirTexto(infoPelicula.sinopsis)});
+    document.getElementById("iconoAudio").addEventListener("click", function(){
+        decirTexto(infoPelicula.sinopsis)
+    });
 
     var trailer = document.createElement("p");
     trailer.setAttribute("class", "ml-auto")
@@ -201,8 +267,6 @@ function crearPelicula(infoPelicula) {
     divImagen.appendChild(imgCaratula);
     divContainer1.appendChild(divImagen);
     divContainer1.appendChild(sinopsis);
-    
-
 
     var agregarALista = document.createElement("button");
     agregarALista.setAttribute("class", "agregarLista");
@@ -214,7 +278,6 @@ function crearPelicula(infoPelicula) {
 
     divImagen.appendChild(agregarALista);
 
-    
     document.getElementById("infoPelicula").appendChild(titulo);
     document.getElementById("infoPelicula").appendChild(divContainer1);
     
@@ -233,8 +296,6 @@ function crearPelicula(infoPelicula) {
     document.getElementById("infoPelicula").appendChild(divPunt);
     
     document.getElementById("abreModal").addEventListener("click", ObtenerListasUsuario(infoPelicula.id));
-
-
 }
 
 function crearDirector(infoDirector) {
@@ -279,26 +340,9 @@ function crearPlataforma(infoPlataforma) {
     document.getElementById("infoPlataforma").appendChild(enlace);
 }
 
- function ObtenerListasUsuario(idPelicula){
-    llamadaAjax("../ObtenerListasUsuario.php", "",
-    function(texto) {
-        var listas = JSON.parse(texto);
-
-        for (var i=0; i<listas.length; i++) {
-            domCrearListasEnModal(listas[i], i,idPelicula, listas.length);
-        }
-    },
-    function(texto) {
- 
-    }
-    );
-
- }
-
  function domCrearListasEnModal(lista, pos,  idPelicula, longitudListas){
     var formulario = document.getElementById("formId");
     
-
     pNombreLista=document.createElement("p");
     pNombreLista.innerHTML = "Lista: "+ lista.nombre;
     pNombreLista.style.display = "inline-block";
@@ -328,53 +372,6 @@ function crearPlataforma(infoPlataforma) {
     }
  }
 
- function acumularId(idPelicula){ 
-    $(document).ready(function() {
-        $('#enviar').click(function(){
-            var selected = '';    
-            $('#formid input[type=checkbox]').each(function(){
-                if (this.checked) {
-                    selected += $(this).val()+',';
-                }
-            }); 
-    
-            if (selected != '') 
-                ajaxAnnadirALista(selected, idPelicula);  
-            else{
-                limpiarDivAlertas();
-                mensaje = "Debes seleccionar al menos una opción";
-                crearAlerta(mensaje);
-            }
-            return false;
-        });         
-    });  
- }
-
- function ajaxAnnadirALista(idListas, idPelicula){
-    llamadaAjax("../AnnadirPeliculaALista.php", "listaId=" + idListas +"&idPelicula="+parseInt(idPelicula),
-    function(texto) {
-            $('#myModal').modal('hide');
-            limpiarDivAlertas();
-            mensaje = "Pelicula insertada con éxito";
-            crearAlerta(mensaje);
-    },
-    function(texto) {
- 
-    }
-    );
-}
- 
-function obtenerUsuarioComentario(comentario) {
-    llamadaAjax("../ObtenerUsuario.php", "id=" + parseInt(comentario.usuarioId),
-    function(texto) {
-            var usuario = JSON.parse(texto);
-            crearComentario(comentario, usuario);
-    },
-    function(texto) {
- 
-    }
-    );
-}
 
 function crearAlerta(mensaje){
     
@@ -404,12 +401,6 @@ function crearAlerta(mensaje){
     $("#modalAlerta").modal("show");
 }
 
-function limpiarDivAlertas(){
-    while(divAlerta.firstChild){
-        divAlerta.removeChild(divAlerta.lastChild);
-    }
-}
-
 function crearComentario(comentario, usuario) {
     
     var divComent = document.createElement("div");
@@ -432,15 +423,24 @@ function cargarBreadcrumbs(infoPelicula) {
     document.getElementById("breadcrumb").appendChild(breadcrumbs);
 }
 
-function insertarComentario() {
-    llamadaAjax("../InsertarComentario.php", "mensaje=" + document.getElementById("insertComentario").value+"&peliculaId="+parseInt(idPelicula),
-    function(texto) {
-            obtenerComentarioInsertado(); 
-    },
-    function(texto) {
- 
+//--------------------------------------UTILIDADES----------------------------
+
+function limpiarDivAlertas(){
+    while(divAlerta.firstChild){
+        divAlerta.removeChild(divAlerta.lastChild);
     }
-    );
 }
 
+function decirTexto(texto) {
+    let audio = new SpeechSynthesisUtterance();
+    audio.text = texto;
+    speechSynthesis.speak(audio);
+}
+
+var idPelicula; //variable global
+function capturarIdURL() {
+    var url = window.location.href;
+    var pos1 = url.indexOf("=");
+    idPelicula = url.substring(pos1+1, url.length);
+}
 

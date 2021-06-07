@@ -6,6 +6,12 @@ window.onload = function(){
     infoUsuario = document.getElementById("infoUsuario");
 }
 
+function cerrarSesion() {
+    window.location = "../SesionCerrar.php";
+}
+
+//----------------------MÉTODOS AJAX----------------------
+
 function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
 
     var request = new XMLHttpRequest();
@@ -37,9 +43,6 @@ function ajaxComprobarSesionIniciada(){
     );
 }
 
-function cerrarSesion() {
-    window.location = "../SesionCerrar.php";
-}
 
 function cargarUsuario() {
 
@@ -63,6 +66,9 @@ function cargarUsuario() {
     }
     );
 }
+
+
+//----------------------------------MÉTODOS DEL DOM--------------------------------------------
 
 function modificarInput(divInput, p1, iconoEdit) {
         var inputEdit = document.createElement("input");
@@ -120,7 +126,8 @@ function modificarContrasenna(divInput, p1, iconoEdit) {
     iconoOK.setAttribute("class", "fas fa-thumbs-up");
     iconoOK.addEventListener("click", function(){
         if(inputEdit.value!=""&&inputEdit2.value!="")
-            llamadaAjax("../ModificarContrasenna.php", "actualContrasenna="+inputEdit.value+"&nuevaContrasenna="+inputEdit2.value,
+            llamadaAjax("../ModificarContrasenna.php", "actualContrasenna="
+                        +inputEdit.value+"&nuevaContrasenna="+inputEdit2.value,
                 function(texto) {
                     var exito = JSON.parse(texto);
                     if(exito){
@@ -150,7 +157,6 @@ divInput.appendChild(iconoOK);
 
 }
 
-
 function domCrearPerfil(usuario){
     var breadcrumbs = document.createElement("li");
     breadcrumbs.innerHTML = usuario.identificador;
@@ -177,7 +183,9 @@ function domCrearPerfil(usuario){
     var iconoEdit = document.createElement("i");
     iconoEdit.setAttribute("class", "fas fa-edit");
     iconoEdit.setAttribute("id", "iconoEdit");
-    iconoEdit.addEventListener("click", function(){modificarInput(divIdentificador2, p1, this); this.style.display = "none";}, false);
+    iconoEdit.addEventListener("click", function(){
+        modificarInput(divIdentificador2, p1, this); this.style.display = "none";
+    }, false);
     divIdentificador.appendChild(iconoEdit);    
     document.getElementById("infoUsuario").appendChild(divIdentificador);
 
@@ -197,7 +205,9 @@ function domCrearPerfil(usuario){
     var iconoEdit2 = document.createElement("i");
     iconoEdit2.setAttribute("class", "fas fa-edit");
     iconoEdit2.setAttribute("id", "iconoEdit");
-    iconoEdit2.addEventListener("click", function(){modificarInput(divNombre2, p2, this); this.style.display = "none";}, false);
+    iconoEdit2.addEventListener("click", function(){
+        modificarInput(divNombre2, p2, this); this.style.display = "none";
+    }, false);
     divNombre.appendChild(iconoEdit2);
     document.getElementById("infoUsuario").appendChild(divNombre);
 
@@ -217,7 +227,9 @@ function domCrearPerfil(usuario){
     var iconoEdit3 = document.createElement("i");
     iconoEdit3.setAttribute("class", "fas fa-edit");
     iconoEdit3.setAttribute("id", "iconoEdit");
-    iconoEdit3.addEventListener("click", function(){modificarInput(divApellidos2, p3, this); this.style.display = "none";}, false);
+    iconoEdit3.addEventListener("click", function(){
+        modificarInput(divApellidos2, p3, this); this.style.display = "none";
+    }, false);
     divApellidos.appendChild(iconoEdit3);
     document.getElementById("infoUsuario").appendChild(divApellidos);
 
@@ -237,7 +249,9 @@ function domCrearPerfil(usuario){
     var iconoEdit4 = document.createElement("i");
     iconoEdit4.setAttribute("class", "fas fa-edit");
     iconoEdit4.setAttribute("id", "iconoEdit");
-    iconoEdit4.addEventListener("click", function(){modificarInput(divEmail2, p4, this); this.style.display = "none";}, false);
+    iconoEdit4.addEventListener("click", function(){
+        modificarInput(divEmail2, p4, this); this.style.display = "none";
+    }, false);
     divEmail.appendChild(iconoEdit4);
     document.getElementById("infoUsuario").appendChild(divEmail);
 
@@ -257,15 +271,12 @@ function domCrearPerfil(usuario){
     var iconoEdit5 = document.createElement("i");
     iconoEdit5.setAttribute("class", "fas fa-edit");
     iconoEdit5.setAttribute("id", "iconoEdit");
-    iconoEdit5.addEventListener("click", function(){modificarContrasenna(divContrasenna2, p5, this); this.style.display = "none";}, false);
+    iconoEdit5.addEventListener("click", function(){
+        modificarContrasenna(divContrasenna2, p5, this); this.style.display = "none";
+    }, false);
     divContrasenna.appendChild(iconoEdit5);
     document.getElementById("infoUsuario").appendChild(divContrasenna);
     
-}
-function limpiarDivAlertas(){
-    while(divAlerta.firstChild){
-        divAlerta.removeChild(divAlerta.lastChild);
-    }
 }
 
 function crearAlerta(mensaje, booleano){
@@ -296,6 +307,14 @@ function crearAlerta(mensaje, booleano){
     $("#modalAlerta").modal("show");
 }
 
+
+//------------------------------------UTILIDADES----------------------------------------
+
+function limpiarDivAlertas(){
+    while(divAlerta.firstChild){
+        divAlerta.removeChild(divAlerta.lastChild);
+    }
+}
 //footer redes sociales
 const shareButton = document.getElementsByClassName("shareButton");
 function redesSociales() {
