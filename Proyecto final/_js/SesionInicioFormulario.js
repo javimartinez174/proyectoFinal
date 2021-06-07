@@ -3,11 +3,12 @@
 
 
     window.onload = function() {
+        jQueyCarrusel();
         document.getElementById("abreModal").addEventListener("click", crearBotonesInicio);
         document.getElementById("descubrenos").addEventListener("click", crearBotonesInicio);
         formulario = document.getElementById("formulario");
         divAlerta= document.getElementById("alerta");
-        jQueyCarrusel();
+        
     }
 
     function jQueyCarrusel(){
