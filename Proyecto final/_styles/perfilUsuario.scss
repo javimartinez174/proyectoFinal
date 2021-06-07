@@ -5,6 +5,7 @@ $regal-blue: #034378;
 $san-juan: #2d4e68;
 $bermuda: #77d7b9;
 $azulClaro: #65c1ff;
+$azulOscuro: #0011ff;
 $white: #fff;
 $black: #000;
 $open-sans: 'Open Sans',
@@ -26,17 +27,15 @@ body{
   height: 100vh;
   font-family: $open-sans;
   }
-  h1{
-      color: #106a7c;
-  }
-  h2{
-      color: #106a7c;
+  
+  h2 {
+    color: $azulOscuro;
+    font-weight: normal;
+    font-size: 35px;
+    font-family: Arial;
+    text-transform: uppercase;
   }
   
-  h4{
-      color: #106a7c;
-  }
-
   a {
       text-decoration: none;
     color: #01447e;
@@ -131,11 +130,44 @@ body{
     flex-direction: row;
   }
 
-  .infoUsuario {
-    width: 90%;
+  .jumbotron {
+    margin: 40px;
+    padding: 0px;
+    display: flex;
+
+  }
+  .contenedor1 {
+    padding: 10%;
+    background-color: $azulClaro;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    margin: 40px;
+  }
+  .contenedor1 h2 {
+    width: 100%;
+  }
+  .contenedor2 {
+    
+    background-color: $azulClaro;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .infoUsuario {
+    padding: 4%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    border: 60px solid transparent;
+    border-image: url("../_img/bordeCinta.png") 50 45;
+    border-radius: 20%;
+  }
+  .imgToyStory {
+    margin-left: 20%;
+    padding-bottom: 1em;
+    border-bottom: 1px solid black;
   }
   h4 {
     margin-left: 20%;
@@ -150,7 +182,7 @@ body{
     margin-left: 20%;
     display: flex;
     flex-direction: row;
-    width: 30em;
+    width: 25em;
     font-weight: bold;
   }
   #iconoVer {
