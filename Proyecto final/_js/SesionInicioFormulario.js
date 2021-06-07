@@ -34,7 +34,7 @@
     }
 
     function ajaxComprobarSesionIniciada(){
-        llamadaAjax("../SesionIniciada.php", "", 
+        llamadaAjax("../_php/SesionIniciada.php", "", 
         function(texto){
             var sesionIniciada = JSON.parse(texto);
             if(sesionIniciada){
@@ -47,7 +47,7 @@
 
     function ajaxIniciarSesion(inputId, contrasenna, recuerdame){
             
-        llamadaAjax("../IniciarSesionAJAX.php", "identificador="+inputId.value+"&contrasenna="+contrasenna.value+"&recuerdame="+recuerdame.checked,
+        llamadaAjax("../_php/IniciarSesionAJAX.php", "identificador="+inputId.value+"&contrasenna="+contrasenna.value+"&recuerdame="+recuerdame.checked,
             function(texto) {
                 var exito = JSON.parse(texto);
 
@@ -65,7 +65,7 @@
     }
 
     function ajaxRegistrarNuevoUsuario(nombre, apellidos, identificador, email, contrasenna, contrasenna2){
-        llamadaAjax("../RegistrarUsuarioAjax.php", "nombre="+nombre.value+"&apellidos="+apellidos.value+
+        llamadaAjax("../_php/RegistrarUsuarioAjax.php", "nombre="+nombre.value+"&apellidos="+apellidos.value+
                                                     "&identificador="+identificador.value+"&email="+email.value
                                                     +"&contrasenna="+contrasenna.value+"&contrasenna2="+contrasenna2.value,
             function(texto) {
@@ -89,7 +89,7 @@
 
     function crearCarruselNovedades(){
 
-        llamadaAjax("../PeliculasNovedades.php", "",
+        llamadaAjax("../_php/PeliculasNovedades.php", "",
             function(texto) {
                 var peliculas = JSON.parse(texto);
     

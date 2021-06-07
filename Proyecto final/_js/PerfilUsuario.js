@@ -32,7 +32,7 @@ function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
 }
 
 function ajaxComprobarSesionIniciada(){
-    llamadaAjax("../SesionIniciada.php", "", 
+    llamadaAjax("../_php/SesionIniciada.php", "", 
     function(texto){
         var sesionIniciada = JSON.parse(texto);
         if(!sesionIniciada){
@@ -50,7 +50,7 @@ function cargarUsuario() {
         infoUsuario.removeChild(infoUsuario.lastChild);
     }
 
-    llamadaAjax("../ObtenerUsuarioPerfil.php", "",
+    llamadaAjax("../_php/ObtenerUsuarioPerfil.php", "",
     function(texto) {
         
         if ( texto == "" ) { //COMO SI CONTARAS LA LONGITUD DE CADENA
@@ -80,7 +80,7 @@ function modificarInput(divInput, p1, iconoEdit) {
         iconoOK.setAttribute("class", "fas fa-thumbs-up");
         iconoOK.addEventListener("click", function(){
             if(inputEdit.value!="")
-                llamadaAjax("../ModificarDato.php", "modificacion="+inputEdit.value+"&input="+p1.id,
+                llamadaAjax("../_php/ModificarDato.php", "modificacion="+inputEdit.value+"&input="+p1.id,
                     function(texto) {
                         var exito = JSON.parse(texto);
                         if(exito==1 || exito==3){
@@ -126,7 +126,7 @@ function modificarContrasenna(divInput, p1, iconoEdit) {
     iconoOK.setAttribute("class", "fas fa-thumbs-up");
     iconoOK.addEventListener("click", function(){
         if(inputEdit.value!=""&&inputEdit2.value!="")
-            llamadaAjax("../ModificarContrasenna.php", "actualContrasenna="
+            llamadaAjax("../_php/ModificarContrasenna.php", "actualContrasenna="
                         +inputEdit.value+"&nuevaContrasenna="+inputEdit2.value,
                 function(texto) {
                     var exito = JSON.parse(texto);

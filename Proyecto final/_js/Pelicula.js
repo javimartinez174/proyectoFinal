@@ -56,7 +56,7 @@ function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
 }
 
 function ajaxComprobarSesionIniciada(){
-    llamadaAjax("../SesionIniciada.php", "", 
+    llamadaAjax("../_php/SesionIniciada.php", "", 
     function(texto){
         var sesionIniciada = JSON.parse(texto);
         if(!sesionIniciada){
@@ -69,7 +69,7 @@ function ajaxComprobarSesionIniciada(){
 
 function obtenerInfoPelicula(idPelicula) {
     
-    llamadaAjax("../ObtenerInfoPelicula.php", "id=" + parseInt(idPelicula),
+    llamadaAjax("../_php/ObtenerInfoPelicula.php", "id=" + parseInt(idPelicula),
         function(texto) {
                 var infoPelicula = JSON.parse(texto);
                 crearPelicula(infoPelicula);        
@@ -82,7 +82,7 @@ function obtenerInfoPelicula(idPelicula) {
 }
 
 function obtenerInfoDirector(idPelicula) {
-    llamadaAjax("../ObtenerInfoDirector.php", "id=" + parseInt(idPelicula),
+    llamadaAjax("../_php/ObtenerInfoDirector.php", "id=" + parseInt(idPelicula),
         function(texto) {
                 var directores = JSON.parse(texto);
 
@@ -98,7 +98,7 @@ function obtenerInfoDirector(idPelicula) {
 }
 
 function obtenerInfoActor(idPelicula) {
-    llamadaAjax("../ObtenerInfoActor.php", "id=" + parseInt(idPelicula),
+    llamadaAjax("../_php/ObtenerInfoActor.php", "id=" + parseInt(idPelicula),
         function(texto) {
                 var actores = JSON.parse(texto);
 
@@ -113,7 +113,7 @@ function obtenerInfoActor(idPelicula) {
 }
 
 function obtenerInfoGenero(idPelicula) {
-    llamadaAjax("../ObtenerInfoGenero.php", "id=" + parseInt(idPelicula),
+    llamadaAjax("../_php/ObtenerInfoGenero.php", "id=" + parseInt(idPelicula),
         function(texto) {
                 var generos = JSON.parse(texto);
 
@@ -128,7 +128,7 @@ function obtenerInfoGenero(idPelicula) {
 }
 
 function obtenerInfoPlataforma(idPelicula) {
-    llamadaAjax("../ObtenerInfoPlataforma.php", "id=" + parseInt(idPelicula),
+    llamadaAjax("../_php/ObtenerInfoPlataforma.php", "id=" + parseInt(idPelicula),
         function(texto) {
                 var plataformas = JSON.parse(texto);
 
@@ -143,7 +143,7 @@ function obtenerInfoPlataforma(idPelicula) {
 }
 
 function obtenerComentarios(idPelicula) {
-    llamadaAjax("../ObtenerComentarios.php", "peliculaId=" + parseInt(idPelicula),
+    llamadaAjax("../_php/ObtenerComentarios.php", "peliculaId=" + parseInt(idPelicula),
         function(texto) {
                 var comentarios = JSON.parse(texto);
 
@@ -158,7 +158,7 @@ function obtenerComentarios(idPelicula) {
 }
 
 function obtenerComentarioInsertado() {
-    llamadaAjax("../ObtenerComentarioinsertado.php", "",
+    llamadaAjax("../_php/ObtenerComentarioinsertado.php", "",
         function(texto) {
                 var comentario = JSON.parse(texto);
                 obtenerUsuarioComentario(comentario);
@@ -170,7 +170,7 @@ function obtenerComentarioInsertado() {
 }
 
 function ObtenerListasUsuario(idPelicula){
-    llamadaAjax("../ObtenerListasUsuario.php", "",
+    llamadaAjax("../_php/ObtenerListasUsuario.php", "",
         function(texto) {
             var listas = JSON.parse(texto);
 
@@ -186,7 +186,7 @@ function ObtenerListasUsuario(idPelicula){
  }
 
 function ajaxAnnadirALista(idListas, idPelicula){
-    llamadaAjax("../AnnadirPeliculaALista.php", "listaId=" + idListas +"&idPelicula="+parseInt(idPelicula),
+    llamadaAjax("../_php/AnnadirPeliculaALista.php", "listaId=" + idListas +"&idPelicula="+parseInt(idPelicula),
         function(texto) {
                 $('#myModal').modal('hide');
                 limpiarDivAlertas();
@@ -200,7 +200,7 @@ function ajaxAnnadirALista(idListas, idPelicula){
 }
  
 function obtenerUsuarioComentario(comentario) {
-    llamadaAjax("../ObtenerUsuario.php", "id=" + parseInt(comentario.usuarioId),
+    llamadaAjax("../_php/ObtenerUsuario.php", "id=" + parseInt(comentario.usuarioId),
         function(texto) {
                 var usuario = JSON.parse(texto);
                 crearComentario(comentario, usuario);
@@ -212,7 +212,7 @@ function obtenerUsuarioComentario(comentario) {
 }
 
 function insertarComentario() {
-    llamadaAjax("../InsertarComentario.php", "mensaje=" + document.getElementById("insertComentario").value+
+    llamadaAjax("../_php/InsertarComentario.php", "mensaje=" + document.getElementById("insertComentario").value+
                 "&peliculaId="+parseInt(idPelicula),
         function(texto) {
                 document.getElementById("insertComentario").value = "";

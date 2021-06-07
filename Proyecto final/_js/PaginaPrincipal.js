@@ -44,7 +44,7 @@ function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
 }
 
 function ajaxComprobarSesionIniciada(){
-    llamadaAjax("../SesionIniciada.php", "", 
+    llamadaAjax("../_php/SesionIniciada.php", "", 
         function(texto){
             var sesionIniciada = JSON.parse(texto);
             if(!sesionIniciada){
@@ -56,7 +56,7 @@ function ajaxComprobarSesionIniciada(){
 }
 
 function cargarPelis() {
-    llamadaAjax("../CargarPeliculas.php", "",
+    llamadaAjax("../_php/CargarPeliculas.php", "",
         function(texto) {
             
             var peliculas = JSON.parse(texto);
@@ -79,7 +79,7 @@ function cargarBusqueda() {
         crearAlertaInsertada(mensaje);
         cargarPelis();
     } else if(busqueda.value != ""){
-        llamadaAjax("../BusquedaAJAX.php", "busqueda=" + busqueda.value,
+        llamadaAjax("../_php/BusquedaAJAX.php", "busqueda=" + busqueda.value,
             function(texto) {
                 
                 if ( texto == "" ) { //COMO SI CONTARAS LA LONGITUD DE CADENA
@@ -110,7 +110,7 @@ function cargarBusqueda() {
 
 
 function aniadirAListaFavoritosAJAX(peliculaId){
-    llamadaAjax("../AniadirAListaFavoritosAJAX.php", "peliculaId="+parseInt(peliculaId),
+    llamadaAjax("../_php/AniadirAListaFavoritosAJAX.php", "peliculaId="+parseInt(peliculaId),
         function(texto) {
                 divLimpiarAlerta();
                 mensaje = "Pelicula insertada en favoritos";
@@ -123,7 +123,7 @@ function aniadirAListaFavoritosAJAX(peliculaId){
 }
 
 function comprobarAdmin() {
-    llamadaAjax("../ComprobarAdmin.php", "",
+    llamadaAjax("../_php/ComprobarAdmin.php", "",
         function(texto) {
             var admin = JSON.parse(texto);
             if(admin)
@@ -136,7 +136,7 @@ function comprobarAdmin() {
 }
 
 function ajaxIntroducirPelicula(inputNombre, inputDirector, inputActores, inputGeneros, inputPlataformas, anio, puntuacion, sinopsis, trailer, caratula) {
-    llamadaAjax("../IntroducirPelicula.php", "nombre="+inputNombre.value+"&director="+inputDirector.value+"&actores="+inputActores.value+"&generos="+inputGeneros.value+"&plataformas="+inputPlataformas.value+"&anio="+anio.value+"&puntuacion="+puntuacion.value+"&sinopsis="+sinopsis.value+"&trailer="+trailer.value+"&caratula="+caratula.value,
+    llamadaAjax("../_php/IntroducirPelicula.php", "nombre="+inputNombre.value+"&director="+inputDirector.value+"&actores="+inputActores.value+"&generos="+inputGeneros.value+"&plataformas="+inputPlataformas.value+"&anio="+anio.value+"&puntuacion="+puntuacion.value+"&sinopsis="+sinopsis.value+"&trailer="+trailer.value+"&caratula="+caratula.value,
     function(texto) {
             $('#myModal').modal('hide');
             cargarPelis();

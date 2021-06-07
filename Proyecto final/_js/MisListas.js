@@ -37,7 +37,7 @@ function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
 }
 
 function ajaxCrearNuevaLista(listaInput){
-    llamadaAjax("../CrearNuevaLista.php", "nombreLista="+listaInput.value,
+    llamadaAjax("../_php/CrearNuevaLista.php", "nombreLista="+listaInput.value,
     function(texto) {
         
             var exito = JSON.parse(texto);
@@ -56,7 +56,7 @@ function ajaxCrearNuevaLista(listaInput){
 function cargarListas() {
     limpiarDiv();
     crearBtnCrearNuevaLista();
-    llamadaAjax("../ObtenerListasUsuario.php", "",
+    llamadaAjax("../_php/ObtenerListasUsuario.php", "",
     function(texto) {
         
             var listas = JSON.parse(texto);
@@ -72,7 +72,7 @@ function cargarListas() {
 }
 
 function cargarPelisLista(lista, divPelis){
-    llamadaAjax("../ObtenerInfoPeliculaPorListaId.php", "id="+parseInt(lista.id),
+    llamadaAjax("../_php/ObtenerInfoPeliculaPorListaId.php", "id="+parseInt(lista.id),
     function(texto) {
         
             var peliculas = JSON.parse(texto);
@@ -88,7 +88,7 @@ function cargarPelisLista(lista, divPelis){
 }
 
 function eliminarLista(listaId){
-    llamadaAjax("../EliminarLista.php", "listaId="+parseInt(listaId),
+    llamadaAjax("../_php/EliminarLista.php", "listaId="+parseInt(listaId),
     function(texto) {
         var exito = JSON.parse(texto);
             if(exito){
@@ -105,7 +105,7 @@ function eliminarLista(listaId){
 }
 
 function eliminarPelicula(listaId, peliculaId){
-    llamadaAjax("../BorrarPeliculaLista.php", "listaId="+parseInt(listaId)+"&peliculaId="+parseInt(peliculaId),
+    llamadaAjax("../_php/BorrarPeliculaLista.php", "listaId="+parseInt(listaId)+"&peliculaId="+parseInt(peliculaId),
     function(texto) {
         limpiarDivAlertas();
         mensaje = "Pelicula eliminada con exito"
