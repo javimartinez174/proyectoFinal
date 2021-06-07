@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
+@import url("https://fonts.googleapis.com/css?family=Sacramento&display=swap");
+// Variables
+$regal-blue: #034378;
+$san-juan: #2d4e68;
+$bermuda: #77d7b9;
+$azulClaro: #65c1ff;
+$white: #fff;
+$black: #000;
+$open-sans: 'Open Sans',
+'sans-serif';
+
+body {
+  padding: 0px;
+  margin: 0px;
+  height: 100vh;
+  background: rgb(14, 51, 100);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 10px,
+    rgba(0, 3, 44, 0.8) 9px,
+    rgba(0, 27, 58, 0.8) 13px,
+    transparent 13px
+  );
+  
+  height: 100vh;
+  font-family: $open-sans;
+}
+  h1{
+      color: #106a7c;
+  }
+  h2{
+      color: #106a7c;
+  }
+  
+  h4{
+      color: $black;
+  }
+
+  a {
+      text-decoration: none;
+    color: #01447e;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+    nav{
+        background-color: #071c22d3;
+    }
+
+    nav button{
+        background-color: rgba(4, 155, 255, 0.651);
+    }
+    .navRightPrincipal {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+  
+    a{
+        text-decoration: none;
+        color: #14839A;
+    }
+    a:hover{
+        color: #00cbf3;
+    }
+    
+
+    .fas {
+      font-size: 1em;
+      color: #49b6ff;
+      cursor: pointer;
+      line-height: 2;
+   }
+   .fas:hover {
+    font-size: 1em;
+    color: #d8ee14;
+    cursor: pointer;
+  }
+ 
+  /*Migas de Pan*/
+
+  ul.breadcrumb {
+    padding: 10px 16px;
+    list-style: none;
+    background-color: #eee;
+  }
+  ul.breadcrumb li {
+    display: inline;
+    font-size: 18px;
+  }
+  ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: "/\00a0";
+  }
+  ul.breadcrumb li a {
+    color: #0275d8;
+    text-decoration: none;
+  }
+  ul.breadcrumb li a:hover {
+    color: #01447e;
+    text-decoration: underline;
+  }
+
+  .listasUsuario img{
+   height: 200px;
+   width: 150px;
+   margin: 1em;
+   border: 1px solid black;
+   border-radius: 10%;
+  }
+
+  .collapsible {
+    margin-top: 1em;
+    border-radius: 2em;
+    background-color: $azulClaro;
+    color: $black;
+    cursor: pointer;
+    padding: 1em;
+    min-width: 45%;
+    max-width: 45%;
+    border: 1px solid black;
+    text-align: center;
+    outline: none;
+    align-self: center;
+    box-shadow: 5px 10px 10px black;
+  }
+
+  .collapsible h4{
+    font-size: 2em;
+  }
+  
+  .collapsible:hover {
+    background-color: $regal-blue;
+    color: black;
+  }
+  
+  .content {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    align-items: center;
+  }
+
+  .containerPeli{
+    display:inline-block;
+    position:relative;
+    }
+    
+    .containerPeli button{
+    position: absolute;
+    top: 1em;
+    right:1.2em;
+    background-color:#8f00059c;
+    border-radius: 50%;
+    border:none;
+    color:white;
+    height: auto;
+    width: auto;
+    }
+
+    .containerPeli button:hover{
+      position: absolute;
+      top:1em;
+      right:1.2em;
+      background-color:#e92b3163;
+      border-radius: 50%;
+      color:white;
+      text-transform:uppercase;
+      height: auto;
+      width: auto;
+      }
+
+      .eliminarLista{
+        margin-right: 1em;
+        background-color:#8f0005c9;
+        border-radius: 50%;
+        font-size: medium;
+        border:none;
+        color:white;
+        height: auto;
+        width: auto;
+      }
+
+      .eliminarLista:hover{
+        margin-right: 1em;
+        background-color:#e92b31d8;
+        border-radius: 50%;
+        font-size: medium;
+        border:none;
+        color:white;
+        height: auto;
+        width: auto;
+      }
+
+      #abreModal{
+        font-size: 1.2em;
+        color: $azulClaro;
+        color: $black;
+        border-radius: 5%;
+        border: none;
+        box-shadow: rgba(0,0,0,0.8) 5px 1px 5px;
+      }
+
+      #abreModal:hover{
+        border-radius: 5%;
+        border: none;
+        background-color: #00768d;
+        box-shadow: rgba(0,0,0,0.8) 5px 1px 5px;
+      }
+
+  .modal-open .container{
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+  }
+
+  #modalAlerta{
+    width: 100%;
+  }
+
+  .alert{
+    width: max-content;
+  }

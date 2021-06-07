@@ -138,7 +138,7 @@ ul.breadcrumb li a:hover {
 }
 
 #infoPelicula #pSinopsis {
-  width: 70%;
+  max-width: 70%;
   margin: 20px;
 }
 
@@ -152,6 +152,8 @@ ul.breadcrumb li a:hover {
           flex-direction: row;
   -ms-flex-line-pack: center;
       align-content: center;
+  background-color: #00101d;
+  border-radius: 2em;
 }
 
 #container1 {
@@ -184,6 +186,15 @@ ul.breadcrumb li a:hover {
 
 #infoPlataforma {
   margin: 20px;
+}
+
+.iconoPlataforma {
+  border: #77d7b9 1px solid;
+}
+
+#trailer {
+  margin-top: 2em;
+  text-align: center;
 }
 
 .comentarios {
@@ -233,6 +244,8 @@ ul.breadcrumb li a:hover {
 .insertComentario {
   background-color: #b5dbf5;
   border-radius: 10px;
+  width: 20em;
+  height: 4em;
 }
 
 .insertComentario:hover {
@@ -249,8 +262,8 @@ ul.breadcrumb li a:hover {
 }
 
 .imgCaratula {
-  height: 70%;
-  width: 25%;
+  width: 80%;
+  max-height: 80%;
 }
 
 @media (min-width: 600px) {
@@ -269,15 +282,23 @@ ul.breadcrumb li a:hover {
 }
 
 .agregarLista {
-  background-color: #0CC7ED;
-  border: 1px solid #0093AF;
-  border-radius: 5px;
-  height: 30%;
+  border: none;
+  background-color: #65c1ff;
+  margin-top: 1em;
+  border-radius: 0.2em;
+  min-width: 80%;
 }
 
 .agregarLista:hover {
-  background-color: #85C9D6;
-  height: 30%;
+  background-color: #2d4e68;
+  color: #fff;
+}
+
+.pSinopsis {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  font-size: 1.1em;
 }
 
 .modal-open .container {

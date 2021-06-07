@@ -176,25 +176,30 @@ function crearPelicula(infoPelicula) {
     cargarBreadcrumbs(infoPelicula);
 
     var titulo = document.createElement("h1");
-    titulo.innerHTML = infoPelicula.nombre;
+    titulo.innerHTML = infoPelicula.nombre + " (" + infoPelicula.anio + ")";
 
     var divContainer1 = document.createElement("div");
     divContainer1.setAttribute("id", "container1");
     var sinopsis = document.createElement("p");
     sinopsis.setAttribute("id", "pSinopsis");
+    sinopsis.setAttribute("class", "pSinopsis");
     sinopsis.innerHTML = infoPelicula.sinopsis;
     document.getElementById("iconoAudio").addEventListener("click", function(){decirTexto(infoPelicula.sinopsis)});
 
     var trailer = document.createElement("p");
+    trailer.setAttribute("class", "ml-auto")
     trailer.setAttribute("id", "pTrailer");
     trailer.innerHTML = infoPelicula.trailer;
+
+    document.getElementById("trailer").appendChild(trailer);
 
     var imgCaratula = document.createElement("img");
     imgCaratula.setAttribute("class", "imgCaratula");
     imgCaratula.setAttribute("src", "../_img/"+infoPelicula.caratula);
 
-    document.getElementsByClassName("imagen").appendChild(divContainer1);
-    divContainer1.appendChild(imgCaratula);
+    divImagen = document.getElementById("imagen");
+    divImagen.appendChild(imgCaratula);
+    divContainer1.appendChild(divImagen);
     divContainer1.appendChild(sinopsis);
     
 
@@ -207,19 +212,16 @@ function crearPelicula(infoPelicula) {
     agregarALista.setAttribute("href", "#");
     agregarALista.innerHTML= "Añadir a mis listas +";
 
+    divImagen.appendChild(agregarALista);
+
     var puntuacion = document.createElement("p");
     puntuacion.innerHTML = "Puntuación obtenida: "+infoPelicula.puntuacion;
 
-    var anio = document.createElement("p");
-    anio.innerHTML = "Año de estreno: "+infoPelicula.anio;
-    
     
     document.getElementById("infoPelicula").appendChild(titulo);
-    divContainer1.appendChild(agregarALista);
     document.getElementById("infoPelicula").appendChild(divContainer1);
-    document.getElementById("infoPelicula").appendChild(trailer);
     document.getElementById("infoPelicula").appendChild(puntuacion);
-    document.getElementById("infoPelicula").appendChild(anio);
+
 
     document.getElementById("abreModal").addEventListener("click", ObtenerListasUsuario(infoPelicula.id));
 
@@ -292,6 +294,7 @@ function crearPlataforma(infoPlataforma) {
     pNombreLista.innerHTML = "Lista: "+ lista.nombre;
     pNombreLista.style.display = "inline-block";
     pNombreLista.style.marginRight = "1em";
+    pNombreLista.style.color = "black";
 
     nombreListaInput = document.createElement("input");
     nombreListaInput.setAttribute("type", "checkbox");
@@ -341,6 +344,7 @@ function crearPlataforma(infoPlataforma) {
  function ajaxAnnadirALista(idListas, idPelicula){
     llamadaAjax("../AnnadirPeliculaALista.php", "listaId=" + idListas +"&idPelicula="+parseInt(idPelicula),
     function(texto) {
+            $('#myModal').modal('hide');
             limpiarDivAlertas();
             mensaje = "Pelicula insertada con éxito";
             crearAlerta(mensaje);

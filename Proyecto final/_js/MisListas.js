@@ -15,7 +15,10 @@ function crearBtnCrearNuevaLista() {
     aNuevaLista.setAttribute("data-toggle", "modal");
     aNuevaLista.setAttribute("data-target", "#myModal");
     aNuevaLista.setAttribute("href", "#");
-    aNuevaLista.innerHTML= "Crear Lista";
+    aNuevaLista.innerHTML= "Crear Lista  <i class='fas fa-plus'></i>";
+
+    
+   
 
     divInsertPeli.appendChild(aNuevaLista);
 
@@ -158,7 +161,9 @@ function domCrearListas(lista, i){
         content.style.maxHeight = content.scrollHeight + "px";
         } 
     });
-    nombreLista.innerHTML= lista.nombre;
+    tituloLista = document.createElement("h4");
+    tituloLista.innerHTML = lista.nombre
+    nombreLista.appendChild(tituloLista);
     document.getElementById("listasUsuario").appendChild(nombreLista);
 
     divPelis = document.createElement("div");

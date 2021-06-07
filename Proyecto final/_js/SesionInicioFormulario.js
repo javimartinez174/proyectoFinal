@@ -249,6 +249,7 @@
                 var exito = JSON.parse(texto);
 
                 if(!exito){
+                    $('#myModal').modal('hide');
                     divLimpiarAlerta();
                     mensaje = "Error! Las credenciales son erroneas";
                     crearAlerta(mensaje);
@@ -274,6 +275,7 @@
                 var exito = JSON.parse(texto);
 
                 if(!exito){
+                    $('#myModal').modal('hide');
                     divLimpiarAlerta();
                     mensaje = "Error! Algo ha ido mal. Puede que su identificador ya se esté usando";
                     crearAlerta(mensaje);
