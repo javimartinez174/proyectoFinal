@@ -238,22 +238,12 @@ class DAO
         self::ejecutarActualizacion("UPDATE usuario SET identificador=?,nombre=?,apellidos=?,email=? WHERE identificador=?", [$identificador, $nombre, $apellidos, $email, $identificador]);
     }
 
-    public static function usuarioModificarContrasenna(string $contrasennaNueva)
+    public static function usuarioModificarDato(string $nuevoDato, string $input): bool
     {
-        $identificador = $_SESSION["identificador"];
-
-
-        if (!isset(self::$pdo)) self::$pdo = self::obtenerPdoConexionBd();
-        self::ejecutarActualizacion("UPDATE usuario SET contrasenna=? WHERE identificador=?", [$contrasennaNueva, $identificador]);
-    }
-
-    public static function usuarioModificarIdentificador(string $nuevoIdentificador, string $input): bool
-    {
-        
-        self::ejecutarActualizacion("UPDATE usuario SET ".$input."=? WHERE identificador=?", [$nuevoIdentificador, $_SESSION["identificador"]]);
+        self::ejecutarActualizacion("UPDATE usuario SET ".$input."=? WHERE identificador=?", [$nuevoDato, $_SESSION["identificador"]]);
         $usuario = self::usuarioObtenerPorId($_SESSION["id"]);
         switch ($input) {
-            case "identificador":
+            case "identificador": 
                 $_SESSION[$input] = $usuario->getIdentificador();
                 break;
             case "nombre":
@@ -268,6 +258,23 @@ class DAO
         }
         
         return true;
+    }
+
+    public static function usuarioModificarContrasenna(string $actualContrasenna, string $nuevaContrasenna): bool
+    {
+        $contrasenna_hash = self::ejecutarConsulta(
+            "SELECT * FROM usuario WHERE identificador=?",
+             [$_SESSION["identificador"]]
+          );
+  
+          if($contrasenna_hash){
+              if(password_verify($actualContrasenna, $contrasenna_hash[0]["contrasenna"])){
+                    self::ejecutarActualizacion("UPDATE usuario SET contrasenna=? WHERE identificador=?", [password_hash($nuevaContrasenna,  PASSWORD_BCRYPT), $_SESSION["identificador"]]);
+                    return true;
+              }
+        }
+        
+        return false;
     }
 
 

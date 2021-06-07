@@ -2,6 +2,7 @@ window.onpaint =  ajaxComprobarSesionIniciada(); //se ejecuta antes de cargar la
 
 window.onload = function(){
     cargarUsuario();
+    divAlerta = document.getElementById("alerta");
     infoUsuario = document.getElementById("infoUsuario");
 }
 
@@ -73,15 +74,21 @@ function modificarInput(divInput, p1, iconoEdit) {
         iconoOK.setAttribute("class", "fas fa-thumbs-up");
         iconoOK.addEventListener("click", function(){
             if(inputEdit.value!="")
-                llamadaAjax("../ModificarIdentificador.php", "nuevoIdentificador="+inputEdit.value+"&input="+p1.id,
+                llamadaAjax("../ModificarDato.php", "modificacion="+inputEdit.value+"&input="+p1.id,
                     function(texto) {
                         var exito = JSON.parse(texto);
-                        if(exito){
-                            iconoEdit.style.display = "block";
+                        if(exito==1 || exito==3){
                             p1.innerHTML = inputEdit.value;
+                            limpiarDivAlertas();
+                            crearAlerta(p1.id+" Actualizado", true);
+                        }else if(exito==2){
+                            limpiarDivAlertas();
+                            crearAlerta("Este identificador ya está en uso", false);
+                        }else if($exito==0){
+                            limpiarDivAlertas();
+                            crearAlerta("Algo ha ido mal..", false);
                         }
-                        else
-                            alert("Campo obligatorio");
+                        iconoEdit.style.display = "block";
                         divInput.removeChild(divInput.lastChild);
                         divInput.removeChild(divInput.lastChild);
                     },
@@ -90,12 +97,57 @@ function modificarInput(divInput, p1, iconoEdit) {
                     }
                 );
             else
-                alert("Campo Obligatorio");
+                crearAlerta("Campo Obligatorio", false);
         })
         
     divInput.appendChild(inputEdit);    
     divInput.appendChild(iconoOK);
     
+}
+
+function modificarContrasenna(divInput, p1, iconoEdit) {
+    var inputEdit = document.createElement("input");
+    inputEdit.setAttribute("type", "text");
+    inputEdit.setAttribute("placeholder", p1.id+" actual");
+    inputEdit.setAttribute("class", "inputEdit");
+    inputEdit.setAttribute("required", true);
+    var inputEdit2 = document.createElement("input");
+    inputEdit2.setAttribute("type", "text");
+    inputEdit2.setAttribute("placeholder", "Nueva "+p1.id);
+    inputEdit2.setAttribute("class", "inputEdit2");
+    inputEdit2.setAttribute("required", true);
+    var iconoOK = document.createElement("i");
+    iconoOK.setAttribute("class", "fas fa-thumbs-up");
+    iconoOK.addEventListener("click", function(){
+        if(inputEdit.value!=""&&inputEdit2.value!="")
+            llamadaAjax("../ModificarContrasenna.php", "actualContrasenna="+inputEdit.value+"&nuevaContrasenna="+inputEdit2.value,
+                function(texto) {
+                    var exito = JSON.parse(texto);
+                    if(exito){
+                        limpiarDivAlertas();
+                        crearAlerta("Contraseña Actualizada", true);
+                    }
+                    else{
+                        limpiarDivAlertas();
+                        crearAlerta("Algo ha salido mal..", false);
+                    }
+                    iconoEdit.style.display = "block";
+                    divInput.removeChild(divInput.lastChild);
+                    divInput.removeChild(divInput.lastChild);
+                    divInput.removeChild(divInput.lastChild);
+                },
+                function(texto) {
+                
+                }
+            );
+        else
+            alert("Campo Obligatorio");
+    })
+    
+divInput.appendChild(inputEdit);  
+divInput.appendChild(inputEdit2);  
+divInput.appendChild(iconoOK);
+
 }
 
 
@@ -195,34 +247,51 @@ function domCrearPerfil(usuario){
     document.getElementById("infoUsuario").appendChild(h4Contrasenna);
     var divContrasenna = document.createElement("div");
     divContrasenna.setAttribute("class", "divContrasenna");
-    var divPass = document.createElement("div");
-    divPass.setAttribute("class", "divPass");
+    var divContrasenna2 = document.createElement("div");
+    divContrasenna2.setAttribute("class", "divContrasenna2");
     var p5 = document.createElement("p");
+    p5.setAttribute("id", "Contraseña");
     p5.innerHTML = "********";
-    divPass.appendChild(p5);
-    divContrasenna.appendChild(divPass);
-    var iconoVer = document.createElement("i");
-    iconoVer.setAttribute("class", "fas fa-eye");
-    iconoVer.setAttribute("id", "iconoVer");
-    iconoVer.addEventListener("mouseover", function(){
-                                            while(divPass.firstChild){
-                                                divPass.removeChild(divPass.lastChild); 
-                                            }
-                                            var p5 = document.createElement("p");
-                                            p5.innerHTML = usuario.contrasenna;
-                                            divPass.appendChild(p5);
-                                        });
-    iconoVer.addEventListener("mouseout", function(){
-                                            while(divPass.firstChild){
-                                                divPass.removeChild(divPass.lastChild); 
-                                            }
-                                            var p5 = document.createElement("p");
-                                            p5.innerHTML = "********";
-                                            divPass.appendChild(p5);
-                                        });
-                                        
-    divContrasenna.appendChild(iconoVer);
+    divContrasenna2.appendChild(p5);
+    divContrasenna.appendChild(divContrasenna2);
+    var iconoEdit5 = document.createElement("i");
+    iconoEdit5.setAttribute("class", "fas fa-edit");
+    iconoEdit5.setAttribute("id", "iconoEdit");
+    iconoEdit5.addEventListener("click", function(){modificarContrasenna(divContrasenna2, p5, this); this.style.display = "none";}, false);
+    divContrasenna.appendChild(iconoEdit5);
     document.getElementById("infoUsuario").appendChild(divContrasenna);
     
 }
+function limpiarDivAlertas(){
+    while(divAlerta.firstChild){
+        divAlerta.removeChild(divAlerta.lastChild);
+    }
+}
 
+function crearAlerta(mensaje, booleano){
+    
+    modal = document.createElement("div");
+    modal.setAttribute("class", "modal");
+    modal.setAttribute("id", "modalAlerta");
+
+    modalDialog = document.createElement("div");
+    modalDialog.setAttribute("class", "modal-dialog modal-dialog-centered modal-sm");
+   
+
+    alerta = document.createElement("div");
+    booleano?alerta.setAttribute("class", "alert alert-success"):alerta.setAttribute("class", "alert alert-danger");
+    alerta.innerHTML = mensaje;
+
+    btnCerrar = document.createElement("button");
+    btnCerrar.setAttribute("type", "button");
+    btnCerrar.setAttribute("class", "close");
+
+    alerta.appendChild(btnCerrar);
+
+    modalDialog.appendChild(alerta);
+    modal.appendChild(modalDialog);
+
+    divAlerta.appendChild(modal);
+
+    $("#modalAlerta").modal("show");
+}

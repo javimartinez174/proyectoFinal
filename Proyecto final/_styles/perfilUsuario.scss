@@ -1,0 +1,174 @@
+body{
+    background: rgb(165, 173, 179);
+  }
+  h1{
+      color: #106a7c;
+  }
+  h2{
+      color: #106a7c;
+  }
+  
+  h4{
+      color: #106a7c;
+  }
+
+  a {
+      text-decoration: none;
+    color: #01447e;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
+
+    nav{
+        background-color: #071c22d3;
+    }
+
+    nav button{
+        background-color: rgba(4, 155, 255, 0.651);
+    }
+    .navRightPrincipal {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+  
+    a{
+      text-decoration: none;
+      color: #14839A;
+    }
+
+    a:hover{
+      color: #00cbf3;
+    }
+  
+
+  .fas {
+    font-size: 16px;
+    color: #001218;
+    cursor: pointer;
+    line-height: 2;
+ }
+ 
+  /*Migas de Pan*/
+
+  ul.breadcrumb {
+    padding: 10px 16px;
+    list-style: none;
+    background-color: rgb(238, 238, 238);
+  }
+  ul.breadcrumb li {
+    display: inline;
+    font-size: 18px;
+  }
+  ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: "/\00a0";
+  }
+  ul.breadcrumb li a {
+    color: #0275d8;
+    text-decoration: none;
+  }
+  ul.breadcrumb li a:hover {
+    color: #01447e;
+    text-decoration: underline;
+  }
+
+
+  .fotoPerfil{
+    margin: 40px;
+    width: 8em;
+    height: 8em;
+    border: 1px solid transparent;
+    border-radius: 100%;
+    box-shadow: 2px 2px 0px 2px turquoise;
+  }
+
+  .formCambiarImg {
+    margin: 40px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .infoUsuario {
+    margin: 40px;
+  }
+
+  .divIdentificador {
+    margin: 8px;
+    padding-left: 8px;
+    display: flex;
+    flex-direction: row;
+    width: 8em;
+    font-weight: bold;
+  }
+  .inputEditIdentificador {
+    display: inline;
+  }
+  .divNombre {
+    margin: 8px;
+    padding-left: 8px;
+    display: flex;
+    flex-direction: row;
+    width: 8em;
+    font-weight: bold;
+  }
+  .divApellidos {
+    margin: 8px;
+    padding-left: 8px;
+    display: flex;
+    flex-direction: row;
+    width: 8em;
+    font-weight: bold;
+  }
+  .divEmail {
+    margin: 8px;
+    padding-left: 8px;
+    display: flex;
+    flex-direction: row;
+    width: 8em;
+    font-weight: bold;
+  }
+  .divContrasenna {
+    margin: 8px;
+    padding-left: 8px;
+    display: flex;
+    flex-direction: row;
+    width: 8em;
+    font-weight: bold;
+  }
+  #iconoVer {
+    position: relative;
+    right: 116px;
+  }
+  #iconoEdit {
+    position: relative;
+    left: 32x;
+  }
+
+  .divIdentificador2 {
+    width: 6em;
+  }
+  .divNombre2 {
+    width: 6em;
+  }
+  .divApellidos2 {
+    width: 6em;
+  }
+  .divEmail2 {
+    width: 6em;
+  }
+  .divContrasenna2 {
+    width: 6em;
+  }
+  .inputEdit, .inputEdit2 {
+    margin: 1%;
+    border: 1px solid black;
+  }
+  
+  
