@@ -11,18 +11,6 @@
         
     }
 
-    //------------------MÉTODOS JQUEY---------------------
-    function jQueyCarrusel(){
-        $(document).ready(setTimeout(function(){  
-            $('.autoplay').slick({
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            autoplay: true,
-            infinite: true,
-            autoplaySpeed: 2000,
-            });
-        }), 1000);
-    }
 
 //---------------------------MÉTODOS AJAX-------------------
     function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
@@ -366,3 +354,16 @@ function divLimpiarFormulario(){
     }
 }
 
+
+    //------------------MÉTODOS JQUEY---------------------
+    function jQueyCarrusel(){
+        $(document).ready(setTimeout(function(){  
+            $('.autoplay').slick({
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            infinite: true,
+            autoplaySpeed: 2000,
+            });
+        }), 100);
+    }
