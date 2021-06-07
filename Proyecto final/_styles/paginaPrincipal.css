@@ -124,8 +124,7 @@ h2 {
 }
 
 .peliculaCard .wrapper {
-  background-image: -webkit-gradient(linear, right top, left top, from(#034378), to(#2d4e68));
-  background-image: linear-gradient(to left, #034378, #2d4e68);
+  background-color: #034378;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: "Open Sans", sans-serif;

@@ -826,7 +826,7 @@ public static function generoObtenerPorPeliculaId(int $id): ?array
         $peliculas = array();
         $rs = self::ejecutarConsulta(
             "SELECT * FROM pelicula WHERE fechaEntrada BETWEEN 
-            (CURRENT_DATE-10) AND CURRENT_DATE",
+            (CURDATE()- INTERVAL 20 DAY) AND CURDATE()",
             []
         );
 

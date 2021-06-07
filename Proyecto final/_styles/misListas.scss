@@ -38,49 +38,90 @@ body {
   }
 
   a {
-      text-decoration: none;
-    color: #01447e;
-  }
-  
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+    text-decoration: none;
+}
 
-    nav{
-        background-color: #071c22d3;
-    }
+.logo {
+  max-width: 20%;
+  margin-right: 3em;
+}
+.logo img{
+  min-width: 4em;
+  max-width: 4em;
+}
 
-    nav button{
-        background-color: rgba(4, 155, 255, 0.651);
-    }
-    .navRightPrincipal {
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-    }
-  
-    a{
-        text-decoration: none;
-        color: #14839A;
-    }
-    a:hover{
-        color: #00cbf3;
-    }
-    
+.navbar {
+  display: flex;
+  align-items: center;
+  font-family: $open-sans;
+  background-color: #071c22d3;
+  justify-content: center; 
+}
 
-    .fas {
-      font-size: 1em;
-      color: #49b6ff;
-      cursor: pointer;
-      line-height: 2;
-   }
-   .fas:hover {
-    font-size: 1em;
-    color: #d8ee14;
-    cursor: pointer;
-  }
+.nav-uls {
+  display: flex;
+  align-items: center;
+  font-family: $open-sans;
+  justify-content: flex-start; 
+  align-self: flex-end;
+  min-width: 80%;
+}
+
+.navbar-nav{
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar-nav li{
+  margin-left: 1.5em;
+}
+
+nav button{
+    background-color: rgba(4, 155, 255, 0.651);
+}
+
+.fas.fa-bars{
+  font-size: 2em;
+  max-width: fit-content;
+  align-self: center;
+}
+.fas.fa-bars:hover{
+  font-size: 2em;
+  max-width: fit-content;
+  align-self: center;
+}
+
+#navRightPrincipal {
+  padding: 8%;
+  background-color: rgb(23, 63, 90);
+  border: 1px solid #0011ff;
+}
+
+.fas {
+  font-size: 1em;
+  color: #49b6ff;
+  cursor: pointer;
+  line-height: 2;
+}
+.fas:hover {
+ font-size: 1em;
+ color: #d8ee14;
+ cursor: pointer;
+}
+
+
+a:hover{
+  color: #00cbf3;
+}
+
+button{
+  background-color: #49b6ff;
+  border: 1px solid #0093AF;
+  border-radius: 5px;
+}
+button:hover{
+  background-color: #85C9D6;
+}
  
   /*Migas de Pan*/
 
@@ -118,7 +159,7 @@ body {
   .collapsible {
     margin-top: 1em;
     border-radius: 2em;
-    background-color: $azulClaro;
+    background-color: #49b6ff;
     color: $black;
     cursor: pointer;
     padding: 1em;
@@ -201,16 +242,15 @@ body {
 
       #abreModal{
         font-size: 1.2em;
-        color: $azulClaro;
-        color: $black;
+        color: $white;
+        background-color: #071c22d3;
         border-radius: 5%;
-        border: none;
+        border: 1px solid #00768d;
         box-shadow: rgba(0,0,0,0.8) 5px 1px 5px;
       }
 
       #abreModal:hover{
         border-radius: 5%;
-        border: none;
         background-color: #00768d;
         box-shadow: rgba(0,0,0,0.8) 5px 1px 5px;
       }
@@ -230,3 +270,33 @@ body {
   .alert{
     width: max-content;
   }
+
+  .modal-dialog{
+    min-width: 350px;
+}
+.modal-body {
+      color: $white;
+      background-color: rgb(23, 63, 90);
+      border: 1px solid #1D2728;
+}
+.modal-header {
+      background-color:#071c22d3;
+      color: $white;
+      border: none;
+      align-items:center;
+      border-radius: 0;
+}
+.modal-content:hover {
+      border: 1px solid #14839A;
+      box-shadow: #14839A;
+}
+
+.modal-open .container-fluid
+{
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+}
+

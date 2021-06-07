@@ -127,6 +127,7 @@ function crearBtnCrearNuevaLista() {
 
     aNuevaLista = document.createElement("button");
     aNuevaLista.setAttribute("id", "abreModal");
+    aNuevaLista.setAttribute("class", "nuevaLista")
     aNuevaLista.setAttribute("data-toggle", "modal");
     aNuevaLista.setAttribute("data-target", "#myModal");
     aNuevaLista.setAttribute("href", "#");
@@ -191,7 +192,7 @@ function domCrearListas(lista, i){
         btnEliminarLista.setAttribute("class", "eliminarLista");
         btnEliminarLista.setAttribute("data-toggle", "tooltip");
         btnEliminarLista.setAttribute("title", "Eliminar "+lista.nombre);
-        btnEliminarLista.setAttribute("data-placement", "top");
+        btnEliminarLista.setAttribute("data-placement", "bottom");
         btnEliminarLista.addEventListener("click", function(){
             eliminarLista(lista.id);
         });

@@ -354,16 +354,14 @@ function divLimpiarFormulario(){
     }
 }
 
-
     //------------------MÉTODOS JQUEY---------------------
     function jQueyCarrusel(){
-        $(document).ready(setTimeout(function(){  
+        $(document).ready(function(){  
             $('.autoplay').slick({
             slidesToShow: 4,
             slidesToScroll: 1,
             autoplay: true,
-            infinite: true,
             autoplaySpeed: 2000,
             });
-        }), 100);
+        });
     }

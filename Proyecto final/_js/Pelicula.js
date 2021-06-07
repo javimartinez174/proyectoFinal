@@ -347,7 +347,6 @@ function crearPlataforma(infoPlataforma) {
     pNombreLista.innerHTML = "Lista: "+ lista.nombre;
     pNombreLista.style.display = "inline-block";
     pNombreLista.style.marginRight = "1em";
-    pNombreLista.style.color = "black";
 
     nombreListaInput = document.createElement("input");
     nombreListaInput.setAttribute("type", "checkbox");
