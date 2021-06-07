@@ -48,7 +48,7 @@ function ajaxComprobarSesionIniciada(){
         function(texto){
             var sesionIniciada = JSON.parse(texto);
             if(!sesionIniciada){
-                window.location ="../SecsionCerrar.php";
+                window.location ="../SesionCerrar.php";
             }
         }, function(texto) {
         }

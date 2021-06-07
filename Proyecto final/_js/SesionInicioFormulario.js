@@ -76,10 +76,13 @@
                     divLimpiarAlerta();
                     mensaje = "Error! Algo ha ido mal. Puede que su identificador ya se esté usando";
                     crearAlerta(mensaje);
-                }else
-                    window.location= "SesionInicioFormulario.html";
-                
-                
+                }else{
+                    $('#myModal').modal('hide');
+                    divLimpiarAlerta();
+                    mensaje = "Registrado con éxito, inicie sesión";
+                    crearAlerta(mensaje);     
+                }
+ 
             }, function (texto){}
         );
     }

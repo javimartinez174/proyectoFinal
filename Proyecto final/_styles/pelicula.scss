@@ -304,20 +304,16 @@ button:hover{
   min-width: 350px;
 }
 .modal-body {
-    color: $white;
+    color: $azulClaro;
     background-color: rgb(23, 63, 90);
     border: 1px solid #1D2728;
 }
 .modal-header {
     background-color:#071c22d3;
-    color: $white;
+    color: $azulClaro;
     border: none;
     align-items:center;
     border-radius: 0;
-}
-.modal-content:hover {
-    border: 1px solid #14839A;
-    box-shadow: #14839A;
 }
 
 .modal-open .container-fluid

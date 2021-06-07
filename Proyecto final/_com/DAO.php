@@ -165,22 +165,6 @@ class DAO
         );
     }
 
-    public static function obtenerusuario(): array
-    {
-        $datos = [];
-        $rs = self::ejecutarConsulta(
-            "SELECT * FROM usuario ",
-            []
-        );
-
-        foreach ($rs as $fila) {
-            $usuario = self::usuarioCrearDesdeRS($fila);
-            array_push($datos, $usuario);
-        }
-
-        return $datos;
-    }
-
     public static function crearUsuario(array $arrayUsuarioNuevo): bool
     {
         return self::ejecutarActualizacion(
@@ -227,17 +211,6 @@ class DAO
         return $actualizacion->execute($parametros);
     }
 
-    public static function usuarioModificar()
-    {
-        $identificador = $_REQUEST["identificador"];
-        $nombre = $_REQUEST["nombre"];
-        $apellidos = $_REQUEST["apellidos"];
-        $email = $_REQUEST["email"];
-
-        if (!isset(self::$pdo)) self::$pdo = self::obtenerPdoConexionBd();
-        self::ejecutarActualizacion("UPDATE usuario SET identificador=?,nombre=?,apellidos=?,email=? WHERE identificador=?", [$identificador, $nombre, $apellidos, $email, $identificador]);
-    }
-
     public static function usuarioModificarDato(string $nuevoDato, string $input): bool
     {
         self::ejecutarActualizacion("UPDATE usuario SET ".$input."=? WHERE identificador=?", [$nuevoDato, $_SESSION["identificador"]]);
@@ -275,17 +248,6 @@ class DAO
         }
         
         return false;
-    }
-
-
-    public static function VerFichaUsuario(): array
-    {
-
-        $identificador = $_SESSION["identificador"];
-
-        if (!isset(self::$pdo)) self::$pdo = self::obtenerPdoConexionBd();
-
-        return self::ejecutarConsulta("SELECT * FROM usuario WHERE identificador=?", [$identificador]);
     }
 
     public static function usuarioEliminar(string $identificador)
@@ -329,7 +291,7 @@ class DAO
         else return null;
     }
 
-    public static function PeliculasObtenerPorIdLista(int $listaId): ?array
+    public static function peliculasObtenerPorIdLista(int $listaId): ?array
     {
         $peliculas = [];
         $rs = self::ejecutarConsulta(
@@ -363,12 +325,6 @@ class DAO
         }
 
         return $datos;
-    }
-
-    public static function peliculaObtenerNombrePlataforma(int $id): string
-    {
-        $categoria = self::plataformaObtenerPorId($id);
-        return $categoria->getNombre();
     }
 
     public static function peliculaInsertar(string $nombre, string $director, string $actores, string $generos, string $plataformas, int $anio, int $puntuacion, string $sinopsis, string $trailer, string $caratula)
@@ -415,10 +371,7 @@ class DAO
 
         //insercción de géneros
         $arrayGeneros = explode(",", $generos);    
-        /*for($i = 0; $i < count($arrayGeneros); $i++){
-            self::ejecutarActualizacion("INSERT INTO genero (nombre) VALUES (?);",
-                [$arrayGeneros[$i]]);
-        }*/
+  
         $generosInsertados = array();
         for($i = 0; $i < count($arrayGeneros); $i++){
             $generoInsertado = self::generoObtenerPorNombre($arrayGeneros[$i]);
@@ -431,10 +384,7 @@ class DAO
 
         //insercción de plataformas
         $arrayPlataformas = explode(",", $plataformas);    
-        /*for($i = 0; $i < count($arrayPlataformas); $i++){
-            self::ejecutarActualizacion("INSERT INTO plataforma (nombre) VALUES (?);",
-                [$arrayPlataformas[$i]]);
-        }*/
+    
         $plataformasInsertados = array();
         for($i = 0; $i < count($arrayPlataformas); $i++){
             $plataformaInsertado = self::plataformaObtenerPorNombre($arrayPlataformas[$i]);
@@ -448,16 +398,6 @@ class DAO
     }
 
 /*---------------------------------GENERO---------------------------------------*/
-
-public static function generoObtenerPorId(int $id): ?Genero
-{
-    $rs = self::ejecutarConsulta(
-        "SELECT * FROM genero WHERE id=?",
-        [$id]
-    );
-    if ($rs) return self::generoCrearDesdeRs($rs[0]);
-    else return null;
-}
 
 private static function generoCrearDesdeRS(array $genero): Genero
 {
@@ -512,16 +452,6 @@ public static function generoObtenerPorPeliculaId(int $id): ?array
 
 
     /*---------------------------------PLATAFORMA---------------------------------------*/
-
-    public static function plataformaObtenerPorId(int $id): ?Plataforma
-    {
-        $rs = self::ejecutarConsulta(
-            "SELECT * FROM plataforma WHERE id=?",
-            [$id]
-        );
-        if ($rs) return self::plataformaCrearDesdeRs($rs[0]);
-        else return null;
-    }
 
     private static function plataformaCrearDesdeRS(array $plataforma): Plataforma
     {
@@ -606,12 +536,6 @@ public static function generoObtenerPorPeliculaId(int $id): ?array
         }
     }
 
-    public static function modificarLista(string $nombre, int $id)
-    {
-        self::ejecutarActualizacion("UPDATE lista SET nombre=? WHERE id=?;",
-            [$nombre, $id]);
-    }
-
     public static function borrarLista(string $id, int $usuarioId): bool
     {
         $exito = self::ejecutarActualizacion("DELETE FROM lista WHERE id=? && usuarioId=? ;",
@@ -649,7 +573,6 @@ public static function generoObtenerPorPeliculaId(int $id): ?array
     }
 
 
-
     public static function borrarPeliculaLista(int $idPelicula, int $idLista): bool
     {
         $filasAfectadas = self::ejecutarActualizacion("DELETE FROM listausuariopeliculas WHERE peliculaId=? && listaId=?", [$idPelicula, $idLista]);
@@ -659,11 +582,6 @@ public static function generoObtenerPorPeliculaId(int $id): ?array
     }
 
     /*--------------------------------BÚSQUEDA---------------------------------*/
-
-    public static function listarGeneros(): array
-    {
-        return self::ejecutarConsulta("SELECT nombre FROM genero", []);
-    }
 
     public static function buscarPeliculaPorNombre(string $nombre): ?array
     {
@@ -713,34 +631,6 @@ public static function generoObtenerPorPeliculaId(int $id): ?array
         } else {
             return null;
         }
-    }
-
-    public static function buscarPeliculaPorPuntuacion(int $puntuacion): ?array
-    {
-        $peliculas = [];
-        $rs = self::ejecutarConsulta(
-            "SELECT * FROM pelicula WHERE puntuacion = ?",
-            [$puntuacion]
-        );
-
-
-        foreach ($rs as $fila) {
-            $pelicula = self::peliculaCrearDesdeRS($fila);
-            array_push($peliculas, $pelicula);
-        }
-
-
-        if ($rs) {
-            return $peliculas;
-        } else {
-            return null;
-        }
-    }
-
-
-    public static function listarPlataformas(): array
-    {
-        return self::ejecutarConsulta("SELECT nombre FROM plataforma", []);
     }
 
     public static function buscarPeliculaPorPlataforma(string $plataformaNombre): ?array
@@ -846,16 +736,6 @@ public static function generoObtenerPorPeliculaId(int $id): ?array
 
 /*-------------------------------DIRECTOR----------------------------*/
 
-    public static function directorObtenerPorId(int $id): ?Director
-    {
-        $rs = self::ejecutarConsulta(
-            "SELECT * FROM director WHERE id=?",
-            [$id]
-        );
-        if ($rs) return self::directorCrearDesdeRs($rs[0]);
-        else return null;
-    }
-
     public static function directorObtenerPorNombre(string $nombre): ?Director
     {
         $rs = self::ejecutarConsulta(
@@ -898,16 +778,6 @@ public static function generoObtenerPorPeliculaId(int $id): ?array
 
 
     /*-------------------------------ACTOR----------------------------*/
-
-public static function actorObtenerPorId(int $id): ?Actor
-{
-    $rs = self::ejecutarConsulta(
-        "SELECT * FROM actor WHERE id=?",
-        [$id]
-    );
-    if ($rs) return self::actorCrearDesdeRs($rs[0]);
-    else return null;
-}
 
 public static function actorObtenerPorNombre(string $nombre): ?Actor
     {

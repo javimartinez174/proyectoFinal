@@ -353,27 +353,23 @@ nav button {
 }
 
 .modal-dialog {
-  min-width: 350px;
+  min-width: 30%;
 }
 
 .modal-body {
+  color: #65c1ff;
   background-color: #173f5a;
   border: 1px solid #1D2728;
 }
 
 .modal-header {
+  color: #65c1ff;
   background-color: #071c22d3;
   border: none;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   border-radius: 0;
-}
-
-.modal-content:hover {
-  border: 1px solid #14839A;
-  -webkit-box-shadow: #14839A;
-          box-shadow: #14839A;
 }
 
 .modal-open .container-fluid {

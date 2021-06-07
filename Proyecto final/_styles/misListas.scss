@@ -32,10 +32,6 @@ body {
   h2{
       color: #106a7c;
   }
-  
-  h4{
-      color: $black;
-  }
 
   a {
     text-decoration: none;
@@ -272,31 +268,33 @@ button:hover{
   }
 
   .modal-dialog{
-    min-width: 350px;
-}
-.modal-body {
-      color: $white;
+    min-width: 30%;
+  }
+
+  .modal-body {
+      color: $azulClaro;
       background-color: rgb(23, 63, 90);
       border: 1px solid #1D2728;
-}
-.modal-header {
+  }
+
+  .modal-header {
       background-color:#071c22d3;
-      color: $white;
+      color: $azulClaro;
       border: none;
       align-items:center;
       border-radius: 0;
-}
-.modal-content:hover {
-      border: 1px solid #14839A;
-      box-shadow: #14839A;
-}
+  }
 
-.modal-open .container-fluid
-{
-  -webkit-filter: blur(2px);
-  -moz-filter: blur(2px);
-  -o-filter: blur(2px);
-  -ms-filter: blur(2px);
-  filter: blur(2px);
-}
+  .modal-open .container-fluid
+  {
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+  }
+
+  .crear{
+    margin-left: 1em;
+  }
 
