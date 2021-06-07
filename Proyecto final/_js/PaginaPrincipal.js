@@ -73,7 +73,12 @@ function cargarBusqueda() {
     divLimpiarCartelera();
     var busqueda = document.getElementById("busqueda");
 
-    if(busqueda.value != ""){
+    if(busqueda.value.length < 3){
+        divLimpiarAlerta();
+        mensaje = "Debes escribir al menos 3 carácteres";
+        crearAlertaInsertada(mensaje);
+        cargarPelis();
+    } else if(busqueda.value != ""){
         llamadaAjax("../BusquedaAJAX.php", "busqueda=" + busqueda.value,
             function(texto) {
                 

@@ -164,16 +164,24 @@ button .close {
 }
 
 .fas {
-  size: 3em;
-  color: #72c47d;
+  font-size: 1em;
+  color: #49b6ff;
   cursor: pointer;
   line-height: 2;
 }
 
 .fas:hover {
-  size: 2em;
-  color: #a10000;
+  font-size: 1em;
+  color: #d8ee14;
   cursor: pointer;
+}
+
+.fa-angle-left {
+  font-size: 2em;
+}
+
+.fa-angle-left:hover {
+  font-size: 2em;
 }
 
 a {

@@ -168,8 +168,11 @@ class DAO
     public static function crearUsuario(array $arrayUsuarioNuevo): bool
     {
         return self::ejecutarActualizacion(
-            "INSERT INTO usuario (identificador, nombre, apellidos, email, contrasenna, fotoPerfil, codigoCookie) VALUES (?, ?, ?, ?, ?, 'usuario.png', NULL)",
-            [$arrayUsuarioNuevo["identificador"], $arrayUsuarioNuevo["nombre"], $arrayUsuarioNuevo["apellidos"], $arrayUsuarioNuevo["email"], password_hash($arrayUsuarioNuevo["contrasenna"], PASSWORD_BCRYPT)]
+            "INSERT INTO usuario (identificador, nombre, apellidos, email, 
+            contrasenna, fotoPerfil, codigoCookie) VALUES (?, ?, ?, ?, ?, 'usuario.png', NULL)",
+            [$arrayUsuarioNuevo["identificador"], $arrayUsuarioNuevo["nombre"], 
+            $arrayUsuarioNuevo["apellidos"], $arrayUsuarioNuevo["email"], 
+            password_hash($arrayUsuarioNuevo["contrasenna"], PASSWORD_BCRYPT)]
         );
     }
 
