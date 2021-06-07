@@ -214,15 +214,24 @@ function crearPelicula(infoPelicula) {
 
     divImagen.appendChild(agregarALista);
 
-    var puntuacion = document.createElement("p");
-    puntuacion.innerHTML = "Puntuación obtenida: "+infoPelicula.puntuacion;
-
     
     document.getElementById("infoPelicula").appendChild(titulo);
     document.getElementById("infoPelicula").appendChild(divContainer1);
-    document.getElementById("infoPelicula").appendChild(puntuacion);
-
-
+    
+    var divPunt = document.createElement("div");
+    divPunt.setAttribute("class", "divPunt");
+    var puntuacion = document.createElement("p");
+    puntuacion.innerHTML = "Puntuación obtenida: "+infoPelicula.puntuacion;
+    divPunt.appendChild(puntuacion);
+    for(var i = 0; i < infoPelicula.puntuacion; i++){
+        var imagenEstrella = document.createElement("img");
+        imagenEstrella.setAttribute("src", "../_img/estrella.png");
+        imagenEstrella.style.width="24px";
+        imagenEstrella.style.height="24px";
+        divPunt.appendChild(imagenEstrella);
+    }
+    document.getElementById("infoPelicula").appendChild(divPunt);
+    
     document.getElementById("abreModal").addEventListener("click", ObtenerListasUsuario(infoPelicula.id));
 
 

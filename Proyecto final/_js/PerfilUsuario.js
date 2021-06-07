@@ -107,12 +107,12 @@ function modificarInput(divInput, p1, iconoEdit) {
 
 function modificarContrasenna(divInput, p1, iconoEdit) {
     var inputEdit = document.createElement("input");
-    inputEdit.setAttribute("type", "text");
+    inputEdit.setAttribute("type", "password");
     inputEdit.setAttribute("placeholder", p1.id+" actual");
     inputEdit.setAttribute("class", "inputEdit");
     inputEdit.setAttribute("required", true);
     var inputEdit2 = document.createElement("input");
-    inputEdit2.setAttribute("type", "text");
+    inputEdit2.setAttribute("type", "password");
     inputEdit2.setAttribute("placeholder", "Nueva "+p1.id);
     inputEdit2.setAttribute("class", "inputEdit2");
     inputEdit2.setAttribute("required", true);
@@ -159,7 +159,7 @@ function domCrearPerfil(usuario){
     var imagenPerfil = document.createElement("img");
     imagenPerfil.setAttribute("src", "../_fotoDePerfil/"+usuario.fotoPerfil);
     imagenPerfil.setAttribute("class", "fotoPerfil");
-    document.getElementById("divImg").appendChild(imagenPerfil);
+    document.getElementById("divImg").insertBefore(imagenPerfil, document.getElementById("formCambiarImg"));
 
     //identificador
     var h4Identificador = document.createElement("h4"); 
@@ -294,4 +294,26 @@ function crearAlerta(mensaje, booleano){
     divAlerta.appendChild(modal);
 
     $("#modalAlerta").modal("show");
+}
+
+//footer redes sociales
+const shareButton = document.getElementsByClassName("shareButton");
+function redesSociales() {
+    shareButton[0].addEventListener("click", (e) => {
+        for( let i=0; i < shareButton.length; i++ ) {
+        shareButton[i].classList.toggle("open")
+        shareButton[0].classList.remove("sent")
+        }
+    })
+
+    for( let i=1; i < shareButton.length; i++ ) {
+    
+    shareButton[i].addEventListener("click", (e) => {
+        
+        for( let i=0; i < shareButton.length; i++ ) {
+            shareButton[i].classList.toggle("open")
+        }
+        shareButton[0].classList.toggle("sent")
+        })
+    }
 }

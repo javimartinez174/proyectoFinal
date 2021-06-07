@@ -157,7 +157,7 @@ function domCrearPelis(pelicula) {
       divContent.setAttribute("class", "content");
       var spanPuntuacion = document.createElement("span");
       spanPuntuacion.setAttribute("class", "author");
-      spanPuntuacion.innerHTML = "Valorada con "+pelicula.puntuacion+"../img/estrella.png"+" en WatchFilm";
+      spanPuntuacion.innerHTML = "Valorada con "+pelicula.puntuacion+" estrellas en WatchFilm";
       var h1Titulo = document.createElement("h2");
       h1Titulo.setAttribute("class", "title");
       h1Titulo.innerHTML = pelicula.nombre;
