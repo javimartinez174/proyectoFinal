@@ -1,6 +1,6 @@
 <?php
 
-require_once "_com/DAO.php";
+require_once "../_com/DAO.php";
 $arrayUsuarioNuevo["identificador"] = $_REQUEST["identificador"];
 $arrayUsuarioNuevo["email"] = $_REQUEST["email"];
 $arrayUsuarioNuevo["contrasenna"] = $_REQUEST["contrasenna"];

@@ -1,6 +1,6 @@
 <?php
 
-require_once "_com/DAO.php";
+require_once "../_com/DAO.php";
 
 $mensaje = $_REQUEST["mensaje"];
 $peliculaId = $_REQUEST["peliculaId"];

@@ -1,6 +1,6 @@
 <?php
 
-require_once "_com/DAO.php";
+require_once "../_com/DAO.php";
 
 $actualContrasenna = $_REQUEST["actualContrasenna"];
 $nuevaContrasenna = $_REQUEST["nuevaContrasenna"];

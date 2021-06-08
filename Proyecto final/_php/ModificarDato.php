@@ -1,6 +1,6 @@
 <?php
 
-require_once "_com/DAO.php";
+require_once "../_com/DAO.php";
 
 $modificacion = $_REQUEST["modificacion"];
 $input = $_REQUEST["input"];

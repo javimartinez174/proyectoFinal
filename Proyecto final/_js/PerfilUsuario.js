@@ -7,7 +7,7 @@ window.onload = function(){
 }
 
 function cerrarSesion() {
-    window.location = "../SesionCerrar.php";
+    window.location = "../_php/SesionCerrar.php";
 }
 
 //----------------------MÉTODOS AJAX----------------------
@@ -36,7 +36,7 @@ function ajaxComprobarSesionIniciada(){
     function(texto){
         var sesionIniciada = JSON.parse(texto);
         if(!sesionIniciada){
-            window.location ="../SesionCerrar.php";
+            window.location ="../_php/SesionCerrar.php";
         }
     },  function(texto) {
         }

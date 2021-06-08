@@ -1,6 +1,6 @@
 <?php
 
-require_once "_com/DAO.php";
+require_once "../_com/DAO.php";
 
 if (!DAO::haySesionRamIniciada() && !DAO::intentarCanjearSesionCookie()) redireccionar("html/SesionInicioFormulario.html");
 
@@ -22,14 +22,14 @@ if (isset($_POST['subir'])) {
         else {
             //Si la imagen es correcta en tamaño y tipo
             //Se intenta subir al servidor
-            if (move_uploaded_file($temp, '_fotoDePerfil/'.$archivo)) {
+            if (move_uploaded_file($temp, '../_fotoDePerfil/'.$archivo)) {
                 //Cambiamos los permisos del archivo a 777 para poder modificarlo posteriormente
                 chmod('_fotoDePerfil/'.$archivo, 0777);
                 //Mostramos el mensaje de que se ha subido co éxito
                 echo '<div><b>Se ha subido correctamente la imagen.</b></div>';
                 //Mostramos la imagen subida
                 DAO::usuarioCambiarFoto($archivo, $_SESSION["identificador"]);
-                redireccionar("html/PerfilUsuario.html");
+                redireccionar("../html/PerfilUsuario.html");
             }
             else {
                 //Si no se ha podido subir la imagen, mostramos un mensaje de error

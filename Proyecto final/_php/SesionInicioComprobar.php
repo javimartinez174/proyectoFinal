@@ -16,9 +16,9 @@ if ($arrayUsuario) { // HAN venido datos: identificador existía y contraseña e
     } else {
         DAO::borrarCookieRecordar();
     }
-    redireccionar("html/PaginaPrincipal.html");
+    redireccionar("../html/PaginaPrincipal.html");
 
 
 } else {
-    redireccionar("html/SesionInicioFormulario.html");
+    redireccionar("../html/SesionInicioFormulario.html");
 }
