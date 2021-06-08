@@ -8,7 +8,7 @@
         document.getElementById("descubrenos").addEventListener("click", crearBotonesInicio);
         formulario = document.getElementById("formulario");
         divAlerta= document.getElementById("alerta");
-        
+        redesSociales();        
     }
 
 
@@ -356,6 +356,30 @@ function divLimpiarFormulario(){
         formulario.removeChild(formulario.lastChild);
     }
 }
+
+
+//footer redes sociales
+const shareButton = document.getElementsByClassName("shareButton");
+function redesSociales() {
+    shareButton[0].addEventListener("click", (e) => {
+        for( let i=0; i < shareButton.length; i++ ) {
+        shareButton[i].classList.toggle("open")
+        shareButton[0].classList.remove("sent")
+        }
+    })
+
+    for( let i=1; i < shareButton.length; i++ ) {
+    
+    shareButton[i].addEventListener("click", (e) => {
+        
+        for( let i=0; i < shareButton.length; i++ ) {
+            shareButton[i].classList.toggle("open")
+        }
+        shareButton[0].classList.toggle("sent")
+        })
+    }
+}
+
 
     //------------------MÉTODOS JQUEY---------------------
     function jQueyCarrusel(){

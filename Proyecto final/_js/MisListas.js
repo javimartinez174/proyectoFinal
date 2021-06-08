@@ -3,6 +3,7 @@ window.onload = function(){
     cargarBreadcrumbs();
     divAlerta = document.getElementById("alerta");
     formulario = document.getElementById("formulario");
+    redesSociales();
 }
 
 //----------------------------MÉTODOS JQUERY----------------------
@@ -287,4 +288,24 @@ function limpiarDiv(){
     }
 }
 
+//footer redes sociales
+const shareButton = document.getElementsByClassName("shareButton");
+function redesSociales() {
+    shareButton[0].addEventListener("click", (e) => {
+        for( let i=0; i < shareButton.length; i++ ) {
+        shareButton[i].classList.toggle("open")
+        shareButton[0].classList.remove("sent")
+        }
+    })
 
+    for( let i=1; i < shareButton.length; i++ ) {
+    
+    shareButton[i].addEventListener("click", (e) => {
+        
+        for( let i=0; i < shareButton.length; i++ ) {
+            shareButton[i].classList.toggle("open")
+        }
+        shareButton[0].classList.toggle("sent")
+        })
+    }
+}

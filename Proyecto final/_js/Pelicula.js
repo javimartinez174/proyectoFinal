@@ -6,6 +6,7 @@ window.onload = function() {
     crearPagina();
     document.getElementById("btnInsertComentario").addEventListener("click", insertarComentario);
     divAlerta = document.getElementById("alerta");
+    redesSociales();
 }
 
 
@@ -443,3 +444,24 @@ function capturarIdURL() {
     idPelicula = url.substring(pos1+1, url.length);
 }
 
+//footer redes sociales
+const shareButton = document.getElementsByClassName("shareButton");
+function redesSociales() {
+    shareButton[0].addEventListener("click", (e) => {
+        for( let i=0; i < shareButton.length; i++ ) {
+        shareButton[i].classList.toggle("open")
+        shareButton[0].classList.remove("sent")
+        }
+    })
+
+    for( let i=1; i < shareButton.length; i++ ) {
+    
+    shareButton[i].addEventListener("click", (e) => {
+        
+        for( let i=0; i < shareButton.length; i++ ) {
+            shareButton[i].classList.toggle("open")
+        }
+        shareButton[0].classList.toggle("sent")
+        })
+    }
+}

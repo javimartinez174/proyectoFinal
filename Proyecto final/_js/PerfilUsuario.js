@@ -4,6 +4,7 @@ window.onload = function(){
     cargarUsuario();
     divAlerta = document.getElementById("alerta");
     infoUsuario = document.getElementById("infoUsuario");
+    redesSociales();
 }
 
 function cerrarSesion() {

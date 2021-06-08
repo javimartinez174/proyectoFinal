@@ -1,14 +1,6 @@
+@import "_vars.scss";
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
 @import url("https://fonts.googleapis.com/css?family=Sacramento&display=swap");
-// Variables
-$regal-blue: #034378;
-$san-juan: #2d4e68;
-$bermuda: #77d7b9;
-$azulClaro: #65c1ff;
-$white: #fff;
-$black: #000;
-$open-sans: 'Open Sans',
-'sans-serif';
 
 body {
   padding: 0px;
@@ -298,3 +290,179 @@ button:hover{
     margin-left: 1em;
   }
 
+//LOGOTIPO*******************************************************************
+
+.contenidoFooter h1 {
+  margin-top: 5%;
+  font-size: calc(20px + 9vh);
+  line-height: calc(20px + 10vh);
+  text-shadow: 0 0 5px #0099ff, 0 0 15px #0099ff, 0 0 20px #0099ff, 0 0 40px #28a9ff, 0 0 60px #0011ff, 0 0 10px #0011ff, 0 0 98px #0011ff;
+    color: #2ebdff;
+  font-family: "Sacramento", cursive;
+  text-align: center;
+  animation: blink 12s infinite;
+  -webkit-animation: blink 12s infinite;
+}
+
+
+
+@-webkit-keyframes blink {
+  20%,
+  24%,
+  55% {
+    color: #111;
+    text-shadow: none;
+  }
+
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+      text-shadow: 0 0 5px #0099ff, 0 0 15px #0099ff, 0 0 20px #0099ff, 0 0 40px #28a9ff, 0 0 60px #0011ff, 0 0 10px #0011ff, 0 0 98px #0011ff;
+      color: #2ebdff;
+  }
+}
+
+@keyframes blink {
+  20%,
+  24%,
+  55% {
+    color: #111;
+    text-shadow: none;
+  }
+
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+      text-shadow: 0 0 5px #0099ff, 0 0 15px #0099ff, 0 0 20px #0099ff, 0 0 40px #28a9ff, 0 0 60px #0011ff, 0 0 10px #0011ff, 0 0 98px #0011ff;
+      color: #2ebdff;
+  }
+}
+
+
+//FOOTER***************************************************************************
+
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+.challenge {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.challenge h1 {
+  width: 100%;
+}
+
+
+.contenidoFooter {
+  width: 100%;
+  height: 320px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  position: relative;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+.contenidoFooter .shareButton.main .share, .contenidoFooter .shareButton.main .close, .contenidoFooter .shareButton.main .check {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  -webkit-transition: all 150ms;
+  transition: all 150ms;
+}
+.contenidoFooter .shareButton.main .share, .contenidoFooter .shareButton.main.open .close, .contenidoFooter .shareButton.main.sent .check {
+  -webkit-transform: rotate(0) scale(1);
+          transform: rotate(0) scale(1);
+  opacity: 1;
+}
+.contenidoFooter .shareButton.main .close, .contenidoFooter .shareButton.main.open .share, .contenidoFooter .shareButton.main .check, .contenidoFooter .shareButton.main.sent .share {
+  opacity: 0;
+  -webkit-transform: rotate(90deg) scale(0);
+          transform: rotate(90deg) scale(0);
+}
+
+.shareButton, .shareButton.open {
+  border: none;
+  border-radius: 50%;
+  background: #0099ff;
+  padding: 1rem;
+  overflow: hidden;
+  outline: none;
+  margin: 0.5rem;
+  width: 24px;
+  height: 24px;
+  box-sizing: content-box;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+  position: relative;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+.shareButton:hover, .shareButton.open:hover {
+  -webkit-transform: scale(1.1) translateY(-3px);
+          transform: scale(1.1) translateY(-3px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.shareButton svg, .shareButton.open svg {
+  display: block;
+  fill: #0011ff;
+  width: 24px;
+  height: 24px;
+  opacity: 1;
+  -webkit-transition: all 150ms;
+  transition: all 150ms;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.fb, .shareButton.open.ig {
+  -webkit-transition-delay: 100ms;
+          transition-delay: 100ms;
+}
+
+.tw, .shareButton.open.tw {
+  -webkit-transition-delay: 50ms;
+          transition-delay: 50ms;
+}
+
+.ig, .shareButton.open.fb {
+  -webkit-transition-delay: 0ms;
+          transition-delay: 0ms;
+}
+
+.fb, .tw, .ig {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+.fb svg, .tw svg, .ig svg {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+
+footer {
+  background-color: $regal-blue;
+}
